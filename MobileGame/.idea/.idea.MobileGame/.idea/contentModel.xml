@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
     <e p="C:\Users\Dev\.Rider2019.2\system\extResources" t="IncludeRecursive" />
@@ -7,9 +7,19 @@
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
-        <e p="Luminaris Starship" t="Include">
-          <e p="Documentation" t="Include">
-            <e p="Readme Luminaris.txt" t="Include" />
+        <e p="_ImportedAssets" t="Include">
+          <e p="Luminaris Starship" t="Include">
+            <e p="Documentation" t="Include">
+              <e p="Readme Luminaris.txt" t="Include" />
+            </e>
+          </e>
+          <e p="TutorialInfo" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="Editor" t="Include">
+                <e p="ReadmeEditor.cs" t="Include" />
+              </e>
+              <e p="Readme.cs" t="Include" />
+            </e>
           </e>
         </e>
         <e p="Scripts" t="Include">
@@ -17,14 +27,6 @@
           <e p="GameManager.cs" t="Include" />
           <e p="PlayerController.cs" t="Include" />
           <e p="SimpleCameraController.cs" t="Include" />
-        </e>
-        <e p="TutorialInfo" t="Include">
-          <e p="Scripts" t="Include">
-            <e p="Editor" t="Include">
-              <e p="ReadmeEditor.cs" t="Include" />
-            </e>
-            <e p="Readme.cs" t="Include" />
-          </e>
         </e>
       </e>
       <e p="MobileGame.sln" t="IncludeFlat" />
