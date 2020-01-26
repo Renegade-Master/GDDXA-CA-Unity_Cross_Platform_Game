@@ -5,7 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - PlayArea
-  - Shot
+  - Shot_Player_Main
+  - Shot_Player_UG_01
+  - Shot_Enemy_Small_Main
   layers:
   - Default
   - TransparentFX

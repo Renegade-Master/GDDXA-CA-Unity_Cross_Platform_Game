@@ -20,7 +20,7 @@ public class BoundaryManager : GenericManager {
     private void OnTriggerExit(Collider other) {
         Debug.Log("Something left: " + other.name);
 
-        if (other.CompareTag("Shot")) {
+        if (other.tag.Contains("Shot")) {
             Debug.Log("Destroying Shot");
             other.gameObject.SetActive(false);
         }

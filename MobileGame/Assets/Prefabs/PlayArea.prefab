@@ -43,7 +43,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 120, y: 1, z: 60}
+  m_Size: {x: 120, y: 10, z: 60}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4053052988011433873
 MonoBehaviour:
@@ -62,3 +62,13 @@ MonoBehaviour:
     xMax: 40
     zMin: -20
     zMax: 20
+  enemyBoundary:
+    xMin: 0
+    xMax: 0
+    zMin: 0
+    zMax: 0
+  projectileBoundary:
+    xMin: 0
+    xMax: 0
+    zMin: 0
+    zMax: 0

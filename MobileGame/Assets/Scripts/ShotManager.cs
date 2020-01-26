@@ -11,27 +11,27 @@ public class ItemToPool {
 
 public class ShotManager : GenericManager {
     public static ShotManager SharedInstance;
-    public List<GameObject> pooledObjects;
     public List<ItemToPool> itemsToPool;
+    
+    private List<GameObject> _pooledObjects;
 
     private void Awake() {
         SharedInstance = this;
     }
 
     void Start () {
-        pooledObjects = new List<GameObject>();
+        _pooledObjects = new List<GameObject>();
         foreach (ItemToPool item in itemsToPool) {
             for (int i = 0; i < item.amountToPool; i++) {
                 GameObject obj = Instantiate(item.objectToPool);
                 obj.SetActive(false);
-                pooledObjects.Add(obj);
+                _pooledObjects.Add(obj);
             }
         }
     }
     
     public GameObject GetPooledObject(string requestTag) {
-        foreach (GameObject pObj in pooledObjects)
-        {
+        foreach (GameObject pObj in _pooledObjects) {
             if (!pObj.activeInHierarchy && pObj.CompareTag(requestTag)) {
                 return pObj;
             }
@@ -39,9 +39,9 @@ public class ShotManager : GenericManager {
         foreach (ItemToPool item in itemsToPool) {
             if (item.objectToPool.CompareTag(requestTag)) {
                 if (item.shouldExpand) {
-                    GameObject obj = (GameObject)Instantiate(item.objectToPool);
+                    GameObject obj = Instantiate(item.objectToPool);
                     obj.SetActive(false);
-                    pooledObjects.Add(obj);
+                    _pooledObjects.Add(obj);
                     return obj;
                 }
             }
