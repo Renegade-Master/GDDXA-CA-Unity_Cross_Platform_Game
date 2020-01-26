@@ -350,6 +350,27 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3783781746631755547, guid: 9bd565aea8abc634c816eed7acb92c8d,
+        type: 3}
+      propertyPath: itemsToPool.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3783781746631755547, guid: 9bd565aea8abc634c816eed7acb92c8d,
+        type: 3}
+      propertyPath: itemsToPool.Array.data[0].amountToPool
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -3783781746631755547, guid: 9bd565aea8abc634c816eed7acb92c8d,
+        type: 3}
+      propertyPath: itemsToPool.Array.data[0].shouldExpand
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3783781746631755547, guid: 9bd565aea8abc634c816eed7acb92c8d,
+        type: 3}
+      propertyPath: itemsToPool.Array.data[0].objectToPool
+      value: 
+      objectReference: {fileID: 7418128789324112594, guid: e78898ad0d3e64a4f942b6be9990b53a,
+        type: 3}
     - target: {fileID: 8678882003901506912, guid: 9bd565aea8abc634c816eed7acb92c8d,
         type: 3}
       propertyPath: m_LocalPosition.x

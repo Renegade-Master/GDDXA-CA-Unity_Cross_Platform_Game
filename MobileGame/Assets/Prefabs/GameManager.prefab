@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8678882003901506912}
   - component: {fileID: 8678882003901506943}
+  - component: {fileID: -3783781746631755547}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -43,3 +44,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cb06376fea7eb04db1df8f01742ccb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentLevel: 0
+  playerPrefab: {fileID: 0}
+  playAreaPrefab: {fileID: 0}
+  skyBoxes: []
+  player: {fileID: 0}
+  playArea: {fileID: 0}
+--- !u!114 &-3783781746631755547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8678882003901506942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c17f489baaa64e29b9b5fefd9529cd69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObjects:
+  - {fileID: 7418128789324112594, guid: e78898ad0d3e64a4f942b6be9990b53a, type: 3}

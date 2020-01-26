@@ -463,7 +463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 30
-  shot: {fileID: 0}
+  shot: {fileID: 7418128789324112594, guid: e78898ad0d3e64a4f942b6be9990b53a, type: 3}
   _shotSpawn: {fileID: 9021898461475381469}
 --- !u!1 &2349743022491429124
 GameObject:

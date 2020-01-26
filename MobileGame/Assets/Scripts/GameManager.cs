@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : GenericManager {
     public int currentLevel;
     
     public GameObject playerPrefab;
     public GameObject playAreaPrefab;
-    public GameObject[] skyBoxes;
     
+    public GameObject[] skyBoxes;
     public GameObject player;
     public GameObject playArea;
     
