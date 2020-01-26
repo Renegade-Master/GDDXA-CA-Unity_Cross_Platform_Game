@@ -63,10 +63,10 @@ MonoBehaviour:
     zMin: -20
     zMax: 20
   enemyBoundary:
-    xMin: 0
-    xMax: 0
-    zMin: 0
-    zMax: 0
+    xMin: -40
+    xMax: 80
+    zMin: -20
+    zMax: 20
   projectileBoundary:
     xMin: 0
     xMax: 0

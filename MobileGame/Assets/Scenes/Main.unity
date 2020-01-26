@@ -357,27 +357,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3783781746631755547, guid: 9bd565aea8abc634c816eed7acb92c8d,
         type: 3}
-      propertyPath: pooledObjects.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -3783781746631755547, guid: 9bd565aea8abc634c816eed7acb92c8d,
-        type: 3}
-      propertyPath: itemsToPool.Array.data[0].amountToPool
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: -3783781746631755547, guid: 9bd565aea8abc634c816eed7acb92c8d,
-        type: 3}
-      propertyPath: itemsToPool.Array.data[0].shouldExpand
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -3783781746631755547, guid: 9bd565aea8abc634c816eed7acb92c8d,
-        type: 3}
-      propertyPath: itemsToPool.Array.data[0].objectToPool
-      value: 
-      objectReference: {fileID: 7418128789324112594, guid: e78898ad0d3e64a4f942b6be9990b53a,
-        type: 3}
-    - target: {fileID: -3783781746631755547, guid: 9bd565aea8abc634c816eed7acb92c8d,
-        type: 3}
       propertyPath: itemsToPool.Array.data[1].objectToPool
       value: 
       objectReference: {fileID: 8308375764326668552, guid: 3596c6cf7e8be9f4394f73507ab97a7d,
@@ -392,20 +371,37 @@ PrefabInstance:
       propertyPath: itemsToPool.Array.data[1].shouldExpand
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1361090515, guid: 9bd565aea8abc634c816eed7acb92c8d, type: 3}
+      propertyPath: itemsToPool.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361090515, guid: 9bd565aea8abc634c816eed7acb92c8d, type: 3}
+      propertyPath: itemsToPool.Array.data[0].objectToPool
+      value: 
+      objectReference: {fileID: 3662236092696538527, guid: 1204d784b6a4d6249b59acf314e42057,
+        type: 3}
+    - target: {fileID: 1361090515, guid: 9bd565aea8abc634c816eed7acb92c8d, type: 3}
+      propertyPath: itemsToPool.Array.data[0].amountToPool
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361090515, guid: 9bd565aea8abc634c816eed7acb92c8d, type: 3}
+      propertyPath: itemsToPool.Array.data[0].shouldExpand
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8678882003901506912, guid: 9bd565aea8abc634c816eed7acb92c8d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.5534588
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8678882003901506912, guid: 9bd565aea8abc634c816eed7acb92c8d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 54.98253
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8678882003901506912, guid: 9bd565aea8abc634c816eed7acb92c8d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.5960593
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8678882003901506912, guid: 9bd565aea8abc634c816eed7acb92c8d,
         type: 3}
@@ -452,44 +448,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    - target: {fileID: 8678882003901506943, guid: 9bd565aea8abc634c816eed7acb92c8d,
-        type: 3}
-      propertyPath: skyBoxes.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8678882003901506943, guid: 9bd565aea8abc634c816eed7acb92c8d,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8678882003901506943, guid: 9bd565aea8abc634c816eed7acb92c8d,
-        type: 3}
-      propertyPath: playArea
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8678882003901506943, guid: 9bd565aea8abc634c816eed7acb92c8d,
-        type: 3}
-      propertyPath: skyBox
-      value: 
-      objectReference: {fileID: 493274391447467576, guid: 9971f952dbef9da40a726eb7ac9403ce,
-        type: 3}
-    - target: {fileID: 8678882003901506943, guid: 9bd565aea8abc634c816eed7acb92c8d,
-        type: 3}
-      propertyPath: skyBoxes.Array.data[0]
-      value: 
-      objectReference: {fileID: 493274391447467576, guid: 9971f952dbef9da40a726eb7ac9403ce,
-        type: 3}
-    - target: {fileID: 8678882003901506943, guid: 9bd565aea8abc634c816eed7acb92c8d,
-        type: 3}
-      propertyPath: playerPrefab
-      value: 
-      objectReference: {fileID: 2349708337057633802, guid: 6999a6f34e6236c43ba5ca927b4c441e,
-        type: 3}
-    - target: {fileID: 8678882003901506943, guid: 9bd565aea8abc634c816eed7acb92c8d,
-        type: 3}
-      propertyPath: playAreaPrefab
-      value: 
-      objectReference: {fileID: 4053052988011433874, guid: d10f1b91aa71b5a49a520820b4c2e52c,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bd565aea8abc634c816eed7acb92c8d, type: 3}

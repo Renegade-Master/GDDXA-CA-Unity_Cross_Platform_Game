@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8678882003901506912}
   - component: {fileID: 8678882003901506943}
   - component: {fileID: -3783781746631755547}
+  - component: {fileID: 1361090515}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8678882003901506942}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5534588, y: 54.98253, z: 4.5960593}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -45,11 +46,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentLevel: 0
-  playerPrefab: {fileID: 0}
-  playAreaPrefab: {fileID: 0}
-  skyBoxes: []
-  player: {fileID: 0}
-  playArea: {fileID: 0}
+  playerPrefab: {fileID: 2349708337057633802, guid: 6999a6f34e6236c43ba5ca927b4c441e,
+    type: 3}
+  playAreaPrefab: {fileID: 4053052988011433874, guid: d10f1b91aa71b5a49a520820b4c2e52c,
+    type: 3}
+  skyBoxes:
+  - {fileID: 493274391447467576, guid: 9971f952dbef9da40a726eb7ac9403ce, type: 3}
 --- !u!114 &-3783781746631755547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,5 +64,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c17f489baaa64e29b9b5fefd9529cd69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pooledObjects:
-  - {fileID: 7418128789324112594, guid: e78898ad0d3e64a4f942b6be9990b53a, type: 3}
+  itemsToPool:
+  - objectToPool: {fileID: 7418128789324112594, guid: e78898ad0d3e64a4f942b6be9990b53a,
+      type: 3}
+    amountToPool: 10
+    shouldExpand: 1
+--- !u!114 &1361090515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8678882003901506942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c87dc2fbb4424c80a250063c9979db2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemsToPool: []

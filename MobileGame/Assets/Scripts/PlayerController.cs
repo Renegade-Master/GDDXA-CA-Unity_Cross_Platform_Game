@@ -1,12 +1,10 @@
 ﻿using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
-    private Boundary _boundary;
-    private Transform _shotSpawn;
+public class PlayerController : GenericController {
 
-    private void Awake() {
+    protected new void Start() {
+        base.Start();
         _boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<BoundaryManager>().playerBoundary;
-        _shotSpawn = transform.Find("ShotSpawn");
     }
 
     void Update() {
@@ -20,7 +18,6 @@ public class PlayerController : MonoBehaviour {
         float moveVertical = Input.GetAxis ("Vertical");
 
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-        //tempRb.velocity = movement * speed;
         tempRb.MovePosition(tempRb.position + movement);
 
         // Clamp the Player Position to within the bounds of the screen
@@ -42,13 +39,17 @@ public class PlayerController : MonoBehaviour {
 
     void GetPlayerInput() {
         if (Input.GetButton("Fire1")) {
-            GameObject bullet = ShotManager.SharedInstance.GetPooledObject("Shot_Enemy_Small_Main"); 
-            if (bullet != null) {
-                bullet.transform.position = _shotSpawn.position;
-                bullet.transform.rotation = _shotSpawn.rotation;
-                bullet.GetComponent<Rigidbody>().velocity = Vector3.right * 50;
-                bullet.SetActive(true);
-            }
+            Fire();
+        }
+    }
+
+    protected override void Fire() {
+        GameObject bullet = ShotManager.instance.GetPooledObject("Shot_Player_Main"); 
+        if (bullet != null) {
+            bullet.transform.position = _shotSpawn.position;
+            bullet.transform.rotation = _shotSpawn.rotation;
+            bullet.GetComponent<Rigidbody>().velocity = Vector3.right * 50;
+            bullet.SetActive(true);
         }
     }
 }

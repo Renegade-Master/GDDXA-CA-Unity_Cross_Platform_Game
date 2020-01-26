@@ -24,9 +24,13 @@
         </e>
         <e p="Scripts" t="Include">
           <e p="BoundaryManager.cs" t="Include" />
+          <e p="EnemyControllerSmall.cs" t="Include" />
+          <e p="EnemyManager.cs" t="Include" />
           <e p="GameManager.cs" t="Include" />
+          <e p="GenericController.cs" t="Include" />
           <e p="GenericManager.cs" t="Include" />
           <e p="PlayerController.cs" t="Include" />
+          <e p="PoolManager.cs" t="Include" />
           <e p="ShotManager.cs" t="Include" />
           <e p="SimpleCameraController.cs" t="Include" />
         </e>
