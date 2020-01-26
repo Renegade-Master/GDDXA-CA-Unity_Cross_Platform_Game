@@ -8,8 +8,8 @@ public class GameManager : GenericManager {
     public GameObject playAreaPrefab;
     
     public GameObject[] skyBoxes;
-    public GameObject player;
-    public GameObject playArea;
+    private GameObject player;
+    private GameObject playArea;
     
     // Start is called before the first frame update
     void Start() {

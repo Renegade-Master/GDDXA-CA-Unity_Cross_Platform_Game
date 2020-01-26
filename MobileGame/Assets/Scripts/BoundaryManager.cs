@@ -1,8 +1,15 @@
 ﻿using System;
 using UnityEngine;
 
-public class BoundaryManager : GenericManager {
+[Serializable]
+public class Boundary {
     public float xMin, xMax, zMin, zMax;
+}
+
+public class BoundaryManager : GenericManager {
+    public Boundary playerBoundary;
+    public Boundary enemyBoundary;
+    public Boundary projectileBoundary;
 
     // Handle an Object ENTERING the collider
     private void OnTriggerEnter(Collider other) {

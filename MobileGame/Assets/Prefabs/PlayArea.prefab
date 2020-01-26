@@ -43,7 +43,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 80, y: 1, z: 40}
+  m_Size: {x: 120, y: 1, z: 60}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4053052988011433873
 MonoBehaviour:
@@ -57,7 +57,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7d01d7d7be8124409acad7c68369eae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xMin: -40
-  xMax: 40
-  zMin: -20
-  zMax: 20
+  playerBoundary:
+    xMin: -40
+    xMax: 40
+    zMin: -20
+    zMax: 20

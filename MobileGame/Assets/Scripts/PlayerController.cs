@@ -5,11 +5,11 @@ public class PlayerController : MonoBehaviour {
     public float speed;
     public GameObject shot;
     
-    private BoundaryManager _boundary;
+    private Boundary _boundary;
     [SerializeField] private Transform _shotSpawn;
 
     private void Awake() {
-        _boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<BoundaryManager>();
+        _boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<BoundaryManager>().playerBoundary;
     }
 
     void Update() {
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     void GetPlayerInput() {
-        if (Input.GetButtonDown("Fire1")) {
+        if (Input.GetButton("Fire1")) {
             GameObject bullet = ShotManager.SharedInstance.GetPooledObject("Shot"); 
             if (bullet != null) {
                 bullet.transform.position = _shotSpawn.position;
