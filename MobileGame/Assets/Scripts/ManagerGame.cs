@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GameManager : GenericManager {
+public class ManagerGame : ManagerGeneric {
     private GameObject _playArea;
 
     private GameObject _player;
@@ -32,7 +32,7 @@ public class GameManager : GenericManager {
 
                 // Spawn some initial Enemies
                 for (var i = 0; i < 4; i++) {
-                    var enemy = EnemyManager.instance.GetPooledObject("Enemy_Small");
+                    var enemy = ManagerEnemy.instance.GetPooledObject("Enemy_Small");
                     if (enemy != null) {
                         Debug.Log("Enemy spawn");
                         enemy.transform.position = new Vector3(60, 0, -10 + 10 * i);

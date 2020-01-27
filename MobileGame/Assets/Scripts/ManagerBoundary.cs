@@ -6,7 +6,7 @@ public class Boundary {
     public float xMin, xMax, zMin, zMax;
 }
 
-public class BoundaryManager : GenericManager {
+public class ManagerBoundary : ManagerGeneric {
     public Boundary enemyBoundary;
     public Boundary playerBoundary;
     public Boundary projectileBoundary;

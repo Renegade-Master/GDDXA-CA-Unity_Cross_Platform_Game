@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-public class PlayerController : GenericController {
+public class ControllerPlayer : ControllerGeneric {
     protected new void Start() {
         base.Start();
-        _boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<BoundaryManager>().playerBoundary;
+        _boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().playerBoundary;
     }
 
     private void Update() {
@@ -41,7 +41,7 @@ public class PlayerController : GenericController {
     }
 
     protected override void Fire() {
-        var bullet = ShotManager.instance.GetPooledObject("Shot_Player_Main");
+        var bullet = ManagerShot.instance.GetPooledObject("Shot_Player_Main");
         if (bullet != null) {
             bullet.transform.position = _shotSpawn.position;
             bullet.transform.rotation = _shotSpawn.rotation;

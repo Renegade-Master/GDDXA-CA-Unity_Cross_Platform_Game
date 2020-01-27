@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 3662236092696703423}
   - component: {fileID: 54618348}
   - component: {fileID: 3225065000533915572}
-  - component: {fileID: 4934715923683644034}
+  - component: {fileID: 3551606343539393688}
   m_Layer: 0
   m_Name: Enemy_Small_01
   m_TagString: Enemy_Small
@@ -173,7 +173,7 @@ CapsuleCollider:
   m_Height: 6.5
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 2}
---- !u!114 &4934715923683644034
+--- !u!114 &3551606343539393688
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -182,6 +182,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 3662236092696538527}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 803ef0d8ad114b99a410ef6119ff9110, type: 3}
+  m_Script: {fileID: 11500000, guid: 4670b9a19360f0147938812f2d86136b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -9,7 +9,7 @@ public class ItemToPool {
     public bool       shouldExpand;
 }
 
-public abstract class PoolManager : GenericManager {
+public abstract class ManagerPool : ManagerGeneric {
     private static readonly List<GameObject> _pooledObjects = new List<GameObject>();
     public                  List<ItemToPool> itemsToPool;
 
