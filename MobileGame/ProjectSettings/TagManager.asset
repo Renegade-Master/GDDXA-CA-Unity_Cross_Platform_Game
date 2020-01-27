@@ -9,6 +9,7 @@ TagManager:
   - Shot_Player_UG_01
   - Shot_Enemy_Small_Main
   - Enemy_Small
+  - Enemy_Small_1
   layers:
   - Default
   - TransparentFX

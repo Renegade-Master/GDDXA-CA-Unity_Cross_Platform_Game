@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
 
 public class EnemyControllerSmall : GenericController {
-    
     protected new void Start() {
         base.Start();
         _boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<BoundaryManager>().enemyBoundary;
     }
-    
+
     protected override void Fire() {
-        GameObject bullet = ShotManager.instance.GetPooledObject("Shot_Enemy_Small_Main"); 
+        var bullet = ShotManager.instance.GetPooledObject("Shot_Enemy_Small_Main");
         if (bullet != null) {
             bullet.transform.position = _shotSpawn.position;
             bullet.transform.rotation = _shotSpawn.rotation;

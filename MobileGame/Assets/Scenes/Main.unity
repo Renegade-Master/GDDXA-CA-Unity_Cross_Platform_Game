@@ -371,6 +371,11 @@ PrefabInstance:
       propertyPath: itemsToPool.Array.data[1].shouldExpand
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -3783781746631755547, guid: 9bd565aea8abc634c816eed7acb92c8d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1361090515, guid: 9bd565aea8abc634c816eed7acb92c8d, type: 3}
       propertyPath: itemsToPool.Array.size
       value: 1

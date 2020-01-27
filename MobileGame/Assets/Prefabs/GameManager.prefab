@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8678882003901506912}
   - component: {fileID: 8678882003901506943}
-  - component: {fileID: -3783781746631755547}
   - component: {fileID: 1361090515}
+  - component: {fileID: -3783781746631755547}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -52,6 +52,19 @@ MonoBehaviour:
     type: 3}
   skyBoxes:
   - {fileID: 493274391447467576, guid: 9971f952dbef9da40a726eb7ac9403ce, type: 3}
+--- !u!114 &1361090515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8678882003901506942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c87dc2fbb4424c80a250063c9979db2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemsToPool: []
 --- !u!114 &-3783781746631755547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,16 +82,3 @@ MonoBehaviour:
       type: 3}
     amountToPool: 10
     shouldExpand: 1
---- !u!114 &1361090515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8678882003901506942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c87dc2fbb4424c80a250063c9979db2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemsToPool: []

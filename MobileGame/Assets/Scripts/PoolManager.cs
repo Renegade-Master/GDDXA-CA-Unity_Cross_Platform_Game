@@ -4,43 +4,43 @@ using UnityEngine;
 
 [Serializable]
 public class ItemToPool {
+    public int        amountToPool;
     public GameObject objectToPool;
-    public int amountToPool;
-    public bool shouldExpand;
+    public bool       shouldExpand;
 }
 
 public abstract class PoolManager : GenericManager {
-    public List<ItemToPool> itemsToPool;
-    
-    private List<GameObject> _pooledObjects;
+    private static readonly List<GameObject> _pooledObjects = new List<GameObject>();
+    public                  List<ItemToPool> itemsToPool;
 
-    void Start () {
-        _pooledObjects = new List<GameObject>();
-        foreach (ItemToPool item in itemsToPool) {
-            for (int i = 0; i < item.amountToPool; i++) {
-                GameObject obj = Instantiate(item.objectToPool);
+    protected void Start() {
+        foreach (var item in itemsToPool)
+            for (var i = 0; i < item.amountToPool; i++) {
+                var obj = Instantiate(item.objectToPool);
                 obj.SetActive(false);
                 _pooledObjects.Add(obj);
             }
-        }
     }
-    
+
     public GameObject GetPooledObject(string requestTag) {
-        foreach (GameObject pObj in _pooledObjects) {
-            if (!pObj.activeInHierarchy && pObj.CompareTag(requestTag)) {
-                return pObj;
-            }
+        if (_pooledObjects == null) {
+            Debug.Log("Pool is null for request String: " + requestTag);
+
+            return null;
         }
-        foreach (ItemToPool item in itemsToPool) {
-            if (item.objectToPool.CompareTag(requestTag)) {
+
+        foreach (var pObj in _pooledObjects)
+            if (!pObj.activeInHierarchy && pObj.CompareTag(requestTag))
+                return pObj;
+        foreach (var item in itemsToPool)
+            if (item.objectToPool.CompareTag(requestTag))
                 if (item.shouldExpand) {
-                    GameObject obj = Instantiate(item.objectToPool);
+                    var obj = Instantiate(item.objectToPool);
                     obj.SetActive(false);
                     _pooledObjects.Add(obj);
                     return obj;
                 }
-            }
-        }
+
         return null;
     }
 }

@@ -7,8 +7,8 @@ public class Boundary {
 }
 
 public class BoundaryManager : GenericManager {
-    public Boundary playerBoundary;
     public Boundary enemyBoundary;
+    public Boundary playerBoundary;
     public Boundary projectileBoundary;
 
     // Handle an Object ENTERING the collider
