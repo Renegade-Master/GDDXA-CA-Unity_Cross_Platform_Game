@@ -459,13 +459,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2349708337057633802}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e48a1a917efc41c38726bb6af966601e, type: 3}
+  m_Script: {fileID: 11500000, guid: be99fa0cdf4984e4bb2b234d93c38563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
-  tilt: 4
-  shot: {fileID: 7418128789324112594, guid: e78898ad0d3e64a4f942b6be9990b53a, type: 3}
-  _shotSpawn: {fileID: 9021898461475381469}
 --- !u!1 &2349743022491429124
 GameObject:
   m_ObjectHideFlags: 0
