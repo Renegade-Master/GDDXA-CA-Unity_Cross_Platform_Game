@@ -38,7 +38,7 @@ public class ManagerGame : ManagerGeneric {
 
                 foreach (var obj in enemySpawnPrefabs) {
                     _enemySpawns.Add(Instantiate(obj,
-                        new Vector3(0, 0, 60),
+                        new Vector3(60, 0, 0),
                         Quaternion.Euler(Vector3.zero)));
                 }
 
@@ -46,7 +46,7 @@ public class ManagerGame : ManagerGeneric {
                     obj.GetComponent<ControllerEnemySpawn>().StartMovement(EnemySpawnPattern.Test);
                 }
 
-                // Spawn some initial Enemies
+                // Spawn some Enemies
                 // for (var i = 0; i < 4; i++) {
                 //     var enemy = ManagerEnemy.instance.GetPooledObject("Enemy_Small");
                 //     if (enemy != null) {

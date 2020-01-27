@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Text;
 using UnityEngine;
 
 public enum EnemySpawnPattern {
@@ -9,9 +8,11 @@ public enum EnemySpawnPattern {
 }
 
 public class ControllerEnemySpawn : ControllerGeneric {
+    private bool _spawnEnemies;
     private float _spawnFreq;
     private Vector3 _moveSpeed;
     private int _direction = 1;
+    private int _enemyCount;
     
     protected void Awake() {
         _boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().enemyBoundary;
@@ -22,15 +23,15 @@ public class ControllerEnemySpawn : ControllerGeneric {
         switch (pattern) {
             case EnemySpawnPattern.Test:
                 _spawnFreq = 1.0f;
-                _moveSpeed = new Vector3(0,0,0.01f);
+                _moveSpeed = new Vector3(0,0,0.33f);
                 break;
             case EnemySpawnPattern.Test2:
                 _spawnFreq = 2.0f;
-                _moveSpeed = new Vector3(0,0,2);
+                _moveSpeed = new Vector3(0,0,0.66f);
                 break;
             case EnemySpawnPattern.Test3:
                 _spawnFreq = 3.0f;
-                _moveSpeed = new Vector3(0,0,3);
+                _moveSpeed = new Vector3(0,0,1);
                 break;
             default:
                 _spawnFreq = 0.0f;
