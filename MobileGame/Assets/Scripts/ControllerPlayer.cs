@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 
-public class ControllerPlayer : ControllerGeneric {
+public class ControllerPlayer : ControllerCharacter {
+    protected void Awake() {
+        _boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().playerBoundary;
+    }
+    
     protected new void Start() {
         base.Start();
-        _boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().playerBoundary;
     }
 
     private void Update() {

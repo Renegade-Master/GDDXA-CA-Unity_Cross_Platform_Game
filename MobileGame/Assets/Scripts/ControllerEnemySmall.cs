@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ControllerEnemySmall : ControllerGeneric {
+public class ControllerEnemySmall : ControllerCharacter {
     protected new void Start() {
         base.Start();
         _boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().enemyBoundary;

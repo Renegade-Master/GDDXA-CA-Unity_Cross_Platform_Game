@@ -23,7 +23,9 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
+          <e p="ControllerCharacter.cs" t="Include" />
           <e p="ControllerEnemySmall.cs" t="Include" />
+          <e p="ControllerEnemySpawn.cs" t="Include" />
           <e p="ControllerGeneric.cs" t="Include" />
           <e p="ControllerPlayer.cs" t="Include" />
           <e p="ManagerBoundary.cs" t="Include" />
