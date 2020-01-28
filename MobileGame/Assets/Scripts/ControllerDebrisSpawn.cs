@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public enum SpawnPatternEnemy {
+public enum SpawnPatternDebris {
     Test,
     Test2,
     Test3
 }
 
-public class ControllerEnemySpawn : ControllerGeneric {
+public class ControllerDebrisSpawn : ControllerGeneric {
     //private bool _spawnEnemies;
     private float _spawnFreq;
     private Vector3 _moveSpeed;
@@ -19,20 +19,20 @@ public class ControllerEnemySpawn : ControllerGeneric {
         _direction = Random.Range(0, 2) * 2 - 1;
     }
     
-    public void StartMovement(SpawnPatternEnemy pattern) {
+    public void StartMovement(SpawnPatternDebris pattern) {
         StopAllCoroutines();
         switch (pattern) {
-            case SpawnPatternEnemy.Test:
-                _spawnFreq = 5.0f;
-                _moveSpeed = new Vector3(0,0,0.33f);
-                break;
-            case SpawnPatternEnemy.Test2:
+            case SpawnPatternDebris.Test:
                 _spawnFreq = 3.0f;
-                _moveSpeed = new Vector3(0,0,0.66f);
+                _moveSpeed = new Vector3(0,0,0.1f);
                 break;
-            case SpawnPatternEnemy.Test3:
+            case SpawnPatternDebris.Test2:
+                _spawnFreq = 2.0f;
+                _moveSpeed = new Vector3(0,0,0.3f);
+                break;
+            case SpawnPatternDebris.Test3:
                 _spawnFreq = 1.0f;
-                _moveSpeed = new Vector3(0,0,1.0f);
+                _moveSpeed = new Vector3(0,0,0.7f);
                 break;
             default:
                 _spawnFreq = 0.0f;
@@ -41,7 +41,7 @@ public class ControllerEnemySpawn : ControllerGeneric {
         }
 
         StartCoroutine(Movement());
-        StartCoroutine(EnemySpawn());
+        StartCoroutine(DebrisSpawn());
     }
 
     private IEnumerator Movement() {
@@ -65,11 +65,11 @@ public class ControllerEnemySpawn : ControllerGeneric {
         }
     }
 
-    private IEnumerator EnemySpawn() {
+    private IEnumerator DebrisSpawn() {
         yield return new WaitForSeconds(_spawnFreq);
         
         while (true) {
-            var enemy = ManagerPoolEnemy.instance.GetPooledObject("Enemy_Small");
+            var enemy = ManagerPoolDebris.instance.GetPooledObject("Debris_Small");
             if (enemy != null) {
                 enemy.transform.position = gameObject.transform.position;
                 enemy.transform.rotation = Quaternion.Euler(0,-90,0);

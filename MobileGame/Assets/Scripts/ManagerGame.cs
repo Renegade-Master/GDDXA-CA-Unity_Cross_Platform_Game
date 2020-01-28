@@ -41,22 +41,20 @@ public class ManagerGame : ManagerGeneric {
                         new Vector3(60, 0, 0),
                         Quaternion.Euler(Vector3.zero)));
                 }
-
-                foreach (var obj in _enemySpawns) {
-                    obj.GetComponent<ControllerEnemySpawn>().StartMovement(EnemySpawnPattern.Test);
+                
+                foreach (var obj in debrisSpawnPrefabs) {
+                    _debrisSpawns.Add(Instantiate(obj,
+                        new Vector3(60, 0, 0),
+                        Quaternion.Euler(Vector3.zero)));
                 }
 
-                // Spawn some Enemies
-                // for (var i = 0; i < 4; i++) {
-                //     var enemy = ManagerEnemy.instance.GetPooledObject("Enemy_Small");
-                //     if (enemy != null) {
-                //         Debug.Log("Enemy spawn");
-                //         enemy.transform.position = new Vector3(60, 0, -10 + 10 * i);
-                //         enemy.GetComponent<Rigidbody>().velocity = Vector3.left * 10;
-                //         enemy.GetComponent<Rigidbody>().transform.rotation = Quaternion.Euler(0, -90, 0);
-                //         enemy.SetActive(true);
-                //     }
-                // }
+                foreach (var obj in _enemySpawns) {
+                    obj.GetComponent<ControllerEnemySpawn>().StartMovement(SpawnPatternEnemy.Test);
+                }
+                
+                foreach (var obj in _debrisSpawns) {
+                    obj.GetComponent<ControllerDebrisSpawn>().StartMovement(SpawnPatternDebris.Test);
+                }
 
                 break;
             default:

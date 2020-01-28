@@ -44,7 +44,7 @@ public class ControllerPlayer : ControllerCharacter {
     }
 
     protected override void Fire() {
-        var bullet = ManagerShot.instance.GetPooledObject("Shot_Player_Main");
+        var bullet = ManagerPoolShot.instance.GetPooledObject("Shot_Player_Main");
         if (bullet != null) {
             bullet.transform.position = _shotSpawn.position;
             bullet.transform.rotation = _shotSpawn.rotation;

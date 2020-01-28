@@ -7,7 +7,7 @@ public class ControllerEnemySmall : ControllerCharacter {
     }
 
     protected override void Fire() {
-        var bullet = ManagerShot.instance.GetPooledObject("Shot_Enemy_Small_Main");
+        var bullet = ManagerPoolShot.instance.GetPooledObject("Shot_Enemy_Small_Main");
         if (bullet != null) {
             bullet.transform.position = _shotSpawn.position;
             bullet.transform.rotation = _shotSpawn.rotation;

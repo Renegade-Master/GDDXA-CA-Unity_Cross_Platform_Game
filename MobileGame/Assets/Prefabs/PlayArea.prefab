@@ -57,14 +57,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7d01d7d7be8124409acad7c68369eae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerBoundary:
-    xMin: -40
-    xMax: 40
-    zMin: -20
-    zMax: 20
   enemyBoundary:
     xMin: -40
     xMax: 80
+    zMin: -20
+    zMax: 20
+  playerBoundary:
+    xMin: -30
+    xMax: 30
     zMin: -20
     zMax: 20
   projectileBoundary:

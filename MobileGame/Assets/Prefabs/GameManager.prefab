@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8678882003901506912}
   - component: {fileID: 8678882003901506943}
-  - component: {fileID: 1361090515}
   - component: {fileID: -3783781746631755547}
+  - component: {fileID: 1361090515}
+  - component: {fileID: -1329471124260961723}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -46,25 +47,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentLevel: 0
-  playerPrefab: {fileID: 2349708337057633802, guid: 6999a6f34e6236c43ba5ca927b4c441e,
-    type: 3}
   playAreaPrefab: {fileID: 4053052988011433874, guid: d10f1b91aa71b5a49a520820b4c2e52c,
+    type: 3}
+  playerPrefab: {fileID: 2349708337057633802, guid: 6999a6f34e6236c43ba5ca927b4c441e,
     type: 3}
   skyBoxes:
   - {fileID: 493274391447467576, guid: 9971f952dbef9da40a726eb7ac9403ce, type: 3}
---- !u!114 &1361090515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8678882003901506942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c87dc2fbb4424c80a250063c9979db2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemsToPool: []
+  enemySpawnPrefabs: []
+  debrisSpawnPrefabs: []
 --- !u!114 &-3783781746631755547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,7 +68,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemsToPool:
-  - objectToPool: {fileID: 7418128789324112594, guid: e78898ad0d3e64a4f942b6be9990b53a,
+  - amountToPool: 10
+    objectToPool: {fileID: 7418128789324112594, guid: e78898ad0d3e64a4f942b6be9990b53a,
       type: 3}
-    amountToPool: 10
     shouldExpand: 1
+--- !u!114 &1361090515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8678882003901506942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c87dc2fbb4424c80a250063c9979db2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemsToPool: []
+--- !u!114 &-1329471124260961723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8678882003901506942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec9c2d429584105829da03c94990253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemsToPool: []

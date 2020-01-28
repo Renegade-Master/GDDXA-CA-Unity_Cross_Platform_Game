@@ -24,5 +24,15 @@ public class ManagerBoundary : ManagerGeneric {
             Debug.Log("Destroying Shot");
             other.gameObject.SetActive(false);
         }
+        
+        if (other.tag.Contains("Enemy")) {
+            Debug.Log("Destroying Enemy");
+            other.gameObject.SetActive(false);
+        }
+        
+        if (other.tag.Contains("Debris")) {
+            Debug.Log("Destroying Debris");
+            other.gameObject.SetActive(false);
+        }
     }
 }
