@@ -8,11 +8,9 @@ public enum SpawnPatternEnemy {
 }
 
 public class ControllerEnemySpawn : ControllerGeneric {
-    //private bool _spawnEnemies;
     private float _spawnFreq;
     private Vector3 _moveSpeed;
     private int _direction;
-    //private int _enemyCount;
     
     protected void Awake() {
         _boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().enemyBoundary;
