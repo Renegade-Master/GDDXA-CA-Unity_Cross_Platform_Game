@@ -12,7 +12,7 @@ public class ManagerGame : ManagerGeneric {
     public  List<GameObject> skyBoxes;
     public  List<GameObject> enemySpawnPrefabs;
     public  List<GameObject> debrisSpawnPrefabs;
-    private List<GameObject> _enemySpawns = new List<GameObject>();
+    private List<GameObject> _enemySpawns  = new List<GameObject>();
     private List<GameObject> _debrisSpawns = new List<GameObject>();
 
     // Start is called before the first frame update
@@ -23,7 +23,6 @@ public class ManagerGame : ManagerGeneric {
 
     // Update is called once per frame
     private void Update() {
-        
     }
 
     private void LoadLevel(int level) {
@@ -36,25 +35,21 @@ public class ManagerGame : ManagerGeneric {
                 _player.GetComponent<Rigidbody>().transform.position = Vector3.zero;
                 _player.GetComponent<Rigidbody>().transform.rotation = Quaternion.Euler(-90, 0, 90);
 
-                foreach (var obj in enemySpawnPrefabs) {
+                foreach (var obj in enemySpawnPrefabs)
                     _enemySpawns.Add(Instantiate(obj,
                         new Vector3(60, 0, 0),
                         Quaternion.Euler(Vector3.zero)));
-                }
-                
-                foreach (var obj in debrisSpawnPrefabs) {
+
+                foreach (var obj in debrisSpawnPrefabs)
                     _debrisSpawns.Add(Instantiate(obj,
                         new Vector3(60, 0, 0),
                         Quaternion.Euler(Vector3.zero)));
-                }
 
-                foreach (var obj in _enemySpawns) {
+                foreach (var obj in _enemySpawns)
                     obj.GetComponent<ControllerEnemySpawn>().StartMovement(SpawnPatternEnemy.Test);
-                }
-                
-                foreach (var obj in _debrisSpawns) {
+
+                foreach (var obj in _debrisSpawns)
                     obj.GetComponent<ControllerDebrisSpawn>().StartMovement(SpawnPatternDebris.Test);
-                }
 
                 break;
             default:

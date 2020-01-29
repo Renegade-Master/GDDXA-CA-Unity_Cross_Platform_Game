@@ -2,22 +2,22 @@
 
 public class ControllerPlayer : ControllerCharacter {
     private Vector3 movement;
-    
-    #if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
-        private Vector2 _touchOrigin = -Vector2.one;
-    #endif
-    
+
+#if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+    private Vector2 _touchOrigin = -Vector2.one;
+#endif
+
     protected void Awake() {
         _boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().playerBoundary;
     }
-    
+
     protected new void Start() {
         base.Start();
     }
 
     private void Update() {
         GetPlayerInput(out var moveHorizontal, out var moveVertical);
-        
+
         movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
     }
 
@@ -44,16 +44,16 @@ public class ControllerPlayer : ControllerCharacter {
     }
 
     private void GetPlayerInput(out float mvH, out float mvV) {
-	    mvH = 0.0f;
-	    mvV = 0.0f;
-	    
+        mvH = 0.0f;
+        mvV = 0.0f;
+
         // Is the Player using a standard input device
-        #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
+#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
         mvH = Input.GetAxis("Horizontal");
         mvV = Input.GetAxis("Vertical");
 
         // If the Player is using a touchscreen input device
-        #elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+#elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
         //Check if Input has registered more than zero touches
         if (Input.touchCount > 0) {
 	        //Store the first touch detected.
@@ -90,7 +90,7 @@ public class ControllerPlayer : ControllerCharacter {
 			        mvV = y > 0 ? 1 : -1;
 	        }
         }
-		#endif // End Device specific code
+#endif // End Device specific code
 
         if (Input.GetButton("Fire1")) Fire();
     }

@@ -15,13 +15,12 @@ public abstract class ManagerPool : ManagerGeneric {
     public           List<ItemToPool> itemsToPool;
 
     protected void Start() {
-        foreach (var item in itemsToPool) {
+        foreach (var item in itemsToPool)
             for (var i = 0; i < item.amountToPool; i++) {
                 var obj = Instantiate(item.objectToPool);
                 obj.SetActive(false);
                 _pooledObjects.Add(obj);
             }
-        }
 
         // Shuffle the Items
         _pooledObjects = Shuffle(_pooledObjects);
@@ -34,17 +33,17 @@ public abstract class ManagerPool : ManagerGeneric {
     //         if
     //     }
     // }
-    
+
     protected List<T> Shuffle<T>(List<T> list) {
-        Random rng = new Random();
-        int n = list.Count;
-        
-        while (n > 1) {  
-            n--;  
-            int k = rng.Next(n + 1);  
-            T value = list[k];  
-            list[k] = list[n];  
-            list[n] = value;  
+        var rng = new Random();
+        var n = list.Count;
+
+        while (n > 1) {
+            n--;
+            var k = rng.Next(n + 1);
+            var value = list[k];
+            list[k] = list[n];
+            list[n] = value;
         }
 
         return list;
