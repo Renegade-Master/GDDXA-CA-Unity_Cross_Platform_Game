@@ -1,6 +1,12 @@
 ﻿using UnityEngine;
 
 public class ControllerPlayer : ControllerCharacter {
+    private Vector3 movement;
+    
+    #if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+        private Vector2 _touchOrigin = -Vector2.one;
+    #endif
+    
     protected void Awake() {
         _boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().playerBoundary;
     }
@@ -10,16 +16,14 @@ public class ControllerPlayer : ControllerCharacter {
     }
 
     private void Update() {
-        GetPlayerInput();
+        GetPlayerInput(out var moveHorizontal, out var moveVertical);
+        
+        movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
     }
 
     private void FixedUpdate() {
         var tempRb = GetComponent<Rigidbody>();
 
-        var moveHorizontal = Input.GetAxis("Horizontal");
-        var moveVertical = Input.GetAxis("Vertical");
-
-        var movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
         tempRb.MovePosition(tempRb.position + movement);
 
         // Clamp the Player Position to within the bounds of the screen
@@ -39,7 +43,55 @@ public class ControllerPlayer : ControllerCharacter {
         GetComponent<Rigidbody>().position = tempRb.position;
     }
 
-    private void GetPlayerInput() {
+    private void GetPlayerInput(out float mvH, out float mvV) {
+	    mvH = 0.0f;
+	    mvV = 0.0f;
+	    
+        // Is the Player using a standard input device
+        #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
+        mvH = Input.GetAxis("Horizontal");
+        mvV = Input.GetAxis("Vertical");
+
+        // If the Player is using a touchscreen input device
+        #elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+        //Check if Input has registered more than zero touches
+        if (Input.touchCount > 0) {
+	        //Store the first touch detected.
+	        var myTouch = Input.touches[0];
+
+	        //Check if the phase of that touch equals Began
+	        if (myTouch.phase == TouchPhase.Began) {
+		        //If so, set touchOrigin to the position of that touch
+		        _touchOrigin = myTouch.position;
+	        }
+
+	        //If the touch phase is not Began, and instead is equal to Ended and the x of _touchOrigin is greater or equal to zero:
+	        else if (myTouch.phase == TouchPhase.Ended && _touchOrigin.x >= 0) {
+		        //Set touchEnd to equal the position of this touch
+		        var touchEnd = myTouch.position;
+
+		        //Calculate the difference between the beginning and end of the touch on the x axis.
+		        var x = touchEnd.x - _touchOrigin.x;
+
+		        //Calculate the difference between the beginning and end of the touch on the y axis.
+		        var y = touchEnd.y - _touchOrigin.y;
+
+		        //Set _touchOrigin.x to -1 so that our else if statement will evaluate false and not repeat immediately.
+		        _touchOrigin.x = -1;
+
+		        //Check if the difference along the x axis is greater than the difference along the y axis.
+		        if (Mathf.Abs(x) > Mathf.Abs(y))
+
+			        //If x is greater than zero, set horizontal to 1, otherwise set it to -1
+			        mvH = x > 0 ? 1 : -1;
+		        else
+
+			        //If y is greater than zero, set horizontal to 1, otherwise set it to -1
+			        mvV = y > 0 ? 1 : -1;
+	        }
+        }
+		#endif // End Device specific code
+
         if (Input.GetButton("Fire1")) Fire();
     }
 
