@@ -13,25 +13,25 @@ public class ManagerBoundary : ManagerGeneric {
 
     // Handle an Object ENTERING the collider
     private void OnTriggerEnter(Collider other) {
-        throw new NotImplementedException();
+        // throw new NotImplementedException();
     }
 
     // Handle and Object EXITING the collider
     private void OnTriggerExit(Collider other) {
-        Debug.Log("Something left: " + other.name);
+        //Debug.Log("Something left: " + other.name);
 
         if (other.tag.Contains("Shot")) {
-            Debug.Log("Destroying Shot");
+            //Debug.Log("Destroying Shot");
             other.gameObject.SetActive(false);
         }
 
         if (other.tag.Contains("Enemy")) {
-            Debug.Log("Destroying Enemy");
+            //Debug.Log("Destroying Enemy");
             other.gameObject.SetActive(false);
         }
 
         if (other.tag.Contains("Debris")) {
-            Debug.Log("Destroying Debris");
+            //Debug.Log("Destroying Debris");
             other.gameObject.SetActive(false);
         }
     }

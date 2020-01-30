@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class ControllerPlayer : ControllerCharacter {
     private Vector3 movement;
@@ -23,6 +24,8 @@ public class ControllerPlayer : ControllerCharacter {
 
     private void FixedUpdate() {
         var tempRb = GetComponent<Rigidbody>();
+
+        Debug.Log("Moving by: " + movement);
 
         tempRb.MovePosition(tempRb.position + movement);
 
@@ -49,11 +52,11 @@ public class ControllerPlayer : ControllerCharacter {
 
         // Is the Player using a standard input device
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
-        mvH = Input.GetAxis("Horizontal");
-        mvV = Input.GetAxis("Vertical");
+        // mvH = Input.GetAxis("Horizontal");
+        // mvV = Input.GetAxis("Vertical");
 
         // If the Player is using a touchscreen input device
-#elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+//#elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
         //Check if Input has registered more than zero touches
         if (Input.touchCount > 0) {
 	        //Store the first touch detected.
@@ -79,15 +82,35 @@ public class ControllerPlayer : ControllerCharacter {
 		        //Set _touchOrigin.x to -1 so that our else if statement will evaluate false and not repeat immediately.
 		        _touchOrigin.x = -1;
 
+		        Debug.Log("TouchX: " + x + " | TouchY: " + y);
+
+		        /* ToDo:
+				 *	This shit is fucked, yo.
+		         *  It would be better to:
+		         * 	 - Spawn a box at the position the touch was at
+		         * 	 - While the touch is held, use a Spring connection to pull Player towards touch
+		         * 	 - When touch releases, despawn the box, and stop pulling
+		         */
+		        
+		        // mvH = Mathf.Clamp(x, -1.0f, 1.0f);
+		        // mvV = Mathf.Clamp(y, -1.0f, 1.0f);
+		        mvH = normalise(mvH, -1, 1);
+		        mvV = normalise(mvV, -1, 1);
+		        
+		        Debug.Log("MoveX: " + mvH + " | MoveY: " + mvV);
+		        
+		        // normalized = (x - min(x)) / (max(x) - min(x))
+		        // normalized = ($value - $min) / ($max - $min)
+
 		        //Check if the difference along the x axis is greater than the difference along the y axis.
-		        if (Mathf.Abs(x) > Mathf.Abs(y))
-
-			        //If x is greater than zero, set horizontal to 1, otherwise set it to -1
-			        mvH = x > 0 ? 1 : -1;
-		        else
-
-			        //If y is greater than zero, set horizontal to 1, otherwise set it to -1
-			        mvV = y > 0 ? 1 : -1;
+		        // if (Mathf.Abs(x) > Mathf.Abs(y))
+		        //
+		        //  //If x is greater than zero, set horizontal to 1, otherwise set it to -1
+		        //  mvH = x > 0 ? 1 : -1;
+		        // else
+		        //
+		        //  //If y is greater than zero, set horizontal to 1, otherwise set it to -1
+		        //  mvV = y > 0 ? 1 : -1;
 	        }
         }
 #endif // End Device specific code
@@ -103,5 +126,9 @@ public class ControllerPlayer : ControllerCharacter {
             bullet.GetComponent<Rigidbody>().velocity = Vector3.right * 50;
             bullet.SetActive(true);
         }
+    }
+
+    private float normalise(float x, float min, float max) {
+	    return (max - min) * ((x - min) / (max - min)) + min;
     }
 }
