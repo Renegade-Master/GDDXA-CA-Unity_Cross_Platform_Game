@@ -6,10 +6,12 @@ public class ControllerPlayer : ControllerCharacter {
 
 #if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
     private Vector2 _touchOrigin = -Vector2.one;
+    [SerializeField] private GameObject _touchTarget;
 #endif
 
     protected void Awake() {
         _boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().playerBoundary;
+        _touchTarget.SetActive(false);
     }
 
     protected new void Start() {
@@ -52,8 +54,8 @@ public class ControllerPlayer : ControllerCharacter {
 
         // Is the Player using a standard input device
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
-        // mvH = Input.GetAxis("Horizontal");
-        // mvV = Input.GetAxis("Vertical");
+        mvH = Input.GetAxis("Horizontal");
+        mvV = Input.GetAxis("Vertical");
 
         // If the Player is using a touchscreen input device
 //#elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
@@ -62,55 +64,29 @@ public class ControllerPlayer : ControllerCharacter {
 	        //Store the first touch detected.
 	        var myTouch = Input.touches[0];
 
+            /* ToDO:
+             *    This isn't working yet.
+             *    The idea is to place a Target at the touch location
+             *        If the touch moves, move the target too
+             *    If the touch is released, set the Target to INACTIVE
+             *    While the Target is ACTIVE, pull the Player towards the Target location
+             */
+            
 	        //Check if the phase of that touch equals Began
 	        if (myTouch.phase == TouchPhase.Began) {
 		        //If so, set touchOrigin to the position of that touch
 		        _touchOrigin = myTouch.position;
+                _touchTarget.GetComponent<Rigidbody>().position = myTouch.position;
+                _touchTarget.SetActive(true);
+            }
+	        
+	        else if (myTouch.phase == TouchPhase.Moved) {
+                _touchTarget.GetComponent<Rigidbody>().position = myTouch.position;
 	        }
 
 	        //If the touch phase is not Began, and instead is equal to Ended and the x of _touchOrigin is greater or equal to zero:
 	        else if (myTouch.phase == TouchPhase.Ended && _touchOrigin.x >= 0) {
-		        //Set touchEnd to equal the position of this touch
-		        var touchEnd = myTouch.position;
-
-		        //Calculate the difference between the beginning and end of the touch on the x axis.
-		        var x = touchEnd.x - _touchOrigin.x;
-
-		        //Calculate the difference between the beginning and end of the touch on the y axis.
-		        var y = touchEnd.y - _touchOrigin.y;
-
-		        //Set _touchOrigin.x to -1 so that our else if statement will evaluate false and not repeat immediately.
-		        _touchOrigin.x = -1;
-
-		        Debug.Log("TouchX: " + x + " | TouchY: " + y);
-
-		        /* ToDo:
-				 *	This shit is fucked, yo.
-		         *  It would be better to:
-		         * 	 - Spawn a box at the position the touch was at
-		         * 	 - While the touch is held, use a Spring connection to pull Player towards touch
-		         * 	 - When touch releases, despawn the box, and stop pulling
-		         */
-		        
-		        // mvH = Mathf.Clamp(x, -1.0f, 1.0f);
-		        // mvV = Mathf.Clamp(y, -1.0f, 1.0f);
-		        mvH = normalise(mvH, -1, 1);
-		        mvV = normalise(mvV, -1, 1);
-		        
-		        Debug.Log("MoveX: " + mvH + " | MoveY: " + mvV);
-		        
-		        // normalized = (x - min(x)) / (max(x) - min(x))
-		        // normalized = ($value - $min) / ($max - $min)
-
-		        //Check if the difference along the x axis is greater than the difference along the y axis.
-		        // if (Mathf.Abs(x) > Mathf.Abs(y))
-		        //
-		        //  //If x is greater than zero, set horizontal to 1, otherwise set it to -1
-		        //  mvH = x > 0 ? 1 : -1;
-		        // else
-		        //
-		        //  //If y is greater than zero, set horizontal to 1, otherwise set it to -1
-		        //  mvV = y > 0 ? 1 : -1;
+		        _touchTarget.SetActive(false);
 	        }
         }
 #endif // End Device specific code
