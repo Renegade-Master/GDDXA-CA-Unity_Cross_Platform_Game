@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ManagerGame : ManagerGeneric {
     private GameObject _playArea;
+    private ManagerGeneric _enemyPoolManager;
+    private ManagerGeneric _debrisPoolManager;
+    private ManagerGeneric _shotPoolManager;
 
     private GameObject _player;
     public  int        currentLevel;
@@ -19,6 +23,7 @@ public class ManagerGame : ManagerGeneric {
     private void Start() {
         // Place all starting GameObjects
         LoadLevel(currentLevel);
+        
     }
 
     // Update is called once per frame
@@ -28,6 +33,10 @@ public class ManagerGame : ManagerGeneric {
     private void LoadLevel(int level) {
         switch (level) {
             case 0:
+                _enemyPoolManager = gameObject.GetComponent<ManagerPoolEnemy>();
+                _debrisPoolManager = gameObject.GetComponent<ManagerPoolDebris>();
+                _shotPoolManager = gameObject.GetComponent<ManagerPoolShot>();
+                
                 Instantiate(skyBoxes[level], Vector3.zero, Quaternion.Euler(Vector3.zero));
                 _playArea = Instantiate(playAreaPrefab, Vector3.zero, Quaternion.Euler(Vector3.zero));
 
@@ -50,6 +59,9 @@ public class ManagerGame : ManagerGeneric {
 
                 foreach (var obj in _debrisSpawns)
                     obj.GetComponent<ControllerDebrisSpawn>().StartMovement(SpawnPatternDebris.Test);
+                
+                // Start the coroutine to regularly skrink the Pooled GameObjects
+                //StartCoroutine(PoolShrinkScheduler());
 
                 break;
             default:
@@ -63,4 +75,12 @@ public class ManagerGame : ManagerGeneric {
         else
             currentLevel++;
     }
+
+    // private IEnumerator PoolShrinkScheduler() {
+    //     yield return new WaitForSeconds(5);
+    //
+    //     while (gameObject.activeInHierarchy) {
+    //         if 
+    //     }
+    // }
 }
