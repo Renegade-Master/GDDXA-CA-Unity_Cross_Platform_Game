@@ -69,7 +69,7 @@ public class ControllerPlayer : ControllerCharacter {
         // mvV = Input.GetAxis("Vertical");
 
         // If the Player is using a touchscreen input device
-//#elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+#elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
         //Check if Input has registered more than zero touches
         if (Input.touchCount > 0) {
 	        //Store the first touch detected.
@@ -113,11 +113,12 @@ public class ControllerPlayer : ControllerCharacter {
     
     // Convert Screen Coordinates into GameWorld Coordinates
     private Vector3 ScreenToWorldCoord(Vector2 touchPos) {
-        Debug.Log("\nConverting: " + touchPos);
-        var temp = new Vector3(touchPos.x, touchPos.y, _mainCam.transform.position.y);
-        Debug.Log("To: " + temp);
+        var temp = new Vector3(
+            touchPos.x,
+            touchPos.y,
+            _mainCam.transform.position.y
+        );
         var temp2 = _mainCam.ScreenToWorldPoint(temp);
-        Debug.Log("And finally: " + temp2); 
 
         return temp2;
     }
