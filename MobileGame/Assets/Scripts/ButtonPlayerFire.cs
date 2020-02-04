@@ -3,14 +3,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ButtonPlayerFire : ButtonGeneric {
-    private GameObject _player;
     private ControllerPlayer _playerController;
     private Button _fireButton;
     
     private void Start() {
         GameObject.Find("GameManager").GetComponent<ManagerGame>().GetPlayer(out _playerController);
-        if (_player == null) {
-            Debug.Log("Player is NULL again: " + _player);
+        if (_playerController == null) {
+            Debug.Log("Player is NULL again: " + _playerController);
             throw new NullReferenceException();
         }
         _fireButton = GetComponent<Button>();
