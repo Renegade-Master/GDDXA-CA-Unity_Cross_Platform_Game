@@ -7,14 +7,14 @@ public class ControllerPlayer : ControllerCharacter {
 
 #if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
     private Vector2 _touchOrigin = -Vector2.one;
-    [SerializeField] private GameObject _touchTarget;
+    public GameObject touchTarget;
 #endif
 
     // For when the GameObejct is Woken after being set to sleep, or after first activation.
     protected void Awake() {
         _boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().playerBoundary;
-        _mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        _touchTarget.SetActive(false);
+        _mainCam = Camera.main;
+        touchTarget.SetActive(false);
     }
 
     // For when the GameObejct is instantiated at the game start.
@@ -33,7 +33,7 @@ public class ControllerPlayer : ControllerCharacter {
     private void FixedUpdate() {
         var tempRb = GetComponent<Rigidbody>();
 
-        Debug.Log("Moving by: " + _movement);
+        //Debug.Log("Moving by: " + _movement);
 
         tempRb.MovePosition(tempRb.position + _movement);
 
@@ -65,11 +65,13 @@ public class ControllerPlayer : ControllerCharacter {
         mvV = Input.GetAxis("Vertical");
 
         // If the Player is using a touchscreen input device
-#elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+//#elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
         //Check if Input has registered more than zero touches
         if (Input.touchCount > 0) {
 	        //Store the first touch detected.
 	        var myTouch = Input.touches[0];
+            Debug.Log("Touch Position: " + myTouch.position);
+            Debug.Log("World Position: " + ScreenToWorldCoord(myTouch.position));
 
             /* ToDO:
              *    This isn't working yet.
@@ -84,19 +86,21 @@ public class ControllerPlayer : ControllerCharacter {
 		        //If so, set touchOrigin to the position of that touch
 		        _touchOrigin = myTouch.position;
                 
-                _touchTarget.GetComponent<Rigidbody>().position = _mainCam.ScreenToWorldPoint(myTouch.position);
-                _touchTarget.SetActive(true);
+                touchTarget.transform.position = ScreenToWorldCoord(myTouch.position);
+                touchTarget.SetActive(true);
             }
 	        
 	        else if (myTouch.phase == TouchPhase.Moved) {
-                _touchTarget.GetComponent<Rigidbody>().position = _mainCam.ScreenToWorldPoint(myTouch.position);
+                touchTarget.transform.position = ScreenToWorldCoord(myTouch.position);
 	        }
 
 	        //If the touch phase is not Began, and instead is equal to Ended and the x of _touchOrigin is greater or equal to zero:
 	        else if (myTouch.phase == TouchPhase.Ended/* && _touchOrigin.x >= 0*/) {
-		        _touchTarget.SetActive(false);
+		        touchTarget.SetActive(false);
 	        }
         }
+        
+        Debug.Log("Touch Array Length: " + Input.touchCount);
 #endif // End Device specific code
 
         if (Input.GetButton("Fire1")) Fire();
@@ -116,5 +120,12 @@ public class ControllerPlayer : ControllerCharacter {
     // Normalise a value to a different value between a given MAX and MIN.
     private float normalise(float x, float min, float max) {
 	    return (max - min) * ((x - min) / (max - min)) + min;
+    }
+    
+    // Convert Screen Coordinates into GameWorld Coordinates
+    private Vector3 ScreenToWorldCoord(Vector2 touchPos) {
+        Vector3 temp = new Vector3(touchPos.x, touchPos.y, _mainCam.transform.position.y);
+
+        return _mainCam.ScreenToWorldPoint(temp);
     }
 }
