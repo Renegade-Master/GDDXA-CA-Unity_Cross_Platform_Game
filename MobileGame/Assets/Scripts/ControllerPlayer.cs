@@ -4,65 +4,69 @@ using UnityEngine;
 public class ControllerPlayer : ControllerCharacter {
     private Vector3 _movement;
     private Camera _mainCam;
+    public float springForce;
 
 #if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
     private Vector2 _touchOrigin = -Vector2.one;
+    private SpringJoint _spring;
     public GameObject touchTarget;
 #endif
 
-    // For when the GameObejct is Woken after being set to sleep, or after first activation.
+    // For when the GameObject is Woken after being set to sleep, or after first activation.
     protected void Awake() {
         _boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().playerBoundary;
         _mainCam = Camera.main;
-        touchTarget.SetActive(false);
+        _spring = gameObject.GetComponent<SpringJoint>();
+        
+        _spring.spring = 0.0f;
+        _spring.GetComponent<Renderer>().enabled = true;
     }
 
-    // For when the GameObejct is instantiated at the game start.
+    // For when the GameObject is instantiated at the game start.
     protected new void Start() {
         base.Start();
     }
 
     // Called BEFORE THE START of every frame to get the Player's intentions for this frame.
     private void Update() {
-        GetPlayerInput(out var moveHorizontal, out var moveVertical);
-
-        _movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+        // GetPlayerInput(out var moveHorizontal, out var moveVertical);
+        //
+        // _movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
     }
     
     // Called just BEFORE THE END of every frame to deal with the physics engine changes, ready for the next frame.
     private void FixedUpdate() {
-        var tempRb = GetComponent<Rigidbody>();
-
-        //Debug.Log("Moving by: " + _movement);
-
-        tempRb.MovePosition(tempRb.position + _movement);
-
+        GetPlayerInput(/*out var moveHorizontal, out var moveVertical*/);
+        // var tempRb = GetComponent<Rigidbody>();
+        //
+        // tempRb.MovePosition(tempRb.position + _movement);
+        //
         // Clamp the Player Position to within the bounds of the screen
-        tempRb.position = new Vector3(
-            Mathf.Clamp(tempRb.position.x, _boundary.xMin, _boundary.xMax),
-            0,
-            Mathf.Clamp(tempRb.position.z, _boundary.zMin, _boundary.zMax)
+        GetComponent<Rigidbody>().position = new Vector3(
+            Mathf.Clamp(GetComponent<Rigidbody>().position.x, _boundary.xMin, _boundary.xMax),
+            0.0f,
+            Mathf.Clamp(GetComponent<Rigidbody>().position.z, _boundary.zMin, _boundary.zMax)
         );
-
-        // Clamp the Player Rotation to within the bounds of the screen
-        tempRb.rotation = Quaternion.Euler(
-            Mathf.Clamp(tempRb.rotation.x, -95, -85),
-            Mathf.Clamp(tempRb.rotation.y, -5, 5),
-            Mathf.Clamp(tempRb.rotation.z, 85, 95)
+        //
+        // Clamp the Player Rotation to within reasonable bounds
+        GetComponent<Rigidbody>().rotation = Quaternion.Euler(
+            Mathf.Clamp(GetComponent<Rigidbody>().rotation.x, -95, -85),
+            0.0f,
+            Mathf.Clamp(GetComponent<Rigidbody>().rotation.z, 85, 95)
         );
-
-        GetComponent<Rigidbody>().position = tempRb.position;
+        //
+        // GetComponent<Rigidbody>().position = tempRb.position;
     }
 
     // Called by Update to get input from the Player.
-    private void GetPlayerInput(out float mvH, out float mvV) {
-        mvH = 0.0f;
-        mvV = 0.0f;
+    private void GetPlayerInput(/*out float mvH, out float mvV*/) {
+        // mvH = 0.0f;
+        // mvV = 0.0f;
 
         // Is the Player using a standard input device
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
-        mvH = Input.GetAxis("Horizontal");
-        mvV = Input.GetAxis("Vertical");
+        // mvH = Input.GetAxis("Horizontal");
+        // mvV = Input.GetAxis("Vertical");
 
         // If the Player is using a touchscreen input device
 //#elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
@@ -70,40 +74,25 @@ public class ControllerPlayer : ControllerCharacter {
         if (Input.touchCount > 0) {
 	        //Store the first touch detected.
 	        var myTouch = Input.touches[0];
-            Debug.Log("Touch Position: " + myTouch.position);
-            Debug.Log("World Position: " + ScreenToWorldCoord(myTouch.position));
 
-            /* ToDO:
-             *    This isn't working yet.
-             *    The idea is to place a Target at the touch location
-             *    If the touch moves, move the target too
-             *    If the touch is released, set the Target to INACTIVE
-             *    While the Target is ACTIVE, pull the Player towards the Target location
-             */
-            
-	        //Check if the phase of that touch equals Began
+            //Check if the phase of that touch equals Began
 	        if (myTouch.phase == TouchPhase.Began) {
-		        //If so, set touchOrigin to the position of that touch
-		        _touchOrigin = myTouch.position;
-                
                 touchTarget.transform.position = ScreenToWorldCoord(myTouch.position);
-                touchTarget.SetActive(true);
+                _spring.spring = springForce;
             }
 	        
 	        else if (myTouch.phase == TouchPhase.Moved) {
                 touchTarget.transform.position = ScreenToWorldCoord(myTouch.position);
 	        }
 
-	        //If the touch phase is not Began, and instead is equal to Ended and the x of _touchOrigin is greater or equal to zero:
-	        else if (myTouch.phase == TouchPhase.Ended/* && _touchOrigin.x >= 0*/) {
-		        touchTarget.SetActive(false);
-	        }
+	        //If the touch phase is not Began, and instead is equal to Ended
+	        else if (myTouch.phase == TouchPhase.Ended) {
+                _spring.spring = 0.0f;
+            }
         }
-        
-        Debug.Log("Touch Array Length: " + Input.touchCount);
 #endif // End Device specific code
 
-        if (Input.GetButton("Fire1")) Fire();
+        //if (Input.GetButton("Fire1")) Fire();
     }
 
     // Called by GetPlayerInput if the Player is requesting to shoot.  Handles Player attacks.
@@ -118,14 +107,18 @@ public class ControllerPlayer : ControllerCharacter {
     }
 
     // Normalise a value to a different value between a given MAX and MIN.
-    private float normalise(float x, float min, float max) {
+    private float Normalise(float x, float min, float max) {
 	    return (max - min) * ((x - min) / (max - min)) + min;
     }
     
     // Convert Screen Coordinates into GameWorld Coordinates
     private Vector3 ScreenToWorldCoord(Vector2 touchPos) {
-        Vector3 temp = new Vector3(touchPos.x, touchPos.y, _mainCam.transform.position.y);
+        Debug.Log("\nConverting: " + touchPos);
+        var temp = new Vector3(touchPos.x, touchPos.y, _mainCam.transform.position.y);
+        Debug.Log("To: " + temp);
+        var temp2 = _mainCam.ScreenToWorldPoint(temp);
+        Debug.Log("And finally: " + temp2); 
 
-        return _mainCam.ScreenToWorldPoint(temp);
+        return temp2;
     }
 }
