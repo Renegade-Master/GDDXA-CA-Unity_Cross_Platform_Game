@@ -7,5 +7,5 @@ public abstract class ControllerCharacter : ControllerGeneric {
         _shotSpawn = transform.Find("ShotSpawn");
     }
 
-    protected abstract void Fire();
+    public abstract void Fire();
 }

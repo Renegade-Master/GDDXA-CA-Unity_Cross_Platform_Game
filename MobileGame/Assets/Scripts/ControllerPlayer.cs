@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ControllerPlayer : ControllerCharacter {
     private Vector3 _movement;
@@ -64,12 +65,12 @@ public class ControllerPlayer : ControllerCharacter {
         // mvV = 0.0f;
 
         // Is the Player using a standard input device
-#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
+#if UNITY_STANDALONE || UNITY_WEBPLAYER
         // mvH = Input.GetAxis("Horizontal");
         // mvV = Input.GetAxis("Vertical");
 
         // If the Player is using a touchscreen input device
-#elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+#elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE || UNITY_EDITOR
         //Check if Input has registered more than zero touches
         if (Input.touchCount > 0) {
 	        //Store the first touch detected.
@@ -96,7 +97,7 @@ public class ControllerPlayer : ControllerCharacter {
     }
 
     // Called by GetPlayerInput if the Player is requesting to shoot.  Handles Player attacks.
-    protected override void Fire() {
+    public override void Fire() {
         var bullet = ManagerPoolShot.instance.GetPooledObject("Shot_Player_Main");
         if (bullet != null) {
             bullet.transform.position = _shotSpawn.position;

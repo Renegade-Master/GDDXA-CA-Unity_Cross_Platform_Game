@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ManagerGame : ManagerGeneric {
     private GameObject _playArea;
@@ -28,6 +29,10 @@ public class ManagerGame : ManagerGeneric {
 
     // Update is called once per frame
     private void Update() {
+    }
+
+    public void GetPlayer(out ControllerPlayer PlayerDest) {
+        PlayerDest =  _player.GetComponent<ControllerPlayer>();
     }
 
     private void LoadLevel(int level) {

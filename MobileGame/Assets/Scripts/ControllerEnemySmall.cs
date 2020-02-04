@@ -6,7 +6,7 @@ public class ControllerEnemySmall : ControllerCharacter {
         _boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().enemyBoundary;
     }
 
-    protected override void Fire() {
+    public override void Fire() {
         var bullet = ManagerPoolShot.instance.GetPooledObject("Shot_Enemy_Small_Main");
         if (bullet != null) {
             bullet.transform.position = _shotSpawn.position;
