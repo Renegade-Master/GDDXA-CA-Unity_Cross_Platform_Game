@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ControllerPlayer : ControllerCharacter {
+    public ControllerPlayer instance;
+    
     private Vector3 _movement;
     private Camera _mainCam;
     public float springForce;
@@ -15,12 +17,12 @@ public class ControllerPlayer : ControllerCharacter {
 
     // For when the GameObject is Woken after being set to sleep, or after first activation.
     protected void Awake() {
+        instance = this;
         _boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().playerBoundary;
         _mainCam = Camera.main;
         _spring = gameObject.GetComponent<SpringJoint>();
         
         _spring.spring = 0.0f;
-        _spring.GetComponent<Renderer>().enabled = true;
     }
 
     // For when the GameObject is instantiated at the game start.
@@ -38,25 +40,25 @@ public class ControllerPlayer : ControllerCharacter {
     // Called just BEFORE THE END of every frame to deal with the physics engine changes, ready for the next frame.
     private void FixedUpdate() {
         GetPlayerInput(/*out var moveHorizontal, out var moveVertical*/);
-        // var tempRb = GetComponent<Rigidbody>();
-        //
-        // tempRb.MovePosition(tempRb.position + _movement);
-        //
+        var tempRb = GetComponent<Rigidbody>();
+        
+        tempRb.MovePosition(tempRb.position + _movement);
+        
         // Clamp the Player Position to within the bounds of the screen
-        GetComponent<Rigidbody>().position = new Vector3(
+        tempRb.position = new Vector3(
             Mathf.Clamp(GetComponent<Rigidbody>().position.x, _boundary.xMin, _boundary.xMax),
             0.0f,
             Mathf.Clamp(GetComponent<Rigidbody>().position.z, _boundary.zMin, _boundary.zMax)
         );
         //
         // Clamp the Player Rotation to within reasonable bounds
-        GetComponent<Rigidbody>().rotation = Quaternion.Euler(
+        tempRb.rotation = Quaternion.Euler(
             Mathf.Clamp(GetComponent<Rigidbody>().rotation.x, -95, -85),
             0.0f,
             Mathf.Clamp(GetComponent<Rigidbody>().rotation.z, 85, 95)
         );
         //
-        // GetComponent<Rigidbody>().position = tempRb.position;
+        GetComponent<Rigidbody>().position = tempRb.position;
     }
 
     // Called by Update to get input from the Player.
