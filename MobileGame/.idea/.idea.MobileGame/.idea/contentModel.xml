@@ -31,6 +31,7 @@
           <e p="ControllerEnemySpawn.cs" t="Include" />
           <e p="ControllerGeneric.cs" t="Include" />
           <e p="ControllerPlayer.cs" t="Include" />
+          <e p="ControllerProjectile.cs" t="Include" />
           <e p="ManagerBoundary.cs" t="Include" />
           <e p="ManagerGame.cs" t="Include" />
           <e p="ManagerGeneric.cs" t="Include" />

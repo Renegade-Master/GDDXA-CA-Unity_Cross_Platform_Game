@@ -69,7 +69,7 @@ public class ControllerEnemySpawn : ControllerGeneric {
             if (enemy != null) {
                 enemy.transform.position = gameObject.transform.position;
                 enemy.transform.rotation = Quaternion.Euler(0, -90, 0);
-                enemy.GetComponent<Rigidbody>().velocity = Vector3.left * 10;
+                //enemy.GetComponent<Rigidbody>().AddForce(Vector3.left * 20);
                 enemy.SetActive(true);
             }
 

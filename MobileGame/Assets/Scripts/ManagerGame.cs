@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ManagerGame : ManagerGeneric {
     private GameObject _playArea;
@@ -11,9 +9,7 @@ public class ManagerGame : ManagerGeneric {
 
     private GameObject _player;
     public  int        currentLevel;
-    //public  GameObject playAreaPrefab;
-
-    //public  GameObject       playerPrefab;
+    
     public  List<GameObject> skyBoxes;
     public  List<GameObject> enemySpawnPrefabs;
     public  List<GameObject> debrisSpawnPrefabs;
@@ -27,14 +23,6 @@ public class ManagerGame : ManagerGeneric {
         
     }
 
-    // Update is called once per frame
-    private void Update() {
-    }
-
-    public ControllerPlayer GetPlayer() {
-        return _player.GetComponent<ControllerPlayer>().instance;
-    }
-
     private void LoadLevel(int level) {
         switch (level) {
             case 0:
@@ -43,10 +31,8 @@ public class ManagerGame : ManagerGeneric {
                 _shotPoolManager = gameObject.GetComponent<ManagerPoolShot>();
                 
                 Instantiate(skyBoxes[level], Vector3.zero, Quaternion.Euler(Vector3.zero));
-                //_playArea = Instantiate(playAreaPrefab, Vector3.zero, Quaternion.Euler(Vector3.zero));
                 _playArea = GameObject.FindWithTag("PlayArea");
 
-                //_player = Instantiate(playerPrefab);
                 _player = GameObject.FindWithTag("Player");
                 _player.GetComponent<Rigidbody>().transform.position = Vector3.zero;
                 _player.GetComponent<Rigidbody>().transform.rotation = Quaternion.Euler(-90, 0, 90);

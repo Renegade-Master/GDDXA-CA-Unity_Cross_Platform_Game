@@ -7,7 +7,6 @@ public class ButtonPlayerFire : ButtonGeneric {
     private Button _fireButton;
     
     private void Start() {
-        //_playerController = GameObject.Find("GameManager").GetComponent<ManagerGame>().GetPlayer();
         _playerController = GameObject.FindWithTag("Player").GetComponent<ControllerPlayer>();
         if (_playerController == null) {
             Debug.Log("Player is NULL again: " + _playerController);
