@@ -9,13 +9,10 @@ public class ControllerEnemySmall : ControllerCharacter {
     
     // Search for player
     public void Update() {
-        double timeNow = Time.time;
-        
         transform.LookAt(_target);
 
-        if ((timeNow - lastShootTime) >= shootCoolDown) {
+        if (ReadyToShoot()) {
             Fire();
-            lastShootTime = timeNow;
         }
     }
 

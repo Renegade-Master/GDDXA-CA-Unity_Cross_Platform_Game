@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonPlayerFire : ButtonGeneric {
+public class ButtonPlayerFire : HudGeneric {
     private ControllerPlayer _playerController;
     private Button _fireButton;
     
@@ -17,6 +17,8 @@ public class ButtonPlayerFire : ButtonGeneric {
     }
 
     private void PlayerFire() {
+        if(!_playerController.ReadyToShoot()) return;
+        
         _playerController.Fire();
     }
 }

@@ -3,7 +3,9 @@
 public class ControllerPlayer : ControllerCharacter {
     private Vector3 _movement;
     private Camera _mainCam;
+
     public float springForce;
+    public DisplayPlayerHealth healthDisplayObject;
 
 #if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
     private Vector2 _touchOrigin = -Vector2.one;
@@ -34,7 +36,6 @@ public class ControllerPlayer : ControllerCharacter {
     
     // Called just BEFORE THE END of every frame to deal with the physics engine changes, ready for the next frame.
     private void FixedUpdate() {
-        //GetPlayerInput(out float mvH, out float mvV);
         var tempRb = GetComponent<Rigidbody>();
 #if UNITY_STANDALONE || UNITY_WEBPLAYER
         tempRb.MovePosition(tempRb.position + _movement);
@@ -102,6 +103,14 @@ public class ControllerPlayer : ControllerCharacter {
             bullet.transform.rotation = _shotSpawn.rotation;
             bullet.GetComponent<Rigidbody>().velocity = Vector3.right * 50;
             bullet.SetActive(true);
+        }
+    }
+    
+    private void OnTriggerEnter(Collider other) {
+        if (other.tag.Contains("Shot")) {
+            Debug.Log("Player has been shot");
+            
+            healthDisplayObject.RemoveHealth(other.GetComponent<ControllerProjectile>().power);
         }
     }
 

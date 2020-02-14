@@ -188,3 +188,4 @@ MonoBehaviour:
   shootChance: 100
   shootCoolDown: 2
   speed: 300
+  hitPoints: 1

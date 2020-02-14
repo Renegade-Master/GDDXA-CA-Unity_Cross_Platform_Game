@@ -9,12 +9,23 @@ public abstract class ControllerCharacter : ControllerGeneric {
     public double shootChance;
     public double shootCoolDown;
     public float speed;
+    public int hitPoints;
     
     protected void Start() {
         _shotSpawn = transform.Find("ShotSpawn");
     }
 
     public abstract void Fire();
+
+    public bool ReadyToShoot() {
+        double timeNow = Time.time;
+        if ((timeNow - lastShootTime) >= shootCoolDown) {
+            lastShootTime = timeNow;
+            return true;
+        }
+
+        return false;
+    }
     
     protected bool IsPointerOverUIObject() {
         if (EventSystem.current.IsPointerOverGameObject()) {
