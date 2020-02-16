@@ -13,7 +13,7 @@ public class ControllerEnemySpawn : ControllerGeneric {
     private int     _direction;
 
     protected void Awake() {
-        _boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().enemyBoundary;
+        Boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().enemyBoundary;
         _direction = Random.Range(0, 2) * 2 - 1;
     }
 
@@ -45,7 +45,7 @@ public class ControllerEnemySpawn : ControllerGeneric {
     private IEnumerator Movement() {
         while (true) {
             var tempRb = gameObject.GetComponent<Rigidbody>();
-            var distanceToEdge = new Vector2(_boundary.zMax - tempRb.position.z, tempRb.position.z - _boundary.zMin);
+            var distanceToEdge = new Vector2(Boundary.zMax - tempRb.position.z, tempRb.position.z - Boundary.zMin);
 
             if (distanceToEdge.x < 3.0f || distanceToEdge.y < 3.0f) //Debug.Log("I'm getting close to the edge.");
                 _direction *= -1;
@@ -55,7 +55,7 @@ public class ControllerEnemySpawn : ControllerGeneric {
             tempRb.position = new Vector3(
                 60,
                 0,
-                Mathf.Clamp(tempRb.position.z, _boundary.zMin, _boundary.zMax)
+                Mathf.Clamp(tempRb.position.z, Boundary.zMin, Boundary.zMax)
             );
             yield return new WaitForEndOfFrame();
         }

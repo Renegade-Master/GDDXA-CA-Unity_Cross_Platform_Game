@@ -5,6 +5,6 @@ public class ControllerProjectile : ControllerGeneric {
     public int power;
 
     public void FixedUpdate() {
-        gameObject.GetComponent<Rigidbody>().AddForce(Vector3.forward * speed);
+        gameObject.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * speed);
     }
 }

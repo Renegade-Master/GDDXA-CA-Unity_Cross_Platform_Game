@@ -10,6 +10,7 @@ TagManager:
   - Shot_Enemy_Small_Main
   - Enemy_Small
   - Debris_Small
+  - Display_Health
   layers:
   - Default
   - TransparentFX

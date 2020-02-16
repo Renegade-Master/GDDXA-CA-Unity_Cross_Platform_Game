@@ -2,10 +2,10 @@
 
 public class ControllerPlayer : ControllerCharacter {
     private Vector3 _movement;
-    private Camera _mainCam;
+    private ManagerGame _gameManager;
+    private DisplayPlayerHealth _healthDisplay;
 
     public float springForce;
-    public DisplayPlayerHealth healthDisplayObject;
 
 #if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
     private Vector2 _touchOrigin = -Vector2.one;
@@ -15,9 +15,12 @@ public class ControllerPlayer : ControllerCharacter {
 
     // For when the GameObject is Woken after being set to sleep, or after first activation.
     protected void Awake() {
-        _boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().playerBoundary;
-        _mainCam = Camera.main;
+        _gameManager = GameObject.FindWithTag("GameController").GetComponent<ManagerGame>();
+        _healthDisplay = GameObject.FindWithTag("Display_Health").GetComponent<DisplayPlayerHealth>();
+        Boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().playerBoundary;
+        MainCam = Camera.main;
         _spring = gameObject.GetComponent<SpringJoint>();
+        HitPoints = _gameManager.getPlayerMaxHealth();
         
         _spring.spring = 0.0f;
     }
@@ -29,6 +32,11 @@ public class ControllerPlayer : ControllerCharacter {
 
     // Called BEFORE THE START of every frame to get the Player's intentions for this frame.
     private void Update() {
+        // Has the Player lost the game?
+        if (HitPoints <= 0) {
+            _gameManager.GameOver();
+        }
+        
         GetPlayerInput(out var moveHorizontal, out var moveVertical);
         
         _movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
@@ -42,9 +50,9 @@ public class ControllerPlayer : ControllerCharacter {
 #endif
         // Clamp the Player Position to within the bounds of the screen
         tempRb.position = new Vector3(
-            Mathf.Clamp(GetComponent<Rigidbody>().position.x, _boundary.xMin, _boundary.xMax),
+            Mathf.Clamp(GetComponent<Rigidbody>().position.x, Boundary.xMin, Boundary.xMax),
             0.0f,
-            Mathf.Clamp(GetComponent<Rigidbody>().position.z, _boundary.zMin, _boundary.zMax)
+            Mathf.Clamp(GetComponent<Rigidbody>().position.z, Boundary.zMin, Boundary.zMax)
         );
       
         // Clamp the Player Rotation to within reasonable bounds
@@ -99,35 +107,22 @@ public class ControllerPlayer : ControllerCharacter {
     public override void Fire() {
         var bullet = ManagerPoolShot.instance.GetPooledObject("Shot_Player_Main");
         if (bullet != null) {
-            bullet.transform.position = _shotSpawn.position;
-            bullet.transform.rotation = _shotSpawn.rotation;
+            bullet.transform.position = ShotSpawn.position;
+            bullet.transform.rotation = ShotSpawn.rotation;
             bullet.GetComponent<Rigidbody>().velocity = Vector3.right * 50;
             bullet.SetActive(true);
         }
     }
     
-    private void OnTriggerEnter(Collider other) {
-        if (other.tag.Contains("Shot")) {
+    protected override void OnTriggerEnter(Collider other) {
+        // If the Player has been shot, but not by themselves.
+        if (other.tag.Contains("Shot") && !other.tag.Contains("Player")) {
             Debug.Log("Player has been shot");
+
+            HitPoints -= other.GetComponent<ControllerProjectile>().power;
             
-            healthDisplayObject.RemoveHealth(other.GetComponent<ControllerProjectile>().power);
+            // ToDo: Only subtract health if Shields are at 0.
+            _healthDisplay.RemoveHealth();
         }
-    }
-
-    // Normalise a value to a different value between a given MAX and MIN.
-    private float Normalise(float x, float min, float max) {
-	    return (max - min) * ((x - min) / (max - min)) + min;
-    }
-    
-    // Convert Screen Coordinates into GameWorld Coordinates
-    private Vector3 ScreenToWorldCoord(Vector2 touchPos) {
-        var temp = new Vector3(
-            touchPos.x,
-            touchPos.y,
-            _mainCam.transform.position.y
-        );
-        var temp2 = _mainCam.ScreenToWorldPoint(temp);
-
-        return temp2;
     }
 }

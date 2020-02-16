@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class ManagerGame : ManagerGeneric {
+    private const int PlayerMaxHealth = 5;
+    
     private GameObject _playArea;
     private ManagerGeneric _enemyPoolManager;
     private ManagerGeneric _debrisPoolManager;
@@ -53,13 +56,17 @@ public class ManagerGame : ManagerGeneric {
                 foreach (var obj in _debrisSpawns)
                     obj.GetComponent<ControllerDebrisSpawn>().StartMovement(SpawnPatternDebris.Test);
                 
-                // Start the coroutine to regularly skrink the Pooled GameObjects
+                // Start the coroutine to regularly shrink the Pooled GameObjects
                 //StartCoroutine(PoolShrinkScheduler());
 
                 break;
             default:
                 return;
         }
+    }
+
+    public int getPlayerMaxHealth() {
+        return PlayerMaxHealth;
     }
 
     private void NextLevel() {
@@ -69,6 +76,15 @@ public class ManagerGame : ManagerGeneric {
             currentLevel++;
     }
 
+    public void GameOver() {
+        Debug.Log("The game has ended.");
+        Application.Quit();
+#if UNITY_EDITOR
+        //Stop playing the scene
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+    }
+    
     // private IEnumerator PoolShrinkScheduler() {
     //     yield return new WaitForSeconds(5);
     //

@@ -1,44 +1,34 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
 
 public abstract class ControllerCharacter : ControllerGeneric {
-    protected Transform _target;
-    protected Transform _shotSpawn;
-    protected double lastShootTime;
+    protected Transform Target;
+    protected Transform ShotSpawn;
+    protected double LastShootTime;
+    protected int HitPoints;
     
     public double shootChance;
     public double shootCoolDown;
     public float speed;
-    public int hitPoints;
     
     protected void Start() {
-        _shotSpawn = transform.Find("ShotSpawn");
+        ShotSpawn = transform.Find("ShotSpawn");
     }
 
     public abstract void Fire();
 
+    protected abstract void OnTriggerEnter(Collider other);
+
+    public int GetHealth() {
+        return HitPoints;
+    }
+
     public bool ReadyToShoot() {
         double timeNow = Time.time;
-        if ((timeNow - lastShootTime) >= shootCoolDown) {
-            lastShootTime = timeNow;
+        if ((timeNow - LastShootTime) >= shootCoolDown) {
+            LastShootTime = timeNow;
             return true;
         }
 
-        return false;
-    }
-    
-    protected bool IsPointerOverUIObject() {
-        if (EventSystem.current.IsPointerOverGameObject()) {
-            return true;
-        }
-
-        for (int touchIndex = 0; touchIndex < Input.touchCount; touchIndex++) {
-            Touch touch = Input.GetTouch(touchIndex);
-            if (EventSystem.current.IsPointerOverGameObject(touch.fingerId)) {
-                return true;
-            }
-        }
- 
         return false;
     }
 }

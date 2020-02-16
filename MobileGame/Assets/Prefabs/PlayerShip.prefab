@@ -430,7 +430,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2349708337057633802}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 3
   m_Convex: 1
@@ -469,7 +469,6 @@ MonoBehaviour:
   speed: 0
   hitPoints: 10
   springForce: 100
-  healthDisplayObject: {fileID: 0}
   touchTarget: {fileID: 1397334633719489995}
 --- !u!145 &4383646783810863805
 SpringJoint:
