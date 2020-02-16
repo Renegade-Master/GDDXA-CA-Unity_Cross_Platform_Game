@@ -119,10 +119,18 @@ public class ControllerPlayer : ControllerCharacter {
         if (other.tag.Contains("Shot") && !other.tag.Contains("Player")) {
             Debug.Log("Player has been shot");
 
-            HitPoints -= other.GetComponent<ControllerProjectile>().power;
+            //HitPoints -= other.GetComponent<ControllerProjectile>().power;
+            HitPoints -= 1;
             
             // ToDo: Only subtract health if Shields are at 0.
             _healthDisplay.RemoveHealth();
+        }
+        
+        if (other.tag.Contains("Debris")) {
+            Debug.Log("Player has hit an asteroid");
+
+            HitPoints += 1;
+            _healthDisplay.AddHealth();
         }
     }
 }

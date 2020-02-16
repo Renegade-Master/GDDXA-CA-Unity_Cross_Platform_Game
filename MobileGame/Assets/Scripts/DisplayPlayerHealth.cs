@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DisplayPlayerHealth : HudGeneric {
@@ -23,14 +24,23 @@ public class DisplayPlayerHealth : HudGeneric {
     private void Update() {
         int playerHealth = _playerController.GetHealth();
         Debug.Log("Player has " + playerHealth + " health.");
+        Debug.Log("Pointer is " + _healthPointer);
     }
-    
+
     // ToDo: Make both of these functions dependant on passed in INT to make removing multiple HP at once possible.
     public void AddHealth() {
+        if (_healthPointer >= _gameManager.getPlayerMaxHealth()) {
+            return;
+        }
+
         _health[_healthPointer++].gameObject.SetActive(true);
     }
     
     public void RemoveHealth() {
+        if (_healthPointer <= 0) {
+            return;
+        }
+
         _health[_healthPointer--].gameObject.SetActive(false);
     }
 }
