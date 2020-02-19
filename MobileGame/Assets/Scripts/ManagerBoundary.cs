@@ -23,18 +23,21 @@ public class ManagerBoundary : ManagerGeneric {
         if (other.tag.Contains("Shot")) {
             //Debug.Log("Destroying Shot");
             other.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            other.gameObject.GetComponent<Rigidbody>().rotation = Quaternion.Euler(Vector3.zero);
             other.gameObject.SetActive(false);
         }
 
         if (other.tag.Contains("Enemy")) {
             //Debug.Log("Destroying Enemy");
             other.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            other.gameObject.GetComponent<Rigidbody>().rotation = Quaternion.Euler(Vector3.zero);
             other.gameObject.SetActive(false);
         }
 
         if (other.tag.Contains("Debris")) {
             //Debug.Log("Destroying Debris");
             other.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            other.gameObject.GetComponent<Rigidbody>().rotation = Quaternion.Euler(Vector3.zero);
             other.gameObject.SetActive(false);
         }
     }

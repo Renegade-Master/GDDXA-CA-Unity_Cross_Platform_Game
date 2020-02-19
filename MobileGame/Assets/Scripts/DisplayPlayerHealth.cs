@@ -24,7 +24,6 @@ public class DisplayPlayerHealth : HudGeneric {
         _healthPointer = -1;
         
         foreach (Transform child in gameObject.transform.Find("PlayerHealthDisplay")) {
-            print("Foreach loop: " + child);
             _health.Add(child);
             _healthPointer++;
         }
@@ -32,8 +31,6 @@ public class DisplayPlayerHealth : HudGeneric {
 
     private void Update() {
         int playerHealth = _playerController.GetHealth();
-        Debug.Log("Player has " + playerHealth + " health.");
-        Debug.Log("Pointer is " + _healthPointer);
         
         // Replenish the Shield after a cooldown period
         if ((Time.time - _lastHitTime) >= _shieldCoolDown) {

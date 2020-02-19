@@ -25,8 +25,8 @@ public class ControllerEnemySmall : ControllerCharacter {
         var bullet = ManagerPoolShot.instance.GetPooledObject("Shot_Enemy_Small_Main");
         if (bullet != null) {
             bullet.transform.position = ShotSpawn.position;
-            bullet.transform.rotation = Quaternion.Euler(Vector3.forward);
-            bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * bullet.GetComponent<ControllerProjectile>().speed);
+            bullet.transform.rotation = gameObject.transform.rotation;
+            bullet.GetComponent<Rigidbody>().AddForce(gameObject.transform.forward * bullet.GetComponent<ControllerProjectile>().speed);
             bullet.SetActive(true);
         }
     }

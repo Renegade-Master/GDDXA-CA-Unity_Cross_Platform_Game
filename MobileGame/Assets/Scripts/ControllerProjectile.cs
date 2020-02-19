@@ -1,10 +1,17 @@
 ﻿using UnityEngine;
 
+/**
+ * Rotation Notes
+ *     Forward = Blue Axis
+ *     Right   = Red Axis
+ *     Up      = Green Axis
+ */
+
 public class ControllerProjectile : ControllerGeneric {
     public float speed;
     public int power;
 
     public void FixedUpdate() {
-        gameObject.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * speed);
+        gameObject.GetComponent<Rigidbody>().AddForce(gameObject.transform.forward * speed);
     }
 }
