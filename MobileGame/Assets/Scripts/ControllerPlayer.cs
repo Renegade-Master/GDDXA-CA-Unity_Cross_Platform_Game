@@ -16,7 +16,7 @@ public class ControllerPlayer : ControllerCharacter {
     // For when the GameObject is Woken after being set to sleep, or after first activation.
     protected void Awake() {
         _gameManager = GameObject.FindWithTag("GameController").GetComponent<ManagerGame>();
-        _healthDisplay = GameObject.FindWithTag("Display_Health").GetComponent<DisplayPlayerHealth>();
+        _healthDisplay = GameObject.FindWithTag("Display_Player_Health_Shield").GetComponent<DisplayPlayerHealth>();
         Boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().playerBoundary;
         MainCam = Camera.main;
         _spring = gameObject.GetComponent<SpringJoint>();
@@ -118,19 +118,18 @@ public class ControllerPlayer : ControllerCharacter {
         // If the Player has been shot, but not by themselves.
         if (other.tag.Contains("Shot") && !other.tag.Contains("Player")) {
             Debug.Log("Player has been shot");
-
-            //HitPoints -= other.GetComponent<ControllerProjectile>().power;
-            HitPoints -= 1;
             
-            // ToDo: Only subtract health if Shields are at 0.
-            _healthDisplay.RemoveHealth();
+            if (_healthDisplay.RemoveHealth()) {
+                HitPoints--;
+            }
         }
         
         if (other.tag.Contains("Pickup_Health")) {
             Debug.Log("Player has collected a health pickup");
 
-            HitPoints += 1;
-            _healthDisplay.AddHealth();
+            if (_healthDisplay.AddHealth()) {
+                HitPoints++;
+            }
         }
     }
 }

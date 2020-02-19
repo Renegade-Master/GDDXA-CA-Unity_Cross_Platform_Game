@@ -12,6 +12,7 @@ TagManager:
   - Debris_Small
   - Display_Health
   - Display_Shield
+  - Display_Player_Health_Shield
   layers:
   - Default
   - TransparentFX
