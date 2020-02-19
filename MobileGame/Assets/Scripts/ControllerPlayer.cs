@@ -126,8 +126,8 @@ public class ControllerPlayer : ControllerCharacter {
             _healthDisplay.RemoveHealth();
         }
         
-        if (other.tag.Contains("Debris")) {
-            Debug.Log("Player has hit an asteroid");
+        if (other.tag.Contains("Pickup_Health")) {
+            Debug.Log("Player has collected a health pickup");
 
             HitPoints += 1;
             _healthDisplay.AddHealth();

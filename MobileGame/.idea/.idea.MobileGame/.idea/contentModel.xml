@@ -8,6 +8,15 @@
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="_ImportedAssets" t="Include">
+          <e p="BarShader_Simple" t="Include">
+            <e p="Readme.txt" t="Include" />
+            <e p="Scripts" t="Include">
+              <e p="DemoBarAnimator.cs" t="Include" />
+            </e>
+            <e p="Shaders" t="Include">
+              <e p="SimpleBar.shader" t="Include" />
+            </e>
+          </e>
           <e p="Luminaris Starship" t="Include">
             <e p="Documentation" t="Include">
               <e p="Readme Luminaris.txt" t="Include" />
