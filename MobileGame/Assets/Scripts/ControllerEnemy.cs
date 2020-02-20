@@ -1,21 +1,23 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public abstract class ControllerEnemy : ControllerCharacter {
     protected new void Start() {
         base.Start();
     }
     
-    protected void Update() {
+    protected new void Update() {
+        base.Update();
+        
         // Has the Enemy been killed?
         if (HitPoints <= 0) {
             gameObject.SetActive(false);
         }
     }
     
-    protected override void OnTriggerEnter(Collider other) {
-        if (other.tag.Contains("Shot") && !other.tag.Contains("Enemy")) {
+    protected override void OnCollisionEnter(Collision other) {
+        if (other.gameObject.tag.Contains("Shot") && !other.gameObject.tag.Contains("Enemy")) {
             //Debug.Log("Enemy has been shot");
-            Debug.Log("Enemy has been shot by " + other.name);
+            Debug.Log("Enemy has been shot by " + other.gameObject.name);
             
             if (HitPoints > 0) {
                 HitPoints--;

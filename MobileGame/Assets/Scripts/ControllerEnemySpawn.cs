@@ -13,7 +13,7 @@ public class ControllerEnemySpawn : ControllerGeneric {
     private Vector3 _moveSpeed;
     private int     _direction;
 
-    protected void Awake() {
+    protected new void Awake() {
         Boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().enemyBoundary;
         _direction = Random.Range(0, 2) * 2 - 1;
     }

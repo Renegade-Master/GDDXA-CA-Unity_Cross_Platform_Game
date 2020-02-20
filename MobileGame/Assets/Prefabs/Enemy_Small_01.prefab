@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7151694306980176269}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ShotSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 3662236092696703421}
   - component: {fileID: 3662236092699603359}
   - component: {fileID: 3662236092698473311}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 54618348}
   - component: {fileID: 3225065000533915572}
   - component: {fileID: 3551606343539393688}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy_Small_01
   m_TagString: Enemy_Small
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3662236092696538527}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 2.5
   m_Height: 6.5

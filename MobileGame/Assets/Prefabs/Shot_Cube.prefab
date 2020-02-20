@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4049107102259837631}
   - component: {fileID: -950444203041574589}
   - component: {fileID: -3935726620171409044}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Shot_Cube
   m_TagString: Shot_Enemy_Small_Main
   m_Icon: {fileID: 0}

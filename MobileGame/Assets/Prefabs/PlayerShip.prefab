@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2346502688231218198}
   - component: {fileID: 2371152647816632186}
   - component: {fileID: 2363449030605022334}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: lower Rotor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 2346109450794556286}
   - component: {fileID: 2371626035243889860}
   - component: {fileID: 2363588728584314430}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: core engine ribs004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 2345975117038714676}
   - component: {fileID: 2372267736617657554}
   - component: {fileID: 2363141006610018568}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Core engine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,7 +245,7 @@ GameObject:
   - component: {fileID: 2346471578923983322}
   - component: {fileID: 2371522035869230412}
   - component: {fileID: 2363453356633116656}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: core engine ribs005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: 2350482792087610290}
   - component: {fileID: 2350482792087610291}
   - component: {fileID: 4383646783810863805}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PlayerShip
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -503,7 +503,7 @@ GameObject:
   - component: {fileID: 2346650730433617734}
   - component: {fileID: 2371520633368817192}
   - component: {fileID: 2363769255348334222}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: upper engine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -581,7 +581,7 @@ GameObject:
   - component: {fileID: 2346866680292319090}
   - component: {fileID: 2372235308318035194}
   - component: {fileID: 2363668633041296032}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: core engine ribs003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -657,7 +657,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9021898461475381469}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ShotSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -689,6 +689,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TouchTarget
+      objectReference: {fileID: 0}
+    - target: {fileID: 5923949053479761241, guid: 8e4c49ade8c96994184954776507c56f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 9056723967746908982, guid: 8e4c49ade8c96994184954776507c56f,
         type: 3}

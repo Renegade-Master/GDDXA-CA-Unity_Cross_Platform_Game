@@ -50,24 +50,27 @@ public class DisplayPlayerHealth : HudGeneric {
     
     // Reduce Shield when hit, or reduce Health if Shield is empty
     // Shield is funky and works backwards to what one might expect.  MAX is empty, MIN is full
-    public bool RemoveHealth() {
+    public void RemoveHealth(int damage) {
         _lastHitTime = Time.time;
         
         // Check if shield is already at 10
         if (_shield.value >= _shield.maxValue) {
             // Check if health-pointer is already at 0 (should not really happen, game should have ended)
             if (_healthPointer < 0) {
-                return false;
+                return;
             }
 
-            Debug.Log("Shields Empty.  Decrementing Health");
-            _health[_healthPointer--].gameObject.SetActive(false);
-            return true;
+            //Debug.Log("Shields Empty.  Decrementing Health");
+            for (int i = 0; i < damage; i++) {
+                _health[_healthPointer--].gameObject.SetActive(false);
+                _playerController.Damage();
+            }
         }
         
         // Reduce shields
-        Debug.Log("Decrementing Shields");
-        _shield.value++;
-        return false;
+        //Debug.Log("Decrementing Shields");
+        for (int i = 0; i < damage; i++) {
+            _shield.value++;   
+        }
     }
 }

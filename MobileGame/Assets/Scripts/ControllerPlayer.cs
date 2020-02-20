@@ -26,7 +26,9 @@ public class ControllerPlayer : ControllerCharacter {
     }
 
     // Called BEFORE THE START of every frame to get the Player's intentions for this frame.
-    private void Update() {
+    private new void Update() {
+        base.Update();
+        
         // Has the Player lost the game?
         if (HitPoints <= 0) {
             GameManager.GameOver();
@@ -109,21 +111,20 @@ public class ControllerPlayer : ControllerCharacter {
         }
     }
     
-    protected override void OnTriggerEnter(Collider other) {
+    protected override void OnCollisionEnter(Collision other) {
         // If the Player has been shot, but not by themselves.
-        if (other.tag.Contains("Shot") && !other.tag.Contains("Player")) {
-            Debug.Log("Player has been shot");
+        if (other.gameObject.tag.Contains("Shot") && !other.gameObject.tag.Contains("Player")) {
+            //Debug.Log("Player has been shot");
+            int damage = other.gameObject.GetComponent<ControllerProjectile>().power;
             
-            if (_healthDisplay.RemoveHealth()) {
-                HitPoints--;
-            }
+            _healthDisplay.RemoveHealth(damage);
             
             other.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             other.gameObject.GetComponent<Rigidbody>().rotation = Quaternion.Euler(Vector3.zero);
             other.gameObject.SetActive(false);
         }
         
-        if (other.tag.Contains("Pickup_Health")) {
+        if (other.gameObject.tag.Contains("Pickup_Health")) {
             Debug.Log("Player has collected a health pickup");
 
             if (_healthDisplay.AddHealth()) {

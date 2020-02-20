@@ -12,7 +12,7 @@ public class ControllerDebrisSpawn : ControllerGeneric {
     private Vector3 _moveSpeed;
     private int     _direction;
 
-    protected void Awake() {
+    protected new void Awake() {
         Boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().enemyBoundary;
         _direction = Random.Range(0, 2) * 2 - 1;
     }
@@ -65,12 +65,12 @@ public class ControllerDebrisSpawn : ControllerGeneric {
         yield return new WaitForSeconds(_spawnFreq);
 
         while (true) {
-            var enemy = ManagerPoolDebris.instance.GetPooledObject("Debris_Small");
-            if (enemy != null) {
-                enemy.transform.position = gameObject.transform.position;
-                enemy.transform.rotation = Quaternion.Euler(0, -90, 0);
-                enemy.GetComponent<Rigidbody>().velocity = Vector3.left * 10;
-                enemy.SetActive(true);
+            var debris = ManagerPoolDebris.instance.GetPooledObject("Debris_Small");
+            if (debris != null) {
+                debris.transform.position = gameObject.transform.position;
+                debris.transform.rotation = Quaternion.Euler(0, -90, 0);
+                debris.GetComponent<Rigidbody>().velocity = Vector3.left * debris.GetComponent<ControllerDebris>().speed;
+                debris.SetActive(true);
             }
 
             yield return new WaitForSeconds(_spawnFreq);

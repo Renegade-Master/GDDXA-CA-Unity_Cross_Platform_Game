@@ -34,6 +34,7 @@
         <e p="Scripts" t="Include">
           <e p="ButtonPlayerFire.cs" t="Include" />
           <e p="ControllerCharacter.cs" t="Include" />
+          <e p="ControllerDebris.cs" t="Include" />
           <e p="ControllerDebrisSpawn.cs" t="Include" />
           <e p="ControllerEnemy.cs" t="Include" />
           <e p="ControllerEnemySmall.cs" t="Include" />

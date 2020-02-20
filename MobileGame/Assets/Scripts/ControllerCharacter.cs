@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public abstract class ControllerCharacter : ControllerGeneric {
     protected Transform Target;
@@ -16,12 +16,20 @@ public abstract class ControllerCharacter : ControllerGeneric {
         ShotSpawn = transform.Find("ShotSpawn");
     }
 
+    protected new void Update() {
+        base.Update();
+    }
+
     public abstract void Fire();
 
-    protected abstract void OnTriggerEnter(Collider other);
+    protected abstract void OnCollisionEnter(Collision other);
 
     public int GetHealth() {
         return HitPoints;
+    }
+
+    public void Damage() {
+        HitPoints --;
     }
 
     public bool ReadyToShoot() {

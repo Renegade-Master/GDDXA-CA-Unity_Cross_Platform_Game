@@ -6,12 +6,23 @@ public class ControllerGeneric : MonoBehaviour {
     protected Camera MainCam;
     protected ManagerGame GameManager;
 
+    private const float RepelForce = 15.0f;
+
     protected void Start() {
         GameManager = GameObject.FindWithTag("GameController").GetComponent<ManagerGame>();
     }
     
     protected void Awake() {
         Start();
+    }
+
+    protected void Update() {
+        Vector3 pos = gameObject.transform.position;
+        
+        gameObject.transform.position.Set(
+            pos.x,
+            0.0f,
+            pos.z);
     }
     
     // Normalise a value to a different value between a given MAX and MIN.

@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 2338898}
   - component: {fileID: 858475899445105951}
   - component: {fileID: -3029118795068777267}
-  m_Layer: 0
+  - component: {fileID: -2020270266512329817}
+  m_Layer: 13
   m_Name: Asteroid_H
   m_TagString: Debris_Small
   m_Icon: {fileID: 0}
@@ -110,3 +111,17 @@ CapsuleCollider:
   m_Height: 0.019290498
   m_Direction: 2
   m_Center: {x: 0.0013832665, y: -0.00007430363, z: -0.00016985512}
+--- !u!114 &-2020270266512329817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 997d634ce88d45f9a0a618dbea523e0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  repelForce: 15

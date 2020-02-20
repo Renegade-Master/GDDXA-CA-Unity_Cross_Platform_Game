@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7418128789324112597}
   - component: {fileID: -8180150897191913641}
   - component: {fileID: 4479264962869274270}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Shot_Sphere
   m_TagString: Shot_Player_Main
   m_Icon: {fileID: 0}
