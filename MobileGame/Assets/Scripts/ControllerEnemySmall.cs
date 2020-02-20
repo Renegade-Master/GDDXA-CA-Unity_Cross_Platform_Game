@@ -1,16 +1,28 @@
 ﻿using System;
 using UnityEngine;
 
-public class ControllerEnemySmall : ControllerCharacter {
+public class ControllerEnemySmall : ControllerEnemy {
+    protected new void Awake() {
+        base.Awake();
+    }
+
+    protected void OnEnable() {
+        HitPoints = GameManager.enemyHitPoints.smallHp;
+    }
+
     protected new void Start() {
         base.Start();
         Boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().enemyBoundary;
         Target = GameObject.FindWithTag("Player").GetComponent<Transform>();
+
+        //HitPoints = GameManager.enemyHitPoints.smallHp;
     }
-    
+
     // Search for player
-    public void Update() {
+    public new void Update() {
         transform.LookAt(Target);
+
+        base.Update();
 
         if (ReadyToShoot()) {
             Fire();
@@ -29,9 +41,5 @@ public class ControllerEnemySmall : ControllerCharacter {
             bullet.GetComponent<Rigidbody>().AddForce(gameObject.transform.forward * bullet.GetComponent<ControllerProjectile>().speed);
             bullet.SetActive(true);
         }
-    }
-
-    protected override void OnTriggerEnter(Collider other) {
-        throw new NotImplementedException();
     }
 }

@@ -40,7 +40,7 @@ public class DisplayPlayerHealth : HudGeneric {
 
     // ToDo: Make both of these functions dependant on passed in INT to make removing multiple HP at once possible.
     public bool AddHealth() {
-        if (_healthPointer >= _gameManager.getPlayerMaxHealth()) {
+        if (_healthPointer >= _gameManager.GetPlayerMaxHealth()) {
             return false;
         }
 

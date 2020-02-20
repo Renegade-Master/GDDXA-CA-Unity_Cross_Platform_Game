@@ -275,6 +275,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cb06376fea7eb04db1df8f01742ccb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyHitPoints:
+    smallHp: 1
+    mediumHp: 3
+    largeHp: 5
+    bossHp: 10
+  playerMaxHealth: 5
   currentLevel: 0
   skyBoxes:
   - {fileID: 493274391447467576, guid: 9971f952dbef9da40a726eb7ac9403ce, type: 3}

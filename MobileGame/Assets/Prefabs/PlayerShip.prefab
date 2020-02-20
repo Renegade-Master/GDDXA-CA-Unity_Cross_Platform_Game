@@ -467,7 +467,6 @@ MonoBehaviour:
   shootChance: 0
   shootCoolDown: 1
   speed: 0
-  hitPoints: 10
   springForce: 100
   touchTarget: {fileID: 1397334633719489995}
 --- !u!145 &4383646783810863805
@@ -690,11 +689,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TouchTarget
-      objectReference: {fileID: 0}
-    - target: {fileID: 5923949053479761241, guid: 8e4c49ade8c96994184954776507c56f,
-        type: 3}
-      propertyPath: m_Layer
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9056723967746908982, guid: 8e4c49ade8c96994184954776507c56f,
         type: 3}

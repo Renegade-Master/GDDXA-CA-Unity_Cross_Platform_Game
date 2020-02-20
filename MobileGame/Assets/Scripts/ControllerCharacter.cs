@@ -10,7 +10,9 @@ public abstract class ControllerCharacter : ControllerGeneric {
     public double shootCoolDown;
     public float speed;
     
-    protected void Start() {
+    protected new void Start() {
+        base.Start();
+        
         ShotSpawn = transform.Find("ShotSpawn");
     }
 

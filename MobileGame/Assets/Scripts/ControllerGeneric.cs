@@ -4,6 +4,15 @@ using UnityEngine.EventSystems;
 public class ControllerGeneric : MonoBehaviour {
     protected Boundary Boundary;
     protected Camera MainCam;
+    protected ManagerGame GameManager;
+
+    protected void Start() {
+        GameManager = GameObject.FindWithTag("GameController").GetComponent<ManagerGame>();
+    }
+    
+    protected void Awake() {
+        Start();
+    }
     
     // Normalise a value to a different value between a given MAX and MIN.
     protected float Normalise(float x, float min, float max) {

@@ -2,7 +2,6 @@
 
 public class ControllerPlayer : ControllerCharacter {
     private Vector3 _movement;
-    private ManagerGame _gameManager;
     private DisplayPlayerHealth _healthDisplay;
 
     public float springForce;
@@ -14,27 +13,23 @@ public class ControllerPlayer : ControllerCharacter {
 #endif
 
     // For when the GameObject is Woken after being set to sleep, or after first activation.
-    protected void Awake() {
-        _gameManager = GameObject.FindWithTag("GameController").GetComponent<ManagerGame>();
+    protected new void Start() {
+        base.Start();
+        
         _healthDisplay = GameObject.FindWithTag("Display_Player_Health_Shield").GetComponent<DisplayPlayerHealth>();
         Boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().playerBoundary;
         MainCam = Camera.main;
         _spring = gameObject.GetComponent<SpringJoint>();
-        HitPoints = _gameManager.getPlayerMaxHealth();
-        
         _spring.spring = 0.0f;
-    }
-
-    // For when the GameObject is instantiated at the game start.
-    protected new void Start() {
-        base.Start();
+        
+        HitPoints = GameManager.GetPlayerMaxHealth();
     }
 
     // Called BEFORE THE START of every frame to get the Player's intentions for this frame.
     private void Update() {
         // Has the Player lost the game?
         if (HitPoints <= 0) {
-            _gameManager.GameOver();
+            GameManager.GameOver();
         }
         
         GetPlayerInput(out var moveHorizontal, out var moveVertical);
@@ -122,6 +117,10 @@ public class ControllerPlayer : ControllerCharacter {
             if (_healthDisplay.RemoveHealth()) {
                 HitPoints--;
             }
+            
+            other.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            other.gameObject.GetComponent<Rigidbody>().rotation = Quaternion.Euler(Vector3.zero);
+            other.gameObject.SetActive(false);
         }
         
         if (other.tag.Contains("Pickup_Health")) {

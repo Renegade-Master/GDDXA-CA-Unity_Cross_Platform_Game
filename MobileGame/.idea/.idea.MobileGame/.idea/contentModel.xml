@@ -35,6 +35,7 @@
           <e p="ButtonPlayerFire.cs" t="Include" />
           <e p="ControllerCharacter.cs" t="Include" />
           <e p="ControllerDebrisSpawn.cs" t="Include" />
+          <e p="ControllerEnemy.cs" t="Include" />
           <e p="ControllerEnemySmall.cs" t="Include" />
           <e p="ControllerEnemySpawn.cs" t="Include" />
           <e p="ControllerGeneric.cs" t="Include" />

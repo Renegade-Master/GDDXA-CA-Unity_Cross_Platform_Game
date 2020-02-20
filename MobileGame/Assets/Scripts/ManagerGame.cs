@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
-using UnityEditor;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
+public class EnemyHitPoints {
+    public int smallHp, mediumHp, largeHp, bossHp;
+}
+
 public class ManagerGame : ManagerGeneric {
-    private const int PlayerMaxHealth = 5;
+    public EnemyHitPoints enemyHitPoints;
+    public int playerMaxHealth;
     
     private GameObject _playArea;
     private ManagerGeneric _enemyPoolManager;
@@ -65,8 +71,8 @@ public class ManagerGame : ManagerGeneric {
         }
     }
 
-    public int getPlayerMaxHealth() {
-        return PlayerMaxHealth;
+    public int GetPlayerMaxHealth() {
+        return playerMaxHealth;
     }
 
     private void NextLevel() {
