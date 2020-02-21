@@ -276,9 +276,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cb06376fea7eb04db1df8f01742ccb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 0
   debrisSpawnPrefabs:
   - {fileID: 6384166841161110300, guid: 74a337451d9bf8e4ba179c97aa0ac75b, type: 3}
+  pickupSpawnPrefabs:
+  - {fileID: 6384166841161110300, guid: 6e43b84e503e758469a1374743c61639, type: 3}
   enemyHitPoints:
     smallHp: 1
     mediumHp: 3
@@ -289,6 +290,9 @@ MonoBehaviour:
   playerMaxHealth: 5
   skyBoxes:
   - {fileID: 493274391447467576, guid: 9971f952dbef9da40a726eb7ac9403ce, type: 3}
+  timeForStage01: 45
+  timeForStage02: 90
+  timeForStage03: 150
 --- !u!114 &2316623817351170878
 MonoBehaviour:
   m_ObjectHideFlags: 0

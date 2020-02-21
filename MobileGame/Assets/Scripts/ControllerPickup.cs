@@ -20,8 +20,6 @@ public class ControllerPickup : ControllerGeneric {
 
     protected new void Update() {
         base.Update();
-
-        // ToDo: Probably just spin, but the particle effect is good by itself
     }
 
     protected void OnCollisionEnter(Collision other) {

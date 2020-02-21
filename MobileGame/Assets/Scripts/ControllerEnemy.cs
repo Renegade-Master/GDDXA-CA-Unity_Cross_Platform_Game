@@ -14,9 +14,6 @@ public abstract class ControllerEnemy : ControllerCharacter {
 
     protected override void OnCollisionEnter(Collision other) {
         if (other.gameObject.tag.Contains("Shot") && !other.gameObject.tag.Contains("Enemy")) {
-            //Debug.Log("Enemy has been shot");
-            Debug.Log("Enemy has been shot by " + other.gameObject.name);
-
             if (HitPoints > 0) HitPoints--;
 
             other.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;

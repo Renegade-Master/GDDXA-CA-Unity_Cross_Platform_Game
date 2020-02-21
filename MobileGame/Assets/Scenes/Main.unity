@@ -485,11 +485,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 531762703389503389, guid: 6999a6f34e6236c43ba5ca927b4c441e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2346643595256111906, guid: 6999a6f34e6236c43ba5ca927b4c441e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -550,11 +545,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerShip
       objectReference: {fileID: 0}
-    - target: {fileID: 7015960083452312668, guid: 6999a6f34e6236c43ba5ca927b4c441e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6999a6f34e6236c43ba5ca927b4c441e, type: 3}
 --- !u!1001 &1381081889896915627
@@ -564,21 +554,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1381081889025119908, guid: 9bd565aea8abc634c816eed7acb92c8d,
-        type: 3}
-      propertyPath: timeForStage01
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1381081889025119908, guid: 9bd565aea8abc634c816eed7acb92c8d,
-        type: 3}
-      propertyPath: timeForStage02
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1381081889025119908, guid: 9bd565aea8abc634c816eed7acb92c8d,
-        type: 3}
-      propertyPath: timeForStage03
-      value: 30
-      objectReference: {fileID: 0}
     - target: {fileID: 1381081889025119909, guid: 9bd565aea8abc634c816eed7acb92c8d,
         type: 3}
       propertyPath: m_Name

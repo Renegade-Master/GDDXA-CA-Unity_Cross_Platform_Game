@@ -37,10 +37,9 @@ public class DisplayPlayerHealth : HudGeneric {
         if (Time.time - _lastHitTime >= _shieldCoolDown) _shield.value = _shield.minValue;
     }
 
-    // ToDo: Make both of these functions dependant on passed in INT to make removing multiple HP at once possible.
     public void AddHealth() {
         // Player cannot increase health beyond set limit
-        if (_healthPointer >= _gameManager.GetPlayerMaxHealth()) return;
+        if (_healthPointer >= _gameManager.GetPlayerMaxHealth() - 1) return;
 
         // Heal the Player
         _health[++_healthPointer].gameObject.SetActive(true);
