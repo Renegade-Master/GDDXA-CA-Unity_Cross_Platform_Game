@@ -10,7 +10,8 @@ public enum SpawnPatternEnemy {
 public class ControllerEnemySpawn : ControllerGeneric {
     private int     _direction;
     private Vector3 _moveSpeed;
-    private float   _spawnFreq;
+    private float   _spawnFreq = 5.0f;
+    private string _enemyToSpawn;
 
     protected new void Awake() {
         Boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().enemyBoundary;
@@ -21,19 +22,20 @@ public class ControllerEnemySpawn : ControllerGeneric {
         StopAllCoroutines();
         switch (pattern) {
             case SpawnPatternEnemy.Test:
-                _spawnFreq = 5.0f;
+                _enemyToSpawn = "Enemy_Small";
                 _moveSpeed = new Vector3(0, 0, 0.33f);
                 break;
             case SpawnPatternEnemy.Test2:
-                _spawnFreq = 3.0f;
-                _moveSpeed = new Vector3(0, 0, 0.66f);
+                _enemyToSpawn = "Enemy_Medium";
+                _moveSpeed = new Vector3(0, 0, 0.5f);
                 break;
             case SpawnPatternEnemy.Test3:
-                _spawnFreq = 1.0f;
-                _moveSpeed = new Vector3(0, 0, 1.0f);
+                _spawnFreq = 3.5f;
+                _enemyToSpawn = "Enemy_Medium";
+                _moveSpeed = new Vector3(0, 0, 0.75f);
                 break;
             default:
-                _spawnFreq = 0.0f;
+                //_spawnFreq = 0.0f;
                 _moveSpeed = Vector3.zero;
                 return;
         }
@@ -66,12 +68,10 @@ public class ControllerEnemySpawn : ControllerGeneric {
         yield return new WaitForSeconds(_spawnFreq);
 
         while (true) {
-            var enemy = ManagerPoolEnemy.instance.GetPooledObject("Enemy_Small");
+            var enemy = ManagerPoolEnemy.instance.GetPooledObject(_enemyToSpawn);
             if (enemy != null) {
                 enemy.transform.position = gameObject.transform.position;
                 enemy.transform.rotation = Quaternion.Euler(0, -90, 0);
-
-                //enemy.GetComponent<Rigidbody>().AddForce(Vector3.left * 20);
                 enemy.SetActive(true);
             }
 

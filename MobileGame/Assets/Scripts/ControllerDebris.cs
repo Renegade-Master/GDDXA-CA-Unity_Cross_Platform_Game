@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
 public class ControllerDebris : ControllerGeneric {
-    public float repelForce;
     public float speed;
 
     protected new void Update() {

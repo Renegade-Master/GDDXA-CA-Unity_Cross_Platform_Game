@@ -4,18 +4,19 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - PlayArea
-  - Shot_Player_Main
-  - Shot_Player_UG_01
-  - Shot_Enemy_Small_Main
-  - Enemy_Small
   - Debris_Small
   - Display_Health
-  - Display_Shield
   - Display_Player_Health_Shield
+  - Display_Shield
+  - Enemy_Medium
+  - Enemy_Small
   - Pickup_Health_Restore
   - Pickup_Shoot_Speed
   - Pickup_Shoot_Spread
+  - PlayArea
+  - Shot_Enemy_Small_Main
+  - Shot_Player_Main
+  - Shot_Enemy_Medium_Main
   layers:
   - Default
   - TransparentFX

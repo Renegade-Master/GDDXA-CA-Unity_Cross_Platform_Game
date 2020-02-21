@@ -278,8 +278,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debrisSpawnPrefabs:
   - {fileID: 6384166841161110300, guid: 74a337451d9bf8e4ba179c97aa0ac75b, type: 3}
-  pickupSpawnPrefabs:
-  - {fileID: 6384166841161110300, guid: 6e43b84e503e758469a1374743c61639, type: 3}
   enemyHitPoints:
     smallHp: 1
     mediumHp: 3
@@ -287,6 +285,8 @@ MonoBehaviour:
     bossHp: 10
   enemySpawnPrefabs:
   - {fileID: 1005167260236953722, guid: a6814d41027258d45a10a61be18cd9e9, type: 3}
+  pickupSpawnPrefabs:
+  - {fileID: 6384166841161110300, guid: 6e43b84e503e758469a1374743c61639, type: 3}
   playerMaxHealth: 5
   skyBoxes:
   - {fileID: 493274391447467576, guid: 9971f952dbef9da40a726eb7ac9403ce, type: 3}
@@ -314,6 +314,10 @@ MonoBehaviour:
     objectToPool: {fileID: 8308375764326668552, guid: 3596c6cf7e8be9f4394f73507ab97a7d,
       type: 3}
     shouldExpand: 1
+  - amountToPool: 5
+    objectToPool: {fileID: 8308375764326668552, guid: 71c3e797bd1e21b4990e1a30029edd77,
+      type: 3}
+    shouldExpand: 1
 --- !u!114 &7735780746277004296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,6 +341,10 @@ MonoBehaviour:
     shouldExpand: 1
   - amountToPool: 5
     objectToPool: {fileID: 3662236092696538527, guid: 56c46ebac4ceb9148846d92fa5c271d6,
+      type: 3}
+    shouldExpand: 1
+  - amountToPool: 5
+    objectToPool: {fileID: 1152354105411914, guid: b5b41c97eeabe3b4ea75abbc6befa8ba,
       type: 3}
     shouldExpand: 1
 --- !u!114 &493081024927658398
@@ -1418,4 +1426,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd86cb955aad43db86e00ca327c94184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shieldCoolDown: 5
+  _shieldCoolDown: 4

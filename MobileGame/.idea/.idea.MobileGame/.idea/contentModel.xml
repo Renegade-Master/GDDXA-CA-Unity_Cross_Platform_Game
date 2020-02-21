@@ -37,6 +37,7 @@
           <e p="ControllerDebris.cs" t="Include" />
           <e p="ControllerDebrisSpawn.cs" t="Include" />
           <e p="ControllerEnemy.cs" t="Include" />
+          <e p="ControllerEnemyMedium.cs" t="Include" />
           <e p="ControllerEnemySmall.cs" t="Include" />
           <e p="ControllerEnemySpawn.cs" t="Include" />
           <e p="ControllerGeneric.cs" t="Include" />

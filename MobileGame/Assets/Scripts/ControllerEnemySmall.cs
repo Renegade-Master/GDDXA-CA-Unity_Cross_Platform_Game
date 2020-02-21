@@ -13,8 +13,6 @@ public class ControllerEnemySmall : ControllerEnemy {
         base.Start();
         Boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().enemyBoundary;
         Target = GameObject.FindWithTag("Player").GetComponent<Transform>();
-
-        //HitPoints = GameManager.enemyHitPoints.smallHp;
     }
 
     // Search for player
@@ -31,14 +29,15 @@ public class ControllerEnemySmall : ControllerEnemy {
     }
 
     public override void Fire() {
-        var bullet = ManagerPoolShot.instance.GetPooledObject("Shot_Enemy_Small_Main");
-        if (bullet != null) {
-            bullet.transform.position = ShotSpawn.position;
-            var o = gameObject;
-            bullet.transform.rotation = o.transform.rotation;
-            bullet.GetComponent<Rigidbody>()
-                  .AddForce(o.transform.forward * bullet.GetComponent<ControllerProjectile>().speed);
-            bullet.SetActive(true);
-        }
+        foreach (Transform child in gameObject.transform.Find("ShotSpawns"))
+            if (child.gameObject.activeSelf) {
+                var bullet = ManagerPoolShot.instance.GetPooledObject("Shot_Enemy_Small_Main");
+                if (bullet != null) {
+                    bullet.transform.position = child.position;
+                    bullet.transform.rotation = child.rotation;
+                    bullet.GetComponent<Rigidbody>().velocity = child.transform.forward * bullet.GetComponent<ControllerProjectile>().speed;
+                    bullet.SetActive(true);
+                }
+            }
     }
 }

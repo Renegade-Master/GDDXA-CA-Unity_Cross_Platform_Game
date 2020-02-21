@@ -102,7 +102,7 @@ public class ControllerPlayer : ControllerCharacter {
                 if (bullet != null) {
                     bullet.transform.position = child.position;
                     bullet.transform.rotation = child.rotation;
-                    bullet.GetComponent<Rigidbody>().velocity = -child.transform.up * 50;
+                    bullet.GetComponent<Rigidbody>().velocity = child.transform.forward * bullet.GetComponent<ControllerProjectile>().speed;
                     bullet.SetActive(true);
                 }
             }

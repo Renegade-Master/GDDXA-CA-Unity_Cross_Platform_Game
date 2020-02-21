@@ -13,7 +13,12 @@ public abstract class ControllerEnemy : ControllerCharacter {
     }
 
     protected override void OnCollisionEnter(Collision other) {
-        if (other.gameObject.tag.Contains("Shot") && !other.gameObject.tag.Contains("Enemy")) {
+        if (other.gameObject.tag.Contains("Shot")) {
+            if (other.gameObject.tag.Contains("Enemy")) {
+                other.gameObject.SetActive(false);
+                return;
+            }
+            
             if (HitPoints > 0) HitPoints--;
 
             other.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
