@@ -8,9 +8,9 @@ public class Boundary {
 
 public class ManagerBoundary : ManagerGeneric {
     public Boundary enemyBoundary;
+    public Boundary pickupBoundary;
     public Boundary playerBoundary;
     public Boundary projectileBoundary;
-    public Boundary pickupBoundary;
 
     // Handle an Object ENTERING the collider
     private void OnTriggerEnter(Collider other) {

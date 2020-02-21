@@ -1,16 +1,14 @@
-using System;
 using UnityEngine;
 
 public class ControllerPickup : ControllerGeneric {
-    public float speed;
-
-    private String _pickupType;
+    private string              _pickupType;
+    private ControllerPlayer    _player;
     private DisplayPlayerHealth _playerHealth;
-    private ControllerPlayer _player;
+    public  float               speed;
 
     protected new void Awake() {
         base.Awake();
-        
+
         _pickupType = gameObject.tag;
         _playerHealth = GameObject.FindWithTag("Display_Player_Health_Shield").GetComponent<DisplayPlayerHealth>();
         _player = GameObject.FindWithTag("Player").GetComponent<ControllerPlayer>();
@@ -41,15 +39,14 @@ public class ControllerPickup : ControllerGeneric {
                     break;
                 case "Pickup_Shoot_Spread":
                     Debug.Log("Player activated Shoot Spread");
-                    foreach (Transform child in _player.gameObject.transform.Find("ShotSpawns")) {
+                    foreach (Transform child in _player.gameObject.transform.Find("ShotSpawns"))
                         child.gameObject.SetActive(true);
-                    }
                     break;
                 default:
                     Debug.Log("Player activated DEFAULT_PICKUP");
                     break;
             }
-            
+
             gameObject.SetActive(false);
         }
     }

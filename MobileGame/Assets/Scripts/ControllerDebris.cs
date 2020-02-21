@@ -19,7 +19,6 @@ public class ControllerDebris : ControllerGeneric {
             other.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             other.gameObject.GetComponent<Rigidbody>().rotation = Quaternion.Euler(Vector3.zero);
             other.gameObject.SetActive(false);
-            return;
         }
     }
 }

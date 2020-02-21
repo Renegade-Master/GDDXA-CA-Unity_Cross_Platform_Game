@@ -96,7 +96,7 @@ public class ControllerPlayer : ControllerCharacter {
 
     // Handles Player attacks.
     public override void Fire() {
-        foreach (Transform child in gameObject.transform.Find("ShotSpawns")) {
+        foreach (Transform child in gameObject.transform.Find("ShotSpawns"))
             if (child.gameObject.activeSelf) {
                 var bullet = ManagerPoolShot.instance.GetPooledObject("Shot_Player_Main");
                 if (bullet != null) {
@@ -106,7 +106,6 @@ public class ControllerPlayer : ControllerCharacter {
                     bullet.SetActive(true);
                 }
             }
-        }
     }
 
     protected override void OnCollisionEnter(Collision other) {

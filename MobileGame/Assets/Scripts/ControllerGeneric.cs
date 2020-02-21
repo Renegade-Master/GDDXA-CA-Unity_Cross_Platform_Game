@@ -2,9 +2,9 @@
 using UnityEngine.EventSystems;
 
 public class ControllerGeneric : MonoBehaviour {
-    protected     Boundary    Boundary;
-    protected     ManagerGame GameManager;
-    protected     Camera      MainCam;
+    protected Boundary    Boundary;
+    protected ManagerGame GameManager;
+    protected Camera      MainCam;
 
     protected void Start() {
         GameManager = GameObject.FindWithTag("GameController").GetComponent<ManagerGame>();

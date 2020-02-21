@@ -41,7 +41,7 @@ public class DisplayPlayerHealth : HudGeneric {
     public void AddHealth() {
         // Player cannot increase health beyond set limit
         if (_healthPointer >= _gameManager.GetPlayerMaxHealth()) return;
-        
+
         // Heal the Player
         _health[++_healthPointer].gameObject.SetActive(true);
         _playerController.Heal();

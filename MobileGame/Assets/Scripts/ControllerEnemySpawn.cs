@@ -48,7 +48,7 @@ public class ControllerEnemySpawn : ControllerGeneric {
             var position = tempRb.position;
             var distanceToEdge = new Vector2(Boundary.zMax - position.z, position.z - Boundary.zMin);
 
-            if (distanceToEdge.x < 3.0f || distanceToEdge.y < 3.0f) //Debug.Log("I'm getting close to the edge.");
+            if (distanceToEdge.x < 3.0f || distanceToEdge.y < 3.0f)
                 _direction *= -1;
 
             tempRb.MovePosition(tempRb.position + _moveSpeed * _direction);
