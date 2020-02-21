@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ControllerEnemySmall : ControllerEnemy {
     protected new void Awake() {
@@ -24,9 +23,7 @@ public class ControllerEnemySmall : ControllerEnemy {
 
         base.Update();
 
-        if (ReadyToShoot()) {
-            Fire();
-        }
+        if (ReadyToShoot()) Fire();
     }
 
     public void FixedUpdate() {
@@ -37,8 +34,10 @@ public class ControllerEnemySmall : ControllerEnemy {
         var bullet = ManagerPoolShot.instance.GetPooledObject("Shot_Enemy_Small_Main");
         if (bullet != null) {
             bullet.transform.position = ShotSpawn.position;
-            bullet.transform.rotation = gameObject.transform.rotation;
-            bullet.GetComponent<Rigidbody>().AddForce(gameObject.transform.forward * bullet.GetComponent<ControllerProjectile>().speed);
+            var o = gameObject;
+            bullet.transform.rotation = o.transform.rotation;
+            bullet.GetComponent<Rigidbody>()
+                  .AddForce(o.transform.forward * bullet.GetComponent<ControllerProjectile>().speed);
             bullet.SetActive(true);
         }
     }

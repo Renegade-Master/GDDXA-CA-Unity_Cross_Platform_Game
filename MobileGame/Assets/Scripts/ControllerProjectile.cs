@@ -6,10 +6,9 @@
  *     Right   = Red Axis
  *     Up      = Green Axis
  */
-
 public class ControllerProjectile : ControllerGeneric {
+    public int   power;
     public float speed;
-    public int power;
 
     protected new void Update() {
         base.Update();

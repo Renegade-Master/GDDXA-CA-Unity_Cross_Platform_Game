@@ -241,6 +241,7 @@ GameObject:
   - component: {fileID: 2316623817351170878}
   - component: {fileID: 7735780746277004296}
   - component: {fileID: 493081024927658398}
+  - component: {fileID: -1850751184940867191}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -275,19 +276,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cb06376fea7eb04db1df8f01742ccb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentLevel: 0
+  debrisSpawnPrefabs:
+  - {fileID: 6384166841161110300, guid: 74a337451d9bf8e4ba179c97aa0ac75b, type: 3}
   enemyHitPoints:
     smallHp: 1
     mediumHp: 3
     largeHp: 5
     bossHp: 10
-  playerMaxHealth: 5
-  currentLevel: 0
-  skyBoxes:
-  - {fileID: 493274391447467576, guid: 9971f952dbef9da40a726eb7ac9403ce, type: 3}
   enemySpawnPrefabs:
   - {fileID: 1005167260236953722, guid: a6814d41027258d45a10a61be18cd9e9, type: 3}
-  debrisSpawnPrefabs:
-  - {fileID: 6384166841161110300, guid: 74a337451d9bf8e4ba179c97aa0ac75b, type: 3}
+  playerMaxHealth: 5
+  skyBoxes:
+  - {fileID: 493274391447467576, guid: 9971f952dbef9da40a726eb7ac9403ce, type: 3}
 --- !u!114 &2316623817351170878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,6 +327,14 @@ MonoBehaviour:
     objectToPool: {fileID: 3662236092696538527, guid: 1204d784b6a4d6249b59acf314e42057,
       type: 3}
     shouldExpand: 1
+  - amountToPool: 5
+    objectToPool: {fileID: 3662236092696538527, guid: f69f5eb25a6ab3642b9851a5baf9bcdc,
+      type: 3}
+    shouldExpand: 1
+  - amountToPool: 5
+    objectToPool: {fileID: 3662236092696538527, guid: 56c46ebac4ceb9148846d92fa5c271d6,
+      type: 3}
+    shouldExpand: 1
 --- !u!114 &493081024927658398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,6 +363,28 @@ MonoBehaviour:
   - amountToPool: 2
     objectToPool: {fileID: 103884, guid: 077a60faab9da2544bcc680ec6f877f4, type: 3}
     shouldExpand: 1
+--- !u!114 &-1850751184940867191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381081889025119909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65f1382d86d24773994102a887b3dfc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemsToPool:
+  - amountToPool: 1
+    objectToPool: {fileID: 112592, guid: 7afa67d132ccad04f81bdcee6bb24c86, type: 3}
+    shouldExpand: 0
+  - amountToPool: 1
+    objectToPool: {fileID: 191180, guid: 5cc99f8313e92c2468387dfd5a6f241e, type: 3}
+    shouldExpand: 0
+  - amountToPool: 1
+    objectToPool: {fileID: 148104, guid: cdb7bae036605ba4cabc7c576743ae88, type: 3}
+    shouldExpand: 0
 --- !u!1 &1381081889288451261
 GameObject:
   m_ObjectHideFlags: 0

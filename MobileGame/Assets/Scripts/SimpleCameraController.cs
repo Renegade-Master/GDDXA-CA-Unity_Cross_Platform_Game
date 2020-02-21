@@ -3,15 +3,15 @@ using UnityEngine;
 
 namespace UnityTemplateProjects {
     public class SimpleCameraController : MonoBehaviour {
+        private readonly CameraState m_InterpolatingCameraState = new CameraState();
+
+        private readonly CameraState m_TargetCameraState = new CameraState();
+
         [Header("Movement Settings")] [Tooltip("Exponential boost factor on translation, controllable by mouse wheel.")]
         public float boost = 3.5f;
 
         [Tooltip("Whether or not to invert our Y axis for mouse input to rotation.")]
         public bool invertY;
-
-        private readonly CameraState m_InterpolatingCameraState = new CameraState();
-
-        private readonly CameraState m_TargetCameraState = new CameraState();
 
         [Header("Rotation Settings")]
         [Tooltip("X = Change in mouse position.\nY = Multiplicative factor for camera rotation.")]

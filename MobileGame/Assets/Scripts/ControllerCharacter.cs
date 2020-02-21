@@ -1,18 +1,18 @@
 using UnityEngine;
 
 public abstract class ControllerCharacter : ControllerGeneric {
-    protected Transform Target;
-    protected Transform ShotSpawn;
+    protected int    HitPoints;
     protected double LastShootTime;
-    protected int HitPoints;
-    
-    public double shootChance;
-    public double shootCoolDown;
-    public float speed;
-    
+
+    public    double    shootChance;
+    public    double    shootCoolDown;
+    protected Transform ShotSpawn;
+    public    float     speed;
+    protected Transform Target;
+
     protected new void Start() {
         base.Start();
-        
+
         ShotSpawn = transform.Find("ShotSpawn");
     }
 
@@ -29,12 +29,16 @@ public abstract class ControllerCharacter : ControllerGeneric {
     }
 
     public void Damage() {
-        HitPoints --;
+        HitPoints--;
+    }
+
+    public void Heal() {
+        HitPoints++;
     }
 
     public bool ReadyToShoot() {
         double timeNow = Time.time;
-        if ((timeNow - LastShootTime) >= shootCoolDown) {
+        if (timeNow - LastShootTime >= shootCoolDown) {
             LastShootTime = timeNow;
             return true;
         }

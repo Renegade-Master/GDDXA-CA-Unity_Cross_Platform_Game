@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [Serializable]
@@ -8,37 +9,38 @@ public class EnemyHitPoints {
 }
 
 public class ManagerGame : ManagerGeneric {
-    public EnemyHitPoints enemyHitPoints;
-    public int playerMaxHealth;
-    
-    private GameObject _playArea;
-    private ManagerGeneric _enemyPoolManager;
-    private ManagerGeneric _debrisPoolManager;
-    private ManagerGeneric _shotPoolManager;
+    private readonly List<GameObject> _debrisSpawns = new List<GameObject>();
+    private readonly List<GameObject> _enemySpawns  = new List<GameObject>();
+    private          ManagerGeneric   _debrisPoolManager;
+    private          ManagerGeneric   _enemyPoolManager;
+    private          ManagerGeneric   _pickupPoolManager;
 
-    private GameObject _player;
-    public  int        currentLevel;
-    
-    public  List<GameObject> skyBoxes;
-    public  List<GameObject> enemySpawnPrefabs;
+    private GameObject _playArea;
+
+    private GameObject       _player;
+    private ManagerGeneric   _shotPoolManager;
+    public  int              currentLevel;
     public  List<GameObject> debrisSpawnPrefabs;
-    private List<GameObject> _enemySpawns  = new List<GameObject>();
-    private List<GameObject> _debrisSpawns = new List<GameObject>();
+    public  EnemyHitPoints   enemyHitPoints;
+    public  List<GameObject> enemySpawnPrefabs;
+    public  int              playerMaxHealth;
+
+    public List<GameObject> skyBoxes;
 
     // Start is called before the first frame update
     private void Start() {
         // Place all starting GameObjects
         LoadLevel(currentLevel);
-        
     }
 
     private void LoadLevel(int level) {
         switch (level) {
             case 0:
-                _enemyPoolManager = gameObject.GetComponent<ManagerPoolEnemy>();
                 _debrisPoolManager = gameObject.GetComponent<ManagerPoolDebris>();
+                _enemyPoolManager = gameObject.GetComponent<ManagerPoolEnemy>();
+                _pickupPoolManager = gameObject.GetComponent<ManagerPoolPickup>();
                 _shotPoolManager = gameObject.GetComponent<ManagerPoolShot>();
-                
+
                 Instantiate(skyBoxes[level], Vector3.zero, Quaternion.Euler(Vector3.zero));
                 _playArea = GameObject.FindWithTag("PlayArea");
 
@@ -61,7 +63,7 @@ public class ManagerGame : ManagerGeneric {
 
                 foreach (var obj in _debrisSpawns)
                     obj.GetComponent<ControllerDebrisSpawn>().StartMovement(SpawnPatternDebris.Test);
-                
+
                 // Start the coroutine to regularly shrink the Pooled GameObjects
                 //StartCoroutine(PoolShrinkScheduler());
 
@@ -86,11 +88,12 @@ public class ManagerGame : ManagerGeneric {
         Debug.Log("The game has ended.");
         Application.Quit();
 #if UNITY_EDITOR
+
         //Stop playing the scene
-        UnityEditor.EditorApplication.isPlaying = false;
+        EditorApplication.isPlaying = false;
 #endif
     }
-    
+
     // private IEnumerator PoolShrinkScheduler() {
     //     yield return new WaitForSeconds(5);
     //

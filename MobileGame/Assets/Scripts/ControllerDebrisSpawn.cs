@@ -8,9 +8,9 @@ public enum SpawnPatternDebris {
 }
 
 public class ControllerDebrisSpawn : ControllerGeneric {
-    private float   _spawnFreq;
-    private Vector3 _moveSpeed;
     private int     _direction;
+    private Vector3 _moveSpeed;
+    private float   _spawnFreq;
 
     protected new void Awake() {
         Boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().enemyBoundary;
@@ -45,7 +45,8 @@ public class ControllerDebrisSpawn : ControllerGeneric {
     private IEnumerator Movement() {
         while (true) {
             var tempRb = gameObject.GetComponent<Rigidbody>();
-            var distanceToEdge = new Vector2(Boundary.zMax - tempRb.position.z, tempRb.position.z - Boundary.zMin);
+            var position = tempRb.position;
+            var distanceToEdge = new Vector2(Boundary.zMax - position.z, position.z - Boundary.zMin);
 
             if (distanceToEdge.x < 3.0f || distanceToEdge.y < 3.0f) //Debug.Log("I'm getting close to the edge.");
                 _direction *= -1;
@@ -69,7 +70,8 @@ public class ControllerDebrisSpawn : ControllerGeneric {
             if (debris != null) {
                 debris.transform.position = gameObject.transform.position;
                 debris.transform.rotation = Quaternion.Euler(0, -90, 0);
-                debris.GetComponent<Rigidbody>().velocity = Vector3.left * debris.GetComponent<ControllerDebris>().speed;
+                debris.GetComponent<Rigidbody>().velocity =
+                    Vector3.left * debris.GetComponent<ControllerDebris>().speed;
                 debris.SetActive(true);
             }
 

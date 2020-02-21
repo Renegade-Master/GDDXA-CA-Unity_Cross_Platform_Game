@@ -27,19 +27,15 @@ public abstract class ManagerPool : ManagerGeneric {
     }
 
     protected void ShrinkPool<T>() {
-        int activeItems = 0;
-    
-        foreach (GameObject item in _pooledObjects) {
-            if (item.activeInHierarchy) {
+        var activeItems = 0;
+
+        foreach (var item in _pooledObjects)
+            if (item.activeInHierarchy)
                 activeItems++;
-            }
-        }
 
-        float usedRatio = (activeItems / _pooledObjects.Capacity);
+        float usedRatio = activeItems / _pooledObjects.Capacity;
 
-        if (usedRatio > 0.7f) {
-            Debug.Log("Current use Ratio is: " + usedRatio);
-        }
+        if (usedRatio > 0.7f) Debug.Log("Current use Ratio is: " + usedRatio);
     }
 
     private List<T> Shuffle<T>(List<T> list) {

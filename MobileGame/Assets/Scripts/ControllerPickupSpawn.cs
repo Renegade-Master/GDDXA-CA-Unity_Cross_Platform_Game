@@ -1,36 +1,36 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public enum SpawnPatternEnemy {
+public enum SpawnPatternPickup {
     Test,
     Test2,
     Test3
 }
 
-public class ControllerEnemySpawn : ControllerGeneric {
+public class ControllerPickupSpawn : ControllerGeneric {
     private int     _direction;
     private Vector3 _moveSpeed;
     private float   _spawnFreq;
 
     protected new void Awake() {
-        Boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().enemyBoundary;
+        Boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().pickupBoundary;
         _direction = Random.Range(0, 2) * 2 - 1;
     }
 
-    public void StartMovement(SpawnPatternEnemy pattern) {
+    public void StartMovement(SpawnPatternPickup pattern) {
         StopAllCoroutines();
         switch (pattern) {
-            case SpawnPatternEnemy.Test:
-                _spawnFreq = 5.0f;
-                _moveSpeed = new Vector3(0, 0, 0.33f);
-                break;
-            case SpawnPatternEnemy.Test2:
+            case SpawnPatternPickup.Test:
                 _spawnFreq = 3.0f;
-                _moveSpeed = new Vector3(0, 0, 0.66f);
+                _moveSpeed = new Vector3(0, 0, 0.1f);
                 break;
-            case SpawnPatternEnemy.Test3:
+            case SpawnPatternPickup.Test2:
+                _spawnFreq = 2.0f;
+                _moveSpeed = new Vector3(0, 0, 0.3f);
+                break;
+            case SpawnPatternPickup.Test3:
                 _spawnFreq = 1.0f;
-                _moveSpeed = new Vector3(0, 0, 1.0f);
+                _moveSpeed = new Vector3(0, 0, 0.7f);
                 break;
             default:
                 _spawnFreq = 0.0f;
@@ -38,8 +38,8 @@ public class ControllerEnemySpawn : ControllerGeneric {
                 return;
         }
 
-        StartCoroutine(Movement());
-        StartCoroutine(EnemySpawn());
+        //StartCoroutine(Movement());
+        //StartCoroutine(PickupSpawn());
     }
 
     private IEnumerator Movement() {
@@ -48,7 +48,7 @@ public class ControllerEnemySpawn : ControllerGeneric {
             var position = tempRb.position;
             var distanceToEdge = new Vector2(Boundary.zMax - position.z, position.z - Boundary.zMin);
 
-            if (distanceToEdge.x < 3.0f || distanceToEdge.y < 3.0f) //Debug.Log("I'm getting close to the edge.");
+            if (distanceToEdge.x < 3.0f || distanceToEdge.y < 3.0f)
                 _direction *= -1;
 
             tempRb.MovePosition(tempRb.position + _moveSpeed * _direction);
@@ -62,17 +62,17 @@ public class ControllerEnemySpawn : ControllerGeneric {
         }
     }
 
-    private IEnumerator EnemySpawn() {
+    private IEnumerator PickupSpawn() {
         yield return new WaitForSeconds(_spawnFreq);
 
         while (true) {
-            var enemy = ManagerPoolEnemy.instance.GetPooledObject("Enemy_Small");
-            if (enemy != null) {
-                enemy.transform.position = gameObject.transform.position;
-                enemy.transform.rotation = Quaternion.Euler(0, -90, 0);
-
-                //enemy.GetComponent<Rigidbody>().AddForce(Vector3.left * 20);
-                enemy.SetActive(true);
+            var debris = ManagerPoolPickup.instance.GetPooledObject("Pickup_Small");
+            if (debris != null) {
+                debris.transform.position = gameObject.transform.position;
+                debris.transform.rotation = Quaternion.Euler(0, -90, 0);
+                debris.GetComponent<Rigidbody>().velocity =
+                    Vector3.left * debris.GetComponent<ControllerPickup>().speed;
+                debris.SetActive(true);
             }
 
             yield return new WaitForSeconds(_spawnFreq);

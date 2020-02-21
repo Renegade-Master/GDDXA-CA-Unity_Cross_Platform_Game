@@ -13,6 +13,9 @@ TagManager:
   - Display_Health
   - Display_Shield
   - Display_Player_Health_Shield
+  - Pickup_Health_Restore
+  - Pickup_Shoot_Speed
+  - Pickup_Shoot_Spread
   layers:
   - Default
   - TransparentFX
