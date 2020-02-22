@@ -112,7 +112,6 @@ public class ControllerPlayer : ControllerCharacter {
     protected override void OnCollisionEnter(Collision other) {
         // If the Player has been shot, but not by themselves.
         if (other.gameObject.tag.Contains("Shot") && !other.gameObject.tag.Contains("Player")) {
-            //Debug.Log("Player has been shot");
             var damage = other.gameObject.GetComponent<ControllerProjectile>().power;
 
             _healthDisplay.RemoveHealth(damage);

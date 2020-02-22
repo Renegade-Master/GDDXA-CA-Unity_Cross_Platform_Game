@@ -101,8 +101,6 @@ public class ManagerGame : ManagerGeneric {
 
     // End the Game
     public void GameOver() {
-        Debug.Log("The game has ended.");
-
         //Stop playing the scene
         Application.Quit();
 #if UNITY_EDITOR
@@ -118,8 +116,6 @@ public class ManagerGame : ManagerGeneric {
             // Handle different Game Stages
             if (_timeElapsed < timeForStage01) {
                 if (_gameManagerLock[0]) {
-                    Debug.Log("Entering Stage 01");
-
                     foreach (var obj in _enemySpawns)
                         obj.GetComponent<ControllerEnemySpawn>().StartMovement(SpawnPatternEnemy.Test);
 
@@ -137,8 +133,6 @@ public class ManagerGame : ManagerGeneric {
                 // START BOSS FIGHT 01
                 // If Boss_01 has not yet been set up, and Player is not currently fighting Boss_01
                 if (bossFight[0][0] && !bossFight[0][1]) {
-                    Debug.Log("Spawning Boss 01");
-
                     // Spawn Boss_01, and stop everything else until it dies
                     _boss = _enemySpawns[0].GetComponent<ControllerEnemySpawn>().SpawnBoss("Large_01");
 
@@ -148,11 +142,9 @@ public class ManagerGame : ManagerGeneric {
 
                 // If Boss_01 is alive
                 if (_boss.activeInHierarchy) {
-                    Debug.Log("Player Fighting Boss 01");
                 } else if (bossFight[0][1]) {
                     // Player was fighting Boss_01, but just killed it
 
-                    Debug.Log("Boss 01 has been killed");
 
                     // Boss_01 has been killed
                     bossFight[0][1] = false;    // Player is not currently fighting Boss_01
@@ -164,8 +156,6 @@ public class ManagerGame : ManagerGeneric {
 
                 // Spawn Stage 02 enemies
                 if (_gameManagerLock[1]) {
-                    Debug.Log("Entering Stage 02");
-
                     foreach (var obj in _enemySpawns)
                         obj.GetComponent<ControllerEnemySpawn>().StartMovement(SpawnPatternEnemy.Test2);
 
@@ -179,8 +169,6 @@ public class ManagerGame : ManagerGeneric {
                     _gameManagerLock[2] = true; // Allow progression to Stage 03
                 }
             } else if (_timeElapsed < timeForStage03) {
-                Debug.Log("Entering Stage 03");
-
                 if (_gameManagerLock[2]) {
                     foreach (var obj in _enemySpawns)
                         obj.GetComponent<ControllerEnemySpawn>().StartMovement(SpawnPatternEnemy.Test3);
@@ -203,8 +191,6 @@ public class ManagerGame : ManagerGeneric {
                 // START BOSS FIGHT 02
                 // If Boss_02 has not yet been set up, and Player is not currently fighting Boss_02
                 if (bossFight[1][0] && !bossFight[1][1]) {
-                    Debug.Log("Spawning Boss 02");
-
                     // Spawn Boss_01, and stop everything else until it dies
                     _boss = _enemySpawns[0].GetComponent<ControllerEnemySpawn>().SpawnBoss("Large_01");
 
@@ -214,11 +200,9 @@ public class ManagerGame : ManagerGeneric {
 
                 // If Boss_02 is alive
                 if (_boss.activeInHierarchy) {
-                    Debug.Log("Player Fighting Boss 02");
                 } else if (bossFight[1][1]) {
                     // Player was fighting Boss_02, but just killed it
 
-                    Debug.Log("Boss 02 has been killed");
 
                     // Boss_02 has been killed
                     bossFight[1][1] = false; // Player is not currently fighting Boss_01

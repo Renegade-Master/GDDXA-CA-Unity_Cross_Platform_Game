@@ -26,17 +26,17 @@ public abstract class ManagerPool : ManagerGeneric {
         _pooledObjects = Shuffle(_pooledObjects);
     }
 
-    protected void ShrinkPool<T>() {
-        var activeItems = 0;
-
-        foreach (var item in _pooledObjects)
-            if (item.activeInHierarchy)
-                activeItems++;
-
-        float usedRatio = activeItems / _pooledObjects.Capacity;
-
-        if (usedRatio > 0.7f) Debug.Log("Current use Ratio is: " + usedRatio);
-    }
+    // protected void ShrinkPool<T>() {
+    //     var activeItems = 0;
+    //
+    //     foreach (var item in _pooledObjects)
+    //         if (item.activeInHierarchy)
+    //             activeItems++;
+    //
+    //     float usedRatio = activeItems / _pooledObjects.Capacity;
+    //
+    //     if (usedRatio > 0.7f) 
+    // }
 
     private List<T> Shuffle<T>(List<T> list) {
         var rng = new Random();
@@ -54,11 +54,7 @@ public abstract class ManagerPool : ManagerGeneric {
     }
 
     public GameObject GetPooledObject(string requestTag) {
-        if (_pooledObjects == null) {
-            Debug.Log("Pool is null for request String: " + requestTag);
-
-            return null;
-        }
+        if (_pooledObjects == null) return null;
 
         foreach (var pObj in _pooledObjects)
             if (!pObj.activeInHierarchy && pObj.CompareTag(requestTag))

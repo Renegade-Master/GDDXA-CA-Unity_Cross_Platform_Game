@@ -56,7 +56,7 @@ public class DisplayPlayerHealth : HudGeneric {
             // Check if health-pointer is already at 0 (should not really happen, game should have ended)
             if (_healthPointer < 0) return;
 
-            //Debug.Log("Shields Empty.  Decrementing Health");
+
             for (var i = 0; i < damage; i++) {
                 _health[_healthPointer--].gameObject.SetActive(false);
                 _playerController.Damage();
@@ -64,7 +64,7 @@ public class DisplayPlayerHealth : HudGeneric {
         }
 
         // Reduce shields
-        //Debug.Log("Decrementing Shields");
+
         for (var i = 0; i < damage; i++) _shield.value++;
     }
 }

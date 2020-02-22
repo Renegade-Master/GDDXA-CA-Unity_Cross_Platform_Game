@@ -28,20 +28,17 @@ public class ControllerPickup : ControllerGeneric {
             // ToDo: Give the Player some sort of Bonus for the Pickup
             switch (_pickupType) {
                 case "Pickup_Health_Restore":
-                    Debug.Log("Player activated Health Restore");
+
                     _playerHealth.AddHealth();
                     break;
                 case "Pickup_Shoot_Speed":
-                    Debug.Log("Player activated Shoot Speed");
+
                     _player.shootCoolDown *= 0.75;
                     break;
                 case "Pickup_Shoot_Spread":
-                    Debug.Log("Player activated Shoot Spread");
+
                     foreach (Transform child in _player.gameObject.transform.Find("ShotSpawns"))
                         child.gameObject.SetActive(true);
-                    break;
-                default:
-                    Debug.Log("Player activated DEFAULT_PICKUP");
                     break;
             }
 

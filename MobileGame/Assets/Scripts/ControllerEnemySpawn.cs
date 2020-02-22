@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Reflection;
 using UnityEngine;
 
 public enum SpawnPatternEnemy {
@@ -66,9 +67,7 @@ public class ControllerEnemySpawn : ControllerGeneric {
         }
 
         // Something went wrong
-        //throw new TargetException();
-        Debug.Log("PROBLEMS!");
-        return null;
+        throw new TargetException();
     }
 
     private IEnumerator Movement() {
