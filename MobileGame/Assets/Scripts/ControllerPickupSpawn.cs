@@ -75,7 +75,7 @@ public class ControllerPickupSpawn : ControllerGeneric {
             tempRb.MovePosition(tempRb.position + _moveSpeed * _direction);
 
             tempRb.position = new Vector3(
-                20,
+                10,
                 0,
                 Mathf.Clamp(tempRb.position.z, Boundary.zMin, Boundary.zMax)
             );

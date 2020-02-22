@@ -554,21 +554,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1381081889025119908, guid: 9bd565aea8abc634c816eed7acb92c8d,
-        type: 3}
-      propertyPath: timeForStage01
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 1381081889025119908, guid: 9bd565aea8abc634c816eed7acb92c8d,
-        type: 3}
-      propertyPath: timeForStage04
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 1381081889025119908, guid: 9bd565aea8abc634c816eed7acb92c8d,
-        type: 3}
-      propertyPath: timeForStage03
-      value: 135
-      objectReference: {fileID: 0}
     - target: {fileID: 1381081889025119909, guid: 9bd565aea8abc634c816eed7acb92c8d,
         type: 3}
       propertyPath: m_Name
@@ -643,11 +628,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7735780746277004296, guid: 9bd565aea8abc634c816eed7acb92c8d,
-        type: 3}
-      propertyPath: itemsToPool.Array.size
-      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bd565aea8abc634c816eed7acb92c8d, type: 3}

@@ -53,14 +53,14 @@ public class ControllerEnemySpawn : ControllerGeneric {
         var enemy = ManagerPoolEnemy.instance.GetPooledObject(requestId);
         if (enemy != null) {
             var spawnPos = new Vector3(
-                150.0f,
+                60.0f,
                 0.0f,
                 gameObject.transform.position.z
             );
             enemy.transform.position = spawnPos;
             enemy.transform.rotation = Quaternion.Euler(0, -90, 0);
-            enemy.GetComponent<Rigidbody>().velocity =
-                Vector3.left * enemy.GetComponent<ControllerEnemy>().speed;
+            enemy.GetComponent<Rigidbody>().AddForce(
+                Vector3.left * enemy.GetComponent<ControllerEnemy>().speed);
             enemy.SetActive(true);
             return enemy;
         }

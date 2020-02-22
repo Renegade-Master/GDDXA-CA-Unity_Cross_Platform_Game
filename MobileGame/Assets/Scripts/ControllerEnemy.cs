@@ -14,11 +14,19 @@ public abstract class ControllerEnemy : ControllerCharacter {
         if (HitPoints <= 0) gameObject.SetActive(false);
 
         transform.LookAt(Target);
-        if (ReadyToShoot()) Fire();
+        if (ReadyToShoot() && InRange()) Fire();
     }
 
     protected void FixedUpdate() {
         gameObject.GetComponent<Rigidbody>().AddForce(Vector3.left * speed);
+    }
+
+    private bool InRange() {
+        if (gameObject.GetComponent<Rigidbody>().transform.position.x < 37.0f
+         && gameObject.GetComponent<Rigidbody>().transform.position.x > -34.0f)
+            return true;
+
+        return false;
     }
 
     protected override void OnCollisionEnter(Collision other) {
