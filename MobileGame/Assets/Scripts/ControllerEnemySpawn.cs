@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Reflection;
 using UnityEngine;
 
 public enum SpawnPatternEnemy {
@@ -9,9 +10,9 @@ public enum SpawnPatternEnemy {
 
 public class ControllerEnemySpawn : ControllerGeneric {
     private int     _direction;
+    private string  _enemyToSpawn;
     private Vector3 _moveSpeed;
     private float   _spawnFreq = 5.0f;
-    private string _enemyToSpawn;
 
     protected new void Awake() {
         Boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().enemyBoundary;
@@ -44,6 +45,33 @@ public class ControllerEnemySpawn : ControllerGeneric {
         StartCoroutine(EnemySpawn());
     }
 
+    // Spawn a specified Boss on request
+    public GameObject SpawnBoss(string type) {
+        StopAllCoroutines();
+        
+        var requestId = $"Enemy_{type}";
+
+        var enemy = ManagerPoolEnemy.instance.GetPooledObject(requestId);
+        if (enemy != null) {
+            var spawnPos = new Vector3(
+                150.0f,
+                0.0f,
+                gameObject.transform.position.z
+            );
+            enemy.transform.position = spawnPos;
+            enemy.transform.rotation = Quaternion.Euler(0, -90, 0);
+            enemy.GetComponent<Rigidbody>().velocity =
+                Vector3.left * enemy.GetComponent<ControllerEnemy>().speed;
+            enemy.SetActive(true);
+            return enemy;
+        }
+        
+        // Something went wrong
+        //throw new TargetException();
+        Debug.Log("PROBLEMS!");
+        return null;
+    }
+
     private IEnumerator Movement() {
         while (true) {
             var tempRb = gameObject.GetComponent<Rigidbody>();
@@ -68,13 +96,14 @@ public class ControllerEnemySpawn : ControllerGeneric {
         yield return new WaitForSeconds(_spawnFreq);
 
         while (true) {
-            var enemy = ManagerPoolEnemy.instance.GetPooledObject(_enemyToSpawn);
-            if (enemy != null) {
-                enemy.transform.position = gameObject.transform.position;
-                enemy.transform.rotation = Quaternion.Euler(0, -90, 0);
-                enemy.SetActive(true);
-            }
-
+            //if (!GameManager.bossLevel) {
+                var enemy = ManagerPoolEnemy.instance.GetPooledObject(_enemyToSpawn);
+                if (enemy != null) {
+                    enemy.transform.position = gameObject.transform.position;
+                    enemy.transform.rotation = Quaternion.Euler(0, -90, 0);
+                    enemy.SetActive(true);
+                }
+            //}
             yield return new WaitForSeconds(_spawnFreq);
         }
     }

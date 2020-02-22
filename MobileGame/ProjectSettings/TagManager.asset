@@ -17,6 +17,9 @@ TagManager:
   - Shot_Enemy_Small_Main
   - Shot_Player_Main
   - Shot_Enemy_Medium_Main
+  - Shot_Enemy_Large_Main
+  - Enemy_Large_01
+  - Enemy_Large_02
   layers:
   - Default
   - TransparentFX

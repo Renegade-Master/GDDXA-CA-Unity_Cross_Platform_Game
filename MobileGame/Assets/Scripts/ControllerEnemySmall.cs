@@ -11,21 +11,15 @@ public class ControllerEnemySmall : ControllerEnemy {
 
     protected new void Start() {
         base.Start();
-        Boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().enemyBoundary;
-        Target = GameObject.FindWithTag("Player").GetComponent<Transform>();
     }
 
     // Search for player
-    public new void Update() {
-        transform.LookAt(Target);
-
+    protected new void Update() {
         base.Update();
-
-        if (ReadyToShoot()) Fire();
     }
 
-    public void FixedUpdate() {
-        gameObject.GetComponent<Rigidbody>().AddForce(Vector3.left * speed);
+    protected new void FixedUpdate() {
+        base.FixedUpdate();
     }
 
     public override void Fire() {
@@ -35,7 +29,8 @@ public class ControllerEnemySmall : ControllerEnemy {
                 if (bullet != null) {
                     bullet.transform.position = child.position;
                     bullet.transform.rotation = child.rotation;
-                    bullet.GetComponent<Rigidbody>().velocity = child.transform.forward * bullet.GetComponent<ControllerProjectile>().speed;
+                    bullet.GetComponent<Rigidbody>().velocity =
+                        child.transform.forward * bullet.GetComponent<ControllerProjectile>().speed;
                     bullet.SetActive(true);
                 }
             }

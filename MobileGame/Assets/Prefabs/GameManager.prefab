@@ -292,7 +292,8 @@ MonoBehaviour:
   - {fileID: 493274391447467576, guid: 9971f952dbef9da40a726eb7ac9403ce, type: 3}
   timeForStage01: 45
   timeForStage02: 90
-  timeForStage03: 150
+  timeForStage03: 135
+  timeForStage04: 180
 --- !u!114 &2316623817351170878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,6 +317,10 @@ MonoBehaviour:
     shouldExpand: 1
   - amountToPool: 5
     objectToPool: {fileID: 8308375764326668552, guid: 71c3e797bd1e21b4990e1a30029edd77,
+      type: 3}
+    shouldExpand: 1
+  - amountToPool: 5
+    objectToPool: {fileID: 8308375764326668552, guid: f621f298b872c0648aeee9e6488bba5e,
       type: 3}
     shouldExpand: 1
 --- !u!114 &7735780746277004296
@@ -347,6 +352,18 @@ MonoBehaviour:
     objectToPool: {fileID: 1152354105411914, guid: b5b41c97eeabe3b4ea75abbc6befa8ba,
       type: 3}
     shouldExpand: 1
+  - amountToPool: 5
+    objectToPool: {fileID: 1152354105411914, guid: 07040391b49a9ab48993510cf6b54d8e,
+      type: 3}
+    shouldExpand: 1
+  - amountToPool: 5
+    objectToPool: {fileID: 1152354105411914, guid: 8c2afc089e46298428da5a4905ca0c59,
+      type: 3}
+    shouldExpand: 1
+  - amountToPool: 1
+    objectToPool: {fileID: 1453896587831234150, guid: 2e1a24b4a0c3ca64daf41c3f6cc76219,
+      type: 3}
+    shouldExpand: 0
 --- !u!114 &493081024927658398
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -22,6 +22,8 @@ public class ControllerGeneric : MonoBehaviour {
             pos.x,
             0.0f,
             pos.z);
+
+        gameObject.transform.position = position;
     }
 
     // Normalise a value to a different value between a given MAX and MIN.
