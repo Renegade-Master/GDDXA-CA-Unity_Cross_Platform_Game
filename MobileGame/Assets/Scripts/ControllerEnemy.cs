@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public abstract class ControllerEnemy : ControllerCharacter {
@@ -13,7 +12,7 @@ public abstract class ControllerEnemy : ControllerCharacter {
 
         // Has the Enemy been killed?
         if (HitPoints <= 0) gameObject.SetActive(false);
-        
+
         transform.LookAt(Target);
         if (ReadyToShoot()) Fire();
     }

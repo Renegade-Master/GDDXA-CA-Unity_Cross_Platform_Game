@@ -11,7 +11,6 @@ public class ControllerEnemyMedium : ControllerEnemy {
 
     protected new void Start() {
         base.Start();
-        
     }
 
     // Search for player

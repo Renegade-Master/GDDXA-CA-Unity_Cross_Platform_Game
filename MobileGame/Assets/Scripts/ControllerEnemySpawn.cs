@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Reflection;
 using UnityEngine;
 
 public enum SpawnPatternEnemy {
@@ -48,7 +47,7 @@ public class ControllerEnemySpawn : ControllerGeneric {
     // Spawn a specified Boss on request
     public GameObject SpawnBoss(string type) {
         StopAllCoroutines();
-        
+
         var requestId = $"Enemy_{type}";
 
         var enemy = ManagerPoolEnemy.instance.GetPooledObject(requestId);
@@ -65,7 +64,7 @@ public class ControllerEnemySpawn : ControllerGeneric {
             enemy.SetActive(true);
             return enemy;
         }
-        
+
         // Something went wrong
         //throw new TargetException();
         Debug.Log("PROBLEMS!");
@@ -96,14 +95,13 @@ public class ControllerEnemySpawn : ControllerGeneric {
         yield return new WaitForSeconds(_spawnFreq);
 
         while (true) {
-            //if (!GameManager.bossLevel) {
-                var enemy = ManagerPoolEnemy.instance.GetPooledObject(_enemyToSpawn);
-                if (enemy != null) {
-                    enemy.transform.position = gameObject.transform.position;
-                    enemy.transform.rotation = Quaternion.Euler(0, -90, 0);
-                    enemy.SetActive(true);
-                }
-            //}
+            var enemy = ManagerPoolEnemy.instance.GetPooledObject(_enemyToSpawn);
+            if (enemy != null) {
+                enemy.transform.position = gameObject.transform.position;
+                enemy.transform.rotation = Quaternion.Euler(0, -90, 0);
+                enemy.SetActive(true);
+            }
+
             yield return new WaitForSeconds(_spawnFreq);
         }
     }

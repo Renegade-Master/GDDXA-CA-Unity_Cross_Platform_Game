@@ -11,7 +11,6 @@ public class ControllerEnemyLarge : ControllerEnemy {
 
     protected new void Start() {
         base.Start();
-        
     }
 
     // Search for player

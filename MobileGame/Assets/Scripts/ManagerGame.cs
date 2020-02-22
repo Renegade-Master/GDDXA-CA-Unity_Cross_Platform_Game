@@ -14,15 +14,9 @@ public class ManagerGame : ManagerGeneric {
     private readonly List<GameObject> _enemySpawns  = new List<GameObject>();
 
     // Lock to ensure that Spawn Patterns are only executed once per stage
-    private readonly bool[]           _gameManagerLock = {true, false, false};
-    
-    // {SpawnBoss, FightingBoss}
-    public bool[][] bossFight = {
-        new [] {false, false}, // Level 01 Boss
-        new [] {false, false}, // Level 02 Boss (currently not used)
-        new [] {false, false}, // Level 03 Boss
-    };
+    private readonly bool[]           _gameManagerLock = {true, false, false, false};
     private readonly List<GameObject> _pickupSpawns    = new List<GameObject>();
+    private          GameObject       _boss;
     private          ManagerGeneric   _debrisPoolManager;
     private          ManagerGeneric   _enemyPoolManager;
     private          ManagerGeneric   _pickupPoolManager;
@@ -31,21 +25,27 @@ public class ManagerGame : ManagerGeneric {
 
     private GameObject     _player;
     private ManagerGeneric _shotPoolManager;
-    private GameObject _boss;
 
     // Used to track when to enter the next game stage
-    private double           _timeElapsed;
-    public  List<GameObject> debrisSpawnPrefabs;
-    public  EnemyHitPoints   enemyHitPoints;
-    public  List<GameObject> enemySpawnPrefabs;
-    public  List<GameObject> pickupSpawnPrefabs;
-    public  int              playerMaxHealth;
+    private double _timeElapsed;
+
+    // {SpawnBoss, FightingBoss}
+    public bool[][] bossFight = {
+        new[] {false, false}, // Boss 01
+        new[] {false, false}  // Boss 02
+    };
+
+    public List<GameObject> debrisSpawnPrefabs;
+    public EnemyHitPoints   enemyHitPoints;
+    public List<GameObject> enemySpawnPrefabs;
+    public List<GameObject> pickupSpawnPrefabs;
+    public int              playerMaxHealth;
 
     public List<GameObject> skyBoxes;
     public double           timeForStage01;
     public double           timeForStage02;
     public double           timeForStage03;
-    public double timeForStage04;
+    public double           timeForStage04;
 
     // Start is called before the first frame update
     private void Start() {
@@ -94,6 +94,11 @@ public class ManagerGame : ManagerGeneric {
         return playerMaxHealth;
     }
 
+    public void PlayerWins() {
+        // End game differently eventually, but for now just call GameOver()
+        GameOver();
+    }
+
     // End the Game
     public void GameOver() {
         Debug.Log("The game has ended.");
@@ -114,7 +119,7 @@ public class ManagerGame : ManagerGeneric {
             if (_timeElapsed < timeForStage01) {
                 if (_gameManagerLock[0]) {
                     Debug.Log("Entering Stage 01");
-                    
+
                     foreach (var obj in _enemySpawns)
                         obj.GetComponent<ControllerEnemySpawn>().StartMovement(SpawnPatternEnemy.Test);
 
@@ -125,40 +130,42 @@ public class ManagerGame : ManagerGeneric {
                         obj.GetComponent<ControllerPickupSpawn>().StartMovement(SpawnPatternPickup.Test);
 
                     _gameManagerLock[0] = false;
-                    bossFight[0][0] = true; // Allow Boss_01 to be spawned
+                    bossFight[0][0] = true;  // Allow Boss_01 to be spawned
                     bossFight[0][1] = false; // Player is not currently fighting Boss_01
                 }
             } else if (_timeElapsed < timeForStage02) {
+                // START BOSS FIGHT 01
                 // If Boss_01 has not yet been set up, and Player is not currently fighting Boss_01
                 if (bossFight[0][0] && !bossFight[0][1]) {
                     Debug.Log("Spawning Boss 01");
-                    
+
                     // Spawn Boss_01, and stop everything else until it dies
                     _boss = _enemySpawns[0].GetComponent<ControllerEnemySpawn>().SpawnBoss("Large_01");
-                    
+
                     bossFight[0][0] = false; // Prevent Boss_01 setup from running again
-                    bossFight[0][1] = true; // Player is now fighting Boss_01
+                    bossFight[0][1] = true;  // Player is now fighting Boss_01
                 }
 
                 // If Boss_01 is alive
                 if (_boss.activeInHierarchy) {
                     Debug.Log("Player Fighting Boss 01");
-                    
-                } else if(bossFight[0][1]) {
-                    // Player was fighting Boss, but just killed it
-                    
+                } else if (bossFight[0][1]) {
+                    // Player was fighting Boss_01, but just killed it
+
                     Debug.Log("Boss 01 has been killed");
 
                     // Boss_01 has been killed
-                    bossFight[0][1] = false; // Player is not currently fighting Boss_01
-                    bossFight[2][0] = true; // Allow Boss_02 setup to run
+                    bossFight[0][1] = false;    // Player is not currently fighting Boss_01
+                    bossFight[1][0] = true;     // Allow Boss_02 setup to run
                     _gameManagerLock[1] = true; // Allow progression to Stage 02
                 }
-                
+
+                // END BOSS FIGHT 01
+
                 // Spawn Stage 02 enemies
                 if (_gameManagerLock[1]) {
                     Debug.Log("Entering Stage 02");
-                    
+
                     foreach (var obj in _enemySpawns)
                         obj.GetComponent<ControllerEnemySpawn>().StartMovement(SpawnPatternEnemy.Test2);
 
@@ -169,11 +176,11 @@ public class ManagerGame : ManagerGeneric {
                         obj.GetComponent<ControllerPickupSpawn>().StartMovement(SpawnPatternPickup.Test2);
 
                     _gameManagerLock[1] = false;
-                    _gameManagerLock[2] = true;
+                    _gameManagerLock[2] = true; // Allow progression to Stage 03
                 }
             } else if (_timeElapsed < timeForStage03) {
                 Debug.Log("Entering Stage 03");
-                
+
                 if (_gameManagerLock[2]) {
                     foreach (var obj in _enemySpawns)
                         obj.GetComponent<ControllerEnemySpawn>().StartMovement(SpawnPatternEnemy.Test3);
@@ -187,14 +194,45 @@ public class ManagerGame : ManagerGeneric {
                     }
 
                     _gameManagerLock[2] = false;
-                    _gameManagerLock[3] = true;
+                    bossFight[1][0] = true;  // Allow Boss_02 to be spawned
+                    bossFight[1][1] = false; // Player is not currently fighting Boss_02
+
+                    _gameManagerLock[3] = true; // Allow progression to Stage 04
                 }
             } else if (_timeElapsed < timeForStage04) {
-                
+                // START BOSS FIGHT 02
+                // If Boss_02 has not yet been set up, and Player is not currently fighting Boss_02
+                if (bossFight[1][0] && !bossFight[1][1]) {
+                    Debug.Log("Spawning Boss 02");
+
+                    // Spawn Boss_01, and stop everything else until it dies
+                    _boss = _enemySpawns[0].GetComponent<ControllerEnemySpawn>().SpawnBoss("Large_01");
+
+                    bossFight[1][0] = false; // Prevent Boss_02 setup from running again
+                    bossFight[1][1] = true;  // Player is now fighting Boss_02
+                }
+
+                // If Boss_02 is alive
+                if (_boss.activeInHierarchy) {
+                    Debug.Log("Player Fighting Boss 02");
+                } else if (bossFight[1][1]) {
+                    // Player was fighting Boss_02, but just killed it
+
+                    Debug.Log("Boss 02 has been killed");
+
+                    // Boss_02 has been killed
+                    bossFight[1][1] = false; // Player is not currently fighting Boss_01
+                    bossFight[1][0] = true;  // Allow Boss_02 setup to run
+
+                    // Player has won the game
+                    PlayerWins();
+                }
+
+                // END BOSS FIGHT 02
             }
 
             // If Player is not currently fighting any Boss, increment timer
-            if(!bossFight[0][1] && !bossFight[1][1] && !bossFight[2][1]) _timeElapsed += 1.0f;
+            if (!bossFight[0][1] && !bossFight[1][1]) _timeElapsed += 1.0f;
             yield return new WaitForSeconds(1.0f);
         }
     }
