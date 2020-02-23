@@ -2,9 +2,11 @@
 
 public class ControllerPlayer : ControllerCharacter {
     private DisplayPlayerHealth _healthDisplay;
-    private Vector3             _movement;
 
     public float springForce;
+    public GameObject touchTarget;
+    private Vector2 _touchOrigin = -Vector2.one;
+    private SpringJoint _spring;
 
     // For when the GameObject is Woken after being set to sleep, or after first activation.
     protected new void Start() {
@@ -12,7 +14,7 @@ public class ControllerPlayer : ControllerCharacter {
 
         _healthDisplay = GameObject.FindWithTag("Display_Player_Health_Shield").GetComponent<DisplayPlayerHealth>();
         Boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().playerBoundary;
-        MainCam = Camera.main;
+        MainCam = Camera.main;        
         _spring = gameObject.GetComponent<SpringJoint>();
         _spring.spring = 0.0f;
 
@@ -26,17 +28,12 @@ public class ControllerPlayer : ControllerCharacter {
         // Has the Player lost the game?
         if (HitPoints <= 0) GameManager.GameOver();
 
-        GetPlayerInput(out var moveHorizontal, out var moveVertical);
-
-        _movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+        GetPlayerInput();
     }
 
     // Called just BEFORE THE END of every frame to deal with the physics engine changes, ready for the next frame.
     private void FixedUpdate() {
         var tempRb = GetComponent<Rigidbody>();
-#if UNITY_STANDALONE || UNITY_WEBPLAYER
-        tempRb.MovePosition(tempRb.position + _movement);
-#endif
 
         // Clamp the Player Position to within the bounds of the screen
         tempRb.position = new Vector3(
@@ -52,24 +49,31 @@ public class ControllerPlayer : ControllerCharacter {
             Mathf.Clamp(GetComponent<Rigidbody>().rotation.z, 85, 95)
         );
 
-        GetComponent<Rigidbody>().position = tempRb.position;
+        gameObject.transform.position = tempRb.position;
     }
 
     // Called by Update to get input from the Player.
-    private void GetPlayerInput(out float mvH, out float mvV) {
-        mvH = 0.0f;
-        mvV = 0.0f;
-
-        // Is the Player using a standard input device
+    private void GetPlayerInput() {
 #if UNITY_STANDALONE || UNITY_WEBPLAYER
-        mvH = 0.0f;
-        mvV = 0.0f;
-        
-        mvH = Input.GetAxis("Horizontal");
-        mvV = Input.GetAxis("Vertical");
+        // Is the Player using a mouse/keyboard input device
 
+        // Get the position of the mouse
+        if (Input.GetMouseButton(0)) {
+            _touchOrigin = Input.mousePosition;
+
+            touchTarget.transform.position = ScreenToWorldCoord(Input.mousePosition);
+            _spring.spring = springForce;
+        } else {
+            _spring.spring = 0.0f;
+        }
+
+        if (Input.GetButton("PrimaryFire")) {
+            if (!ReadyToShoot()) return;
+
+            Fire();
+        }
+#elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
         // If the Player is using a touchscreen input device
-#elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE || UNITY_EDITOR
 
         //Check if Input has registered more than zero touches
         if (Input.touchCount > 0) {
@@ -121,10 +125,4 @@ public class ControllerPlayer : ControllerCharacter {
             other.gameObject.SetActive(false);
         }
     }
-
-#if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
-    private Vector2     _touchOrigin = -Vector2.one;
-    private SpringJoint _spring;
-    public  GameObject  touchTarget;
-#endif
 }

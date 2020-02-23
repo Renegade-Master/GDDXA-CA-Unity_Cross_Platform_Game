@@ -347,6 +347,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d10f1b91aa71b5a49a520820b4c2e52c, type: 3}
+--- !u!1 &468227734 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1397334633719489995, guid: 6999a6f34e6236c43ba5ca927b4c441e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1975620838}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &757432884
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,6 +551,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerShip
       objectReference: {fileID: 0}
+    - target: {fileID: 2350482792087610291, guid: 6999a6f34e6236c43ba5ca927b4c441e,
+        type: 3}
+      propertyPath: speed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2350482792087610291, guid: 6999a6f34e6236c43ba5ca927b4c441e,
+        type: 3}
+      propertyPath: touchTarget
+      value: 
+      objectReference: {fileID: 468227734}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6999a6f34e6236c43ba5ca927b4c441e, type: 3}
 --- !u!1001 &1381081889896915627
