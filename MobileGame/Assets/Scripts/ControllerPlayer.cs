@@ -2,11 +2,11 @@
 
 public class ControllerPlayer : ControllerCharacter {
     private DisplayPlayerHealth _healthDisplay;
+    private SpringJoint         _spring;
+    private Vector2             _touchOrigin = -Vector2.one;
 
-    public float springForce;
+    public float      springForce;
     public GameObject touchTarget;
-    private Vector2 _touchOrigin = -Vector2.one;
-    private SpringJoint _spring;
 
     // For when the GameObject is Woken after being set to sleep, or after first activation.
     protected new void Start() {
@@ -14,7 +14,7 @@ public class ControllerPlayer : ControllerCharacter {
 
         _healthDisplay = GameObject.FindWithTag("Display_Player_Health_Shield").GetComponent<DisplayPlayerHealth>();
         Boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().playerBoundary;
-        MainCam = Camera.main;        
+        MainCam = Camera.main;
         _spring = gameObject.GetComponent<SpringJoint>();
         _spring.spring = 0.0f;
 
@@ -55,6 +55,7 @@ public class ControllerPlayer : ControllerCharacter {
     // Called by Update to get input from the Player.
     private void GetPlayerInput() {
 #if UNITY_STANDALONE || UNITY_WEBPLAYER
+
         // Is the Player using a mouse/keyboard input device
 
         // Get the position of the mouse
