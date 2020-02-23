@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ButtonPlayerFire" Collapsed="true">
+    <Position X="18" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAEAAAAQAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Assets\Scripts\ButtonPlayerFire.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ControllerCharacter" Collapsed="true">
+    <Position X="12" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQAAACAACAAAACAgAAABCAAAQAEEQAIAAAAASAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ControllerCharacter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ControllerDebris" Collapsed="true">
+    <Position X="14.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAgAAAAAAAAAAAAAAAAAAAQAIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ControllerDebris.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ControllerDebrisSpawn" Collapsed="true">
+    <Position X="3" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEEAAABCAAABAAAAAAAAAAAAAAAAAAIAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\ControllerDebrisSpawn.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ControllerEnemy" Collapsed="true">
+    <Position X="11" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgQAAAAAAiAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ControllerEnemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ControllerEnemyLarge" Collapsed="true">
+    <Position X="8.75" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AgQAAAEAAiAAAAAAAAAAAAAAAAAEAAAAAAAIAAAACEA=</HashCode>
+      <FileName>Assets\Scripts\ControllerEnemyLarge.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ControllerEnemyMedium" Collapsed="true">
+    <Position X="11" Y="4.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAiAAAAAAAAAAAAAAAAAEAAAAAAAAAAAACEA=</HashCode>
+      <FileName>Assets\Scripts\ControllerEnemyMedium.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ControllerEnemySmall" Collapsed="true">
+    <Position X="13.25" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAiAAAAAAAAAAAAAAAAAEAAAAAAAAAAAACEA=</HashCode>
+      <FileName>Assets\Scripts\ControllerEnemySmall.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ControllerEnemySpawn" Collapsed="true">
+    <Position X="5.25" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAABDAAABAAAAABAAAAQAAAAAAAIAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\ControllerEnemySpawn.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ControllerGeneric" Collapsed="true">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAUAAAAAACAAAAAAAAAAAABAAAAAAAAAAAAAAgBABEA=</HashCode>
+      <FileName>Assets\Scripts\ControllerGeneric.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ControllerPickup" Collapsed="true">
+    <Position X="9.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAACAAAABAAAQAIAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\ControllerPickup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ControllerPickupSpawn" Collapsed="true">
+    <Position X="16.75" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>IAgCAAEAAAABAAAABAAQAAAAAAAAAAAAAAEIAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\ControllerPickupSpawn.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ControllerPlayer" Collapsed="true">
+    <Position X="13.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAAEAiAAAAAAAAAAAAAAAAAEEAAoAARAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ControllerPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ControllerProjectile" Collapsed="true">
+    <Position X="7.5" Y="2" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAgAAAAAAAAAAAAAAAAEAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ControllerProjectile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DisplayPlayerHealth" Collapsed="true">
+    <Position X="15.75" Y="5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAACAEBBAAEAAAAAABAAAACAAAAAAAAAAAAAWA=</HashCode>
+      <FileName>Assets\Scripts\DisplayPlayerHealth.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HudGeneric" Collapsed="true">
+    <Position X="17" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\HudGeneric.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ManagerBoundary" Collapsed="true">
+    <Position X="6" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgCAAIAAAAAAAAAAAAAAAAIAAAAEAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ManagerBoundary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ManagerGame" Collapsed="true">
+    <Position X="1.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAIgAAZACAIhoBAAAAICAAEEAAQAAAARhAgCIAAQIk=</HashCode>
+      <FileName>Assets\Scripts\ManagerGame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ManagerGeneric" Collapsed="true">
+    <Position X="3.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ManagerGeneric.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ManagerPool" Collapsed="true">
+    <Position X="3.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAACgAAAAAAAAAAAAAAAAAAAAEgA=</HashCode>
+      <FileName>Assets\Scripts\ManagerPool.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ManagerPoolDebris" Collapsed="true">
+    <Position X="5" Y="6.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\ManagerPoolDebris.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ManagerPoolEnemy" Collapsed="true">
+    <Position X="7.25" Y="6.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\ManagerPoolEnemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ManagerPoolPickup" Collapsed="true">
+    <Position X="0.5" Y="6.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\ManagerPoolPickup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ManagerPoolShot" Collapsed="true">
+    <Position X="2.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\ManagerPoolShot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
