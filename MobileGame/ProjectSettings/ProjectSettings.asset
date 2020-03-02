@@ -262,7 +262,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 3
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 2800000, guid: 154659bca2663a94e86d719ccb989f72, type: 3}
-  AndroidKeystoreName: D:/_College/4thYear/Semester_02/CrossPlatformGamesDevelopment/Assignments/Asgnmt_03/Keystore/mobileSpaceShooter_PlayStoreKey.keystore
+  AndroidKeystoreName: D:/_College/Year_04/Semester_02/CrossPlatformGamesDevelopment/Assignments/Asgnmt_03/Keystore/mobileSpaceShooter_PlayStoreKey.keystore
   AndroidKeyaliasName: mobilespaceshooter_playstorekey
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
