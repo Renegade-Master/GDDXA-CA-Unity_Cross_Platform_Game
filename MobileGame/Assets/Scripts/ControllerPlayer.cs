@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
 public class ControllerPlayer : ControllerCharacter {
+    // Google Analytics Tracking
+    public GoogleAnalyticsV4 googleAnalytics;
+
     private DisplayPlayerHealth _healthDisplay;
     private SpringJoint         _spring;
     private Vector2             _touchOrigin = -Vector2.one;

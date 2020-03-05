@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
 public class ControllerEnemyLarge : ControllerEnemy {
+    // Google Analytics Tracking
+    public GoogleAnalyticsV4 googleAnalytics;
+    
     private int     _direction;
     private Vector3 _moveSpeed;
 

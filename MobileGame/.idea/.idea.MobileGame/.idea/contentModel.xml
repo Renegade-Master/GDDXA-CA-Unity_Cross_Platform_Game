@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Dev\.Rider2019.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Dev\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_MobileGame.-1221882822.00" t="ExcludeRecursive" />
-    <e p="D:\workspaces\GDD4A_CPGD_MobileGame\MobileGame" t="IncludeRecursive">
+    <e p="C:\Users\UnityDev\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\UnityDev\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_MobileGame.-1886862665.00" t="ExcludeRecursive" />
+    <e p="C:\workspace\CPGD\UnityMobileGame\MobileGame" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="_ImportedAssets" t="Include">
@@ -28,6 +30,49 @@
                 <e p="ReadmeEditor.cs" t="Include" />
               </e>
               <e p="Readme.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="GoogleAnalytics" t="Include">
+          <e p="Editor" t="Include">
+            <e p="GoogleAnalyticsDependencies.xml" t="Include" />
+          </e>
+        </e>
+        <e p="PlayServicesResolver" t="Include">
+          <e p="Editor" t="Include">
+            <e p="play-services-resolver_v1.2.56.0.txt" t="Include" />
+          </e>
+        </e>
+        <e p="Plugins" t="Include">
+          <e p="Android" t="Include">
+            <e p="AndroidManifest.xml" t="Include" />
+            <e p="Readme.txt" t="Include" />
+          </e>
+          <e p="Editor" t="Include">
+            <e p="TooltipDrawer.cs" t="Include" />
+          </e>
+          <e p="GoogleAnalyticsV4" t="Include">
+            <e p="Attributes" t="Include">
+              <e p="AdvertiserOptInAttribute.cs" t="Include" />
+              <e p="RangedTooltipAttribute.cs" t="Include" />
+              <e p="TooltipAttribute.cs" t="Include" />
+            </e>
+            <e p="Field.cs" t="Include" />
+            <e p="Fields.cs" t="Include" />
+            <e p="GAIHandler.cs" t="Include" />
+            <e p="GoogleAnalyticsAndroidV4.cs" t="Include" />
+            <e p="GoogleAnalyticsiOSV3.cs" t="Include" />
+            <e p="GoogleAnalyticsMPV3.cs" t="Include" />
+            <e p="GoogleAnalyticsV4.cs" t="Include" />
+            <e p="HitBuilders" t="Include">
+              <e p="AppViewHitBuilder.cs" t="Include" />
+              <e p="EventHitBuilder.cs" t="Include" />
+              <e p="ExceptionHitBuilder.cs" t="Include" />
+              <e p="HitBuilder.cs" t="Include" />
+              <e p="ItemHitBuilder.cs" t="Include" />
+              <e p="SocialHitBuilder.cs" t="Include" />
+              <e p="TimingHitBuilder.cs" t="Include" />
+              <e p="TransactionHitBuilder.cs" t="Include" />
             </e>
           </e>
         </e>
