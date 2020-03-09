@@ -133,7 +133,7 @@ MonoBehaviour:
   shootChance: 100
   shootCoolDown: 4
   speed: 250
-  googleAnalytics: {fileID: 6042355327757730437, guid: 395e3bb54e8936c449535190d8460c3c,
+  googleAnalytics: {fileID: 114531908067335576, guid: bbc182e4479ba4d21ad61ccd1ffc0944,
     type: 3}
 --- !u!64 &4874502382193409681
 MeshCollider:

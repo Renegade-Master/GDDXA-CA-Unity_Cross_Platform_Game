@@ -530,6 +530,8 @@ MonoBehaviour:
   shootChance: 0
   shootCoolDown: 1
   speed: 0
+  googleAnalytics: {fileID: 6042355327757730437, guid: 395e3bb54e8936c449535190d8460c3c,
+    type: 3}
   springForce: 100
   touchTarget: {fileID: 1397334633719489995}
 --- !u!145 &4383646783810863805

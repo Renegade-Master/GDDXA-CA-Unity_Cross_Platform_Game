@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9613b8deaaf38422ba6dd4031a2a94e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  androidTrackingCode: 1838772458
+  androidTrackingCode: UA-159824885-1
   IOSTrackingCode: 
   otherTrackingCode: 
   productName: Mobile Space Shooter
