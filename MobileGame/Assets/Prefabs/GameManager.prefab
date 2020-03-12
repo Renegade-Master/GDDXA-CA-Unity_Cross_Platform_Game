@@ -276,6 +276,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cb06376fea7eb04db1df8f01742ccb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gaGameComplete: {fileID: 6042355327757730437, guid: 395e3bb54e8936c449535190d8460c3c,
+    type: 3}
   debrisSpawnPrefabs:
   - {fileID: 6384166841161110300, guid: 74a337451d9bf8e4ba179c97aa0ac75b, type: 3}
   enemyHitPoints:
@@ -928,6 +930,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2710a34be3ac48f18d25148821a12e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  googleAnalyticsPlayerShot: {fileID: 0}
 --- !u!1 &4693640413274725399
 GameObject:
   m_ObjectHideFlags: 0

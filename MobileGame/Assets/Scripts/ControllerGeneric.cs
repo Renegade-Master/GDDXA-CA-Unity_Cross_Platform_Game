@@ -16,7 +16,7 @@ public class ControllerGeneric : MonoBehaviour {
 
     protected void Update() {
         var position = gameObject.transform.position;
-        var pos = position;
+        var pos      = position;
 
         position.Set(
             pos.x,
@@ -32,11 +32,15 @@ public class ControllerGeneric : MonoBehaviour {
     }
 
     protected bool IsPointerOverUIObject() {
-        if (EventSystem.current.IsPointerOverGameObject()) return true;
+        if (EventSystem.current.IsPointerOverGameObject()) {
+            return true;
+        }
 
         for (var touchIndex = 0; touchIndex < Input.touchCount; touchIndex++) {
             var touch = Input.GetTouch(touchIndex);
-            if (EventSystem.current.IsPointerOverGameObject(touch.fingerId)) return true;
+            if (EventSystem.current.IsPointerOverGameObject(touch.fingerId)) {
+                return true;
+            }
         }
 
         return false;

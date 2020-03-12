@@ -31,12 +31,30 @@ namespace UnityTemplateProjects {
 
         private Vector3 GetInputTranslationDirection() {
             var direction = new Vector3();
-            if (Input.GetKey(KeyCode.W)) direction += Vector3.forward;
-            if (Input.GetKey(KeyCode.S)) direction += Vector3.back;
-            if (Input.GetKey(KeyCode.A)) direction += Vector3.left;
-            if (Input.GetKey(KeyCode.D)) direction += Vector3.right;
-            if (Input.GetKey(KeyCode.Q)) direction += Vector3.down;
-            if (Input.GetKey(KeyCode.E)) direction += Vector3.up;
+            if (Input.GetKey(KeyCode.W)) {
+                direction += Vector3.forward;
+            }
+
+            if (Input.GetKey(KeyCode.S)) {
+                direction += Vector3.back;
+            }
+
+            if (Input.GetKey(KeyCode.A)) {
+                direction += Vector3.left;
+            }
+
+            if (Input.GetKey(KeyCode.D)) {
+                direction += Vector3.right;
+            }
+
+            if (Input.GetKey(KeyCode.Q)) {
+                direction += Vector3.down;
+            }
+
+            if (Input.GetKey(KeyCode.E)) {
+                direction += Vector3.up;
+            }
+
             return direction;
         }
 
@@ -44,13 +62,15 @@ namespace UnityTemplateProjects {
             // Exit Sample  
             if (Input.GetKey(KeyCode.Escape)) {
                 Application.Quit();
-#if UNITY_EDITOR
+                #if UNITY_EDITOR
                 EditorApplication.isPlaying = false;
-#endif
+                #endif
             }
 
             // Hide and lock cursor when right mouse button pressed
-            if (Input.GetMouseButtonDown(1)) Cursor.lockState = CursorLockMode.Locked;
+            if (Input.GetMouseButtonDown(1)) {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
 
             // Unlock and show cursor when right mouse button released
             if (Input.GetMouseButtonUp(1)) {
@@ -73,7 +93,9 @@ namespace UnityTemplateProjects {
             var translation = GetInputTranslationDirection() * Time.deltaTime;
 
             // Speed up movement when shift key held
-            if (Input.GetKey(KeyCode.LeftShift)) translation *= 10.0f;
+            if (Input.GetKey(KeyCode.LeftShift)) {
+                translation *= 10.0f;
+            }
 
             // Modify movement by a boost factor (defined in Inspector and modified in play mode through the mouse scroll wheel)
             boost += Input.mouseScrollDelta.y * 0.2f;

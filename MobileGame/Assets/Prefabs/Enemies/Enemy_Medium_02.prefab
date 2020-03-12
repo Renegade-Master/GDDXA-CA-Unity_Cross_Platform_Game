@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8936622041135579536}
   - component: {fileID: 6669573314601695704}
   m_Layer: 10
-  m_Name: Enemy_Medium_01
+  m_Name: Enemy_Medium_02
   m_TagString: Enemy_Medium
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,6 +110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 134643de8798477ca061a328b186e3fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gaFireTracking: {fileID: 0}
+  gaTimesHitTracking: {fileID: 6042355327757730437, guid: 395e3bb54e8936c449535190d8460c3c,
+    type: 3}
   shootChance: 100
   shootCoolDown: 3.5
   speed: 200

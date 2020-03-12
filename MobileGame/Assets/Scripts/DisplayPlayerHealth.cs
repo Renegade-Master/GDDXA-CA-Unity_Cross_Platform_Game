@@ -18,7 +18,7 @@ public class DisplayPlayerHealth : HudGeneric {
 
         // Find the Shield Display Object
         _shield = gameObject.transform.Find("PlayerShieldDisplay").transform.Find("Bar_PlayerShield")
-                            .GetComponent<Slider>();
+            .GetComponent<Slider>();
 
         // Prepare and find the Health Display Object(s)
         _health = new List<Transform>();
@@ -34,12 +34,16 @@ public class DisplayPlayerHealth : HudGeneric {
         var playerHealth = _playerController.GetHealth();
 
         // Replenish the Shield after a cooldown period
-        if (Time.time - _lastHitTime >= _shieldCoolDown) _shield.value = _shield.minValue;
+        if (Time.time - _lastHitTime >= _shieldCoolDown) {
+            _shield.value = _shield.minValue;
+        }
     }
 
     public void AddHealth() {
         // Player cannot increase health beyond set limit
-        if (_healthPointer >= _gameManager.GetPlayerMaxHealth() - 1) return;
+        if (_healthPointer >= _gameManager.GetPlayerMaxHealth() - 1) {
+            return;
+        }
 
         // Heal the Player
         _health[++_healthPointer].gameObject.SetActive(true);
@@ -54,7 +58,9 @@ public class DisplayPlayerHealth : HudGeneric {
         // Check if shield is already at 10
         if (_shield.value >= _shield.maxValue) {
             // Check if health-pointer is already at 0 (should not really happen, game should have ended)
-            if (_healthPointer < 0) return;
+            if (_healthPointer < 0) {
+                return;
+            }
 
 
             for (var i = 0; i < damage; i++) {
@@ -65,6 +71,8 @@ public class DisplayPlayerHealth : HudGeneric {
 
         // Reduce shields
 
-        for (var i = 0; i < damage; i++) _shield.value++;
+        for (var i = 0; i < damage; i++) {
+            _shield.value++;
+        }
     }
 }

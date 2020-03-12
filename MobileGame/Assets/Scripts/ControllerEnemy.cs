@@ -11,10 +11,14 @@ public abstract class ControllerEnemy : ControllerCharacter {
         base.Update();
 
         // Has the Enemy been killed?
-        if (HitPoints <= 0) gameObject.SetActive(false);
+        if (HitPoints <= 0) {
+            gameObject.SetActive(false);
+        }
 
         transform.LookAt(Target);
-        if (ReadyToShoot() && InRange()) Fire();
+        if (ReadyToShoot() && InRange()) {
+            Fire();
+        }
     }
 
     protected void FixedUpdate() {
@@ -23,8 +27,9 @@ public abstract class ControllerEnemy : ControllerCharacter {
 
     private bool InRange() {
         if (gameObject.GetComponent<Rigidbody>().transform.position.x < 37.0f
-         && gameObject.GetComponent<Rigidbody>().transform.position.x > -34.0f)
+            && gameObject.GetComponent<Rigidbody>().transform.position.x > -34.0f) {
             return true;
+        }
 
         return false;
     }
@@ -36,7 +41,9 @@ public abstract class ControllerEnemy : ControllerCharacter {
                 return;
             }
 
-            if (HitPoints > 0) HitPoints--;
+            if (HitPoints > 0) {
+                HitPoints--;
+            }
 
             other.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             other.gameObject.GetComponent<Rigidbody>().rotation = Quaternion.Euler(Vector3.zero);

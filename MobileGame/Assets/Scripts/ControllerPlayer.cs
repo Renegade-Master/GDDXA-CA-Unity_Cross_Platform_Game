@@ -1,9 +1,6 @@
 ﻿using UnityEngine;
 
 public class ControllerPlayer : ControllerCharacter {
-    // Google Analytics Tracking
-    public GoogleAnalyticsV4 googleAnalytics;
-
     private DisplayPlayerHealth _healthDisplay;
     private SpringJoint         _spring;
     private Vector2             _touchOrigin = -Vector2.one;
@@ -29,7 +26,9 @@ public class ControllerPlayer : ControllerCharacter {
         base.Update();
 
         // Has the Player lost the game?
-        if (HitPoints <= 0) GameManager.GameOver();
+        if (HitPoints <= 0) {
+            GameManager.GameOver();
+        }
 
         GetPlayerInput();
     }
@@ -57,8 +56,7 @@ public class ControllerPlayer : ControllerCharacter {
 
     // Called by Update to get input from the Player.
     private void GetPlayerInput() {
-#if UNITY_STANDALONE || UNITY_WEBPLAYER
-
+        #if UNITY_STANDALONE || UNITY_WEBPLAYER
         // Is the Player using a mouse/keyboard input device
 
         // Get the position of the mouse
@@ -73,10 +71,10 @@ public class ControllerPlayer : ControllerCharacter {
 
         if (Input.GetButton("PrimaryFire")) {
             if (!ReadyToShoot()) return;
-
+            
             Fire();
         }
-#elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+        #elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
         // If the Player is using a touchscreen input device
 
         //Check if Input has registered more than zero touches
@@ -99,12 +97,15 @@ public class ControllerPlayer : ControllerCharacter {
                 }
             }
         }
-#endif // End Device specific code
+        #endif // End Device specific code
     }
 
     // Handles Player attacks.
     public override void Fire() {
-        foreach (Transform child in gameObject.transform.Find("ShotSpawns"))
+        // Notify Google Analytics
+        gaFireTracking.LogEvent("Hit/Miss/Kill Ratio", "Fire", "PlayerFire", 1);
+
+        foreach (Transform child in gameObject.transform.Find("ShotSpawns")) {
             if (child.gameObject.activeSelf) {
                 var bullet = ManagerPoolShot.instance.GetPooledObject("Shot_Player_Main");
                 if (bullet != null) {
@@ -115,11 +116,15 @@ public class ControllerPlayer : ControllerCharacter {
                     bullet.SetActive(true);
                 }
             }
+        }
     }
 
     protected override void OnCollisionEnter(Collision other) {
         // If the Player has been shot, but not by themselves.
         if (other.gameObject.tag.Contains("Shot") && !other.gameObject.tag.Contains("Player")) {
+            // Notify Google Analytics
+            gaFireTracking.LogEvent("Damage", "TookDamage", "PlayerTookDamage", 1);
+
             var damage = other.gameObject.GetComponent<ControllerProjectile>().power;
 
             _healthDisplay.RemoveHealth(damage);

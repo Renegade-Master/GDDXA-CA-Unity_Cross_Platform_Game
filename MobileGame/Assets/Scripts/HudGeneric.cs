@@ -1,4 +1,3 @@
 ﻿using UnityEngine;
 
-public class HudGeneric : MonoBehaviour {
-}
+public class HudGeneric : MonoBehaviour { }

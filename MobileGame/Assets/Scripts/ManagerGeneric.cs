@@ -1,4 +1,3 @@
 ﻿using UnityEngine;
 
-public abstract class ManagerGeneric : MonoBehaviour {
-}
+public abstract class ManagerGeneric : MonoBehaviour { }

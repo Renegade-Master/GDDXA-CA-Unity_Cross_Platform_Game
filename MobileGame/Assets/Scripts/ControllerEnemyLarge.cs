@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 
 public class ControllerEnemyLarge : ControllerEnemy {
+    private int _direction;
+
+    private Vector3 _moveSpeed;
+
     // Google Analytics Tracking
     public GoogleAnalyticsV4 googleAnalytics;
-    
-    private int     _direction;
-    private Vector3 _moveSpeed;
 
     protected new void Awake() {
         base.Awake();
@@ -24,7 +25,7 @@ public class ControllerEnemyLarge : ControllerEnemy {
     // Search for player
     protected new void Update() {
         var position = gameObject.transform.position;
-        var pos = position;
+        var pos      = position;
 
         position.Set(
             pos.x,
@@ -34,10 +35,14 @@ public class ControllerEnemyLarge : ControllerEnemy {
         gameObject.transform.position = position;
 
         // Has the Enemy been killed?
-        if (HitPoints <= 0) gameObject.SetActive(false);
+        if (HitPoints <= 0) {
+            gameObject.SetActive(false);
+        }
 
         transform.LookAt(Target);
-        if (ReadyToShoot() && InRange()) Fire();
+        if (ReadyToShoot() && InRange()) {
+            Fire();
+        }
     }
 
     protected new void FixedUpdate() {
@@ -45,12 +50,13 @@ public class ControllerEnemyLarge : ControllerEnemy {
             base.FixedUpdate();
         } else {
             // Move to the Right Edge of the screen, then hold position moving up/down
-            var tempRb = gameObject.GetComponent<Rigidbody>();
-            var position = tempRb.position;
+            var tempRb         = gameObject.GetComponent<Rigidbody>();
+            var position       = tempRb.position;
             var distanceToEdge = new Vector2(Boundary.zMax - position.z, position.z - Boundary.zMin);
 
-            if (distanceToEdge.x < 3.0f || distanceToEdge.y < 3.0f)
+            if (distanceToEdge.x < 3.0f || distanceToEdge.y < 3.0f) {
                 _direction *= -1;
+            }
 
             tempRb.MovePosition(tempRb.position + _moveSpeed * _direction);
 
@@ -66,14 +72,15 @@ public class ControllerEnemyLarge : ControllerEnemy {
 
     private bool InRange() {
         if (gameObject.GetComponent<Rigidbody>().transform.position.x < 48.0f
-         && gameObject.GetComponent<Rigidbody>().transform.position.x > -34.0f)
+            && gameObject.GetComponent<Rigidbody>().transform.position.x > -34.0f) {
             return true;
+        }
 
         return false;
     }
 
     public override void Fire() {
-        foreach (Transform child in gameObject.transform.Find("ShotSpawns"))
+        foreach (Transform child in gameObject.transform.Find("ShotSpawns")) {
             if (child.gameObject.activeSelf) {
                 var bullet = ManagerPoolShot.instance.GetPooledObject("Shot_Enemy_Large_Main");
                 if (bullet != null) {
@@ -84,5 +91,6 @@ public class ControllerEnemyLarge : ControllerEnemy {
                     bullet.SetActive(true);
                 }
             }
+        }
     }
 }

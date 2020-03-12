@@ -130,6 +130,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4ece4d9d475446dac82117bed899ef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gaFireTracking: {fileID: 0}
+  gaTimesHitTracking: {fileID: 6042355327757730437, guid: 395e3bb54e8936c449535190d8460c3c,
+    type: 3}
   shootChance: 100
   shootCoolDown: 4
   speed: 250

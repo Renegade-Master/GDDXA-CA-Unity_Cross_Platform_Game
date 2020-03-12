@@ -1,6 +1,10 @@
 using UnityEngine;
 
 public abstract class ControllerCharacter : ControllerGeneric {
+    // Google Analytics Tracking
+    public GoogleAnalyticsV4 gaFireTracking;
+    public GoogleAnalyticsV4 gaTimesHitTracking;
+
     protected int    HitPoints;
     protected double LastShootTime;
 

@@ -23,7 +23,7 @@ public class ControllerEnemySmall : ControllerEnemy {
     }
 
     public override void Fire() {
-        foreach (Transform child in gameObject.transform.Find("ShotSpawns"))
+        foreach (Transform child in gameObject.transform.Find("ShotSpawns")) {
             if (child.gameObject.activeSelf) {
                 var bullet = ManagerPoolShot.instance.GetPooledObject("Shot_Enemy_Small_Main");
                 if (bullet != null) {
@@ -34,5 +34,6 @@ public class ControllerEnemySmall : ControllerEnemy {
                     bullet.SetActive(true);
                 }
             }
+        }
     }
 }

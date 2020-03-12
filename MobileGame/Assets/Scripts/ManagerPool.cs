@@ -15,12 +15,13 @@ public abstract class ManagerPool : ManagerGeneric {
     public           List<ItemToPool> itemsToPool;
 
     protected void Start() {
-        foreach (var item in itemsToPool)
+        foreach (var item in itemsToPool) {
             for (var i = 0; i < item.amountToPool; i++) {
                 var obj = Instantiate(item.objectToPool);
                 obj.SetActive(false);
                 _pooledObjects.Add(obj);
             }
+        }
 
         // Shuffle the Items
         _pooledObjects = Shuffle(_pooledObjects);
@@ -40,11 +41,11 @@ public abstract class ManagerPool : ManagerGeneric {
 
     private List<T> Shuffle<T>(List<T> list) {
         var rng = new Random();
-        var n = list.Count;
+        var n   = list.Count;
 
         while (n > 1) {
             n--;
-            var k = rng.Next(n + 1);
+            var k     = rng.Next(n + 1);
             var value = list[k];
             list[k] = list[n];
             list[n] = value;
@@ -54,19 +55,26 @@ public abstract class ManagerPool : ManagerGeneric {
     }
 
     public GameObject GetPooledObject(string requestTag) {
-        if (_pooledObjects == null) return null;
+        if (_pooledObjects == null) {
+            return null;
+        }
 
-        foreach (var pObj in _pooledObjects)
-            if (!pObj.activeInHierarchy && pObj.CompareTag(requestTag))
+        foreach (var pObj in _pooledObjects) {
+            if (!pObj.activeInHierarchy && pObj.CompareTag(requestTag)) {
                 return pObj;
-        foreach (var item in itemsToPool)
-            if (item.objectToPool.CompareTag(requestTag))
+            }
+        }
+
+        foreach (var item in itemsToPool) {
+            if (item.objectToPool.CompareTag(requestTag)) {
                 if (item.shouldExpand) {
                     var obj = Instantiate(item.objectToPool);
                     obj.SetActive(false);
                     _pooledObjects.Add(obj);
                     return obj;
                 }
+            }
+        }
 
         return null;
     }

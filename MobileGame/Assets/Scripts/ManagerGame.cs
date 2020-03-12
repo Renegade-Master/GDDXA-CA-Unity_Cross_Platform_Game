@@ -37,9 +37,13 @@ public class ManagerGame : ManagerGeneric {
 
     public List<GameObject> debrisSpawnPrefabs;
     public EnemyHitPoints   enemyHitPoints;
+
     public List<GameObject> enemySpawnPrefabs;
-    public List<GameObject> pickupSpawnPrefabs;
-    public int              playerMaxHealth;
+
+    // Google Analytics Tracking
+    public GoogleAnalyticsV4 gaGameComplete;
+    public List<GameObject>  pickupSpawnPrefabs;
+    public int               playerMaxHealth;
 
     public List<GameObject> skyBoxes;
     public double           timeForStage01;
@@ -70,20 +74,23 @@ public class ManagerGame : ManagerGeneric {
         _player.GetComponent<Rigidbody>().transform.position = Vector3.zero;
         _player.GetComponent<Rigidbody>().transform.rotation = Quaternion.Euler(-90, 0, 90);
 
-        foreach (var obj in enemySpawnPrefabs)
+        foreach (var obj in enemySpawnPrefabs) {
             _enemySpawns.Add(Instantiate(obj,
                 new Vector3(60, 0, 0),
                 Quaternion.Euler(Vector3.zero)));
+        }
 
-        foreach (var obj in debrisSpawnPrefabs)
+        foreach (var obj in debrisSpawnPrefabs) {
             _debrisSpawns.Add(Instantiate(obj,
                 new Vector3(60, 0, 0),
                 Quaternion.Euler(Vector3.zero)));
+        }
 
-        foreach (var obj in pickupSpawnPrefabs)
+        foreach (var obj in pickupSpawnPrefabs) {
             _pickupSpawns.Add(Instantiate(obj,
                 new Vector3(20, 0, 0),
                 Quaternion.Euler(Vector3.zero)));
+        }
 
         // Start a coroutine to track how much time has elapsed
         StartCoroutine(GameClock());
@@ -95,6 +102,9 @@ public class ManagerGame : ManagerGeneric {
     }
 
     public void PlayerWins() {
+        // Google Analytics Reporting
+        gaGameComplete.LogEvent("RateSuccess", "Win", "BossDefeated", 1);
+
         // End game differently eventually, but for now just call GameOver()
         GameOver();
     }
@@ -103,10 +113,10 @@ public class ManagerGame : ManagerGeneric {
     public void GameOver() {
         //Stop playing the scene
         Application.Quit();
-#if UNITY_EDITOR
+        #if UNITY_EDITOR
 
         EditorApplication.isPlaying = false;
-#endif
+        #endif
     }
 
     // Keep track of how much time has elapsed in the Game
@@ -116,14 +126,17 @@ public class ManagerGame : ManagerGeneric {
             // Handle different Game Stages
             if (_timeElapsed < timeForStage01) {
                 if (_gameManagerLock[0]) {
-                    foreach (var obj in _enemySpawns)
+                    foreach (var obj in _enemySpawns) {
                         obj.GetComponent<ControllerEnemySpawn>().StartMovement(SpawnPatternEnemy.Test);
+                    }
 
-                    foreach (var obj in _debrisSpawns)
+                    foreach (var obj in _debrisSpawns) {
                         obj.GetComponent<ControllerDebrisSpawn>().StartMovement(SpawnPatternDebris.Test);
+                    }
 
-                    foreach (var obj in _pickupSpawns)
+                    foreach (var obj in _pickupSpawns) {
                         obj.GetComponent<ControllerPickupSpawn>().StartMovement(SpawnPatternPickup.Test);
+                    }
 
                     _gameManagerLock[0] = false;
                     bossFight[0][0] = true;  // Allow Boss_01 to be spawned
@@ -141,8 +154,7 @@ public class ManagerGame : ManagerGeneric {
                 }
 
                 // If Boss_01 is alive
-                if (_boss.activeInHierarchy) {
-                } else if (bossFight[0][1]) {
+                if (_boss.activeInHierarchy) { } else if (bossFight[0][1]) {
                     // Player was fighting Boss_01, but just killed it
 
 
@@ -156,25 +168,30 @@ public class ManagerGame : ManagerGeneric {
 
                 // Spawn Stage 02 enemies
                 if (_gameManagerLock[1]) {
-                    foreach (var obj in _enemySpawns)
+                    foreach (var obj in _enemySpawns) {
                         obj.GetComponent<ControllerEnemySpawn>().StartMovement(SpawnPatternEnemy.Test2);
+                    }
 
-                    foreach (var obj in _debrisSpawns)
+                    foreach (var obj in _debrisSpawns) {
                         obj.GetComponent<ControllerDebrisSpawn>().StartMovement(SpawnPatternDebris.Test2);
+                    }
 
-                    foreach (var obj in _pickupSpawns)
+                    foreach (var obj in _pickupSpawns) {
                         obj.GetComponent<ControllerPickupSpawn>().StartMovement(SpawnPatternPickup.Test2);
+                    }
 
                     _gameManagerLock[1] = false;
                     _gameManagerLock[2] = true; // Allow progression to Stage 03
                 }
             } else if (_timeElapsed < timeForStage03) {
                 if (_gameManagerLock[2]) {
-                    foreach (var obj in _enemySpawns)
+                    foreach (var obj in _enemySpawns) {
                         obj.GetComponent<ControllerEnemySpawn>().StartMovement(SpawnPatternEnemy.Test3);
+                    }
 
-                    foreach (var obj in _debrisSpawns)
+                    foreach (var obj in _debrisSpawns) {
                         obj.GetComponent<ControllerDebrisSpawn>().StartMovement(SpawnPatternDebris.Test3);
+                    }
 
                     foreach (var obj in _pickupSpawns) {
                         obj.GetComponent<ControllerPickupSpawn>().StartMovement(SpawnPatternPickup.Test3);
@@ -199,8 +216,7 @@ public class ManagerGame : ManagerGeneric {
                 }
 
                 // If Boss_02 is alive
-                if (_boss.activeInHierarchy) {
-                } else if (bossFight[1][1]) {
+                if (_boss.activeInHierarchy) { } else if (bossFight[1][1]) {
                     // Player was fighting Boss_02, but just killed it
 
 
@@ -216,7 +232,10 @@ public class ManagerGame : ManagerGeneric {
             }
 
             // If Player is not currently fighting any Boss, increment timer
-            if (!bossFight[0][1] && !bossFight[1][1]) _timeElapsed += 1.0f;
+            if (!bossFight[0][1] && !bossFight[1][1]) {
+                _timeElapsed += 1.0f;
+            }
+
             yield return new WaitForSeconds(1.0f);
         }
     }

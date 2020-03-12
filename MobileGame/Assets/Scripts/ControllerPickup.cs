@@ -37,8 +37,10 @@ public class ControllerPickup : ControllerGeneric {
                     break;
                 case "Pickup_Shoot_Spread":
 
-                    foreach (Transform child in _player.gameObject.transform.Find("ShotSpawns"))
+                    foreach (Transform child in _player.gameObject.transform.Find("ShotSpawns")) {
                         child.gameObject.SetActive(true);
+                    }
+
                     break;
             }
 

@@ -8,18 +8,22 @@ public class ButtonPlayerFire : HudGeneric {
 
     private void Start() {
         _playerController = GameObject.FindWithTag("Player").GetComponent<ControllerPlayer>();
-        if (_playerController == null) throw new NullReferenceException();
+        if (_playerController == null) {
+            throw new NullReferenceException();
+        }
 
         _fireButton = GetComponent<Button>();
         _fireButton.onClick.AddListener(PlayerFire);
 
-#if UNITY_STANDALONE || UNITY_WEBPLAYER
+        #if UNITY_STANDALONE || UNITY_WEBPLAYER
         _fireButton.gameObject.SetActive(false);
-#endif
+        #endif
     }
 
     private void PlayerFire() {
-        if (!_playerController.ReadyToShoot()) return;
+        if (!_playerController.ReadyToShoot()) {
+            return;
+        }
 
         _playerController.Fire();
     }
