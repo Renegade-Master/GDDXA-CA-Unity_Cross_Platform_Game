@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Dev\.Rider2019.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Dev\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_MobileGame.-1221882822.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Dev\AppData\local\JetBrains\Rider2020.1\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Dev\AppData\local\JetBrains\Rider2020.1\resharper-host\local\Transient\ReSharperHost\v201\SolutionCaches\_MobileGame.-1221882822.00" t="ExcludeRecursive" />
     <e p="D:\workspaces\GDD4A_CPGD_MobileGame\MobileGame" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />

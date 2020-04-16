@@ -54,7 +54,7 @@ public class ControllerPlayer : ControllerCharacter {
 
     // Called by Update to get input from the Player.
     private void GetPlayerInput() {
-#if UNITY_STANDALONE || UNITY_WEBPLAYER
+#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
 
         // Is the Player using a mouse/keyboard input device
 

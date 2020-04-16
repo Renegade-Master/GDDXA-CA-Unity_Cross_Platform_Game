@@ -13,7 +13,7 @@ public class ButtonPlayerFire : HudGeneric {
         _fireButton = GetComponent<Button>();
         _fireButton.onClick.AddListener(PlayerFire);
 
-#if UNITY_STANDALONE || UNITY_WEBPLAYER
+#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
         _fireButton.gameObject.SetActive(false);
 #endif
     }
