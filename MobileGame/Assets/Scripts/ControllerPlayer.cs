@@ -26,7 +26,13 @@ public class ControllerPlayer : ControllerCharacter {
         base.Update();
 
         // Has the Player lost the game?
-        if (HitPoints <= 0) GameManager.GameOver();
+        if (HitPoints <= 0) {
+            if (Social.localUser.authenticated)
+                Social.ReportProgress(GPGSIds.achievement_you_died, 100.0,
+                    success => { Debug.Log(success ? "Player Died Success" : "Player Died Fail"); });
+
+            GameManager.GameOver();
+        }
 
         GetPlayerInput();
     }

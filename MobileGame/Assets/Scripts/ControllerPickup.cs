@@ -34,11 +34,23 @@ public class ControllerPickup : ControllerGeneric {
                 case "Pickup_Shoot_Speed":
 
                     _player.shootCoolDown *= 0.75;
+
+                    if (Social.localUser.authenticated)
+                        Social.ReportProgress(GPGSIds.achievement_more_faster, 100.0,
+                            success => {
+                                Debug.Log(success ? "Shot Speed Pickup Success" : "Shot Speed Pickup Fail");
+                            });
                     break;
                 case "Pickup_Shoot_Spread":
 
                     foreach (Transform child in _player.gameObject.transform.Find("ShotSpawns"))
                         child.gameObject.SetActive(true);
+
+                    if (Social.localUser.authenticated)
+                        Social.ReportProgress(GPGSIds.achievement_more_wider, 100.0,
+                            success => {
+                                Debug.Log(success ? "Shot Spread Pickup Success" : "Shot Spread Pickup Fail");
+                            });
                     break;
             }
 

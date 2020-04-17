@@ -31,6 +31,133 @@
             </e>
           </e>
         </e>
+        <e p="ExternalDependencyManager" t="Include">
+          <e p="Editor" t="Include">
+            <e p="external-dependency-manager_v1.2.144.txt" t="Include" />
+            <e p="GoogleRegistries.xml" t="Include" />
+          </e>
+        </e>
+        <e p="GooglePlayGames" t="Include">
+          <e p="BasicApi" t="Include">
+            <e p="Achievement.cs" t="Include" />
+            <e p="CommonStatusCodes.cs" t="Include" />
+            <e p="CommonTypes.cs" t="Include" />
+            <e p="DummyClient.cs" t="Include" />
+            <e p="Events" t="Include">
+              <e p="Event.cs" t="Include" />
+              <e p="IEvent.cs" t="Include" />
+              <e p="IEventsClient.cs" t="Include" />
+            </e>
+            <e p="IPlayGamesClient.cs" t="Include" />
+            <e p="LeaderboardScoreData.cs" t="Include" />
+            <e p="Multiplayer" t="Include">
+              <e p="Invitation.cs" t="Include" />
+              <e p="IRealTimeMultiplayerClient.cs" t="Include" />
+              <e p="ITurnBasedMultiplayerClient.cs" t="Include" />
+              <e p="MatchOutcome.cs" t="Include" />
+              <e p="Participant.cs" t="Include" />
+              <e p="Player.cs" t="Include" />
+              <e p="RealTimeMultiplayerListener.cs" t="Include" />
+              <e p="TurnBasedMatch.cs" t="Include" />
+            </e>
+            <e p="Nearby" t="Include">
+              <e p="AdvertisingResult.cs" t="Include" />
+              <e p="ConnectionRequest.cs" t="Include" />
+              <e p="ConnectionResponse.cs" t="Include" />
+              <e p="DummyNearbyConnectionClient.cs" t="Include" />
+              <e p="EndpointDetails.cs" t="Include" />
+              <e p="INearbyConnectionClient.cs" t="Include" />
+              <e p="NearbyConnectionConfiguration.cs" t="Include" />
+            </e>
+            <e p="PlayerStats.cs" t="Include" />
+            <e p="PlayGamesClientConfiguration.cs" t="Include" />
+            <e p="SavedGame" t="Include">
+              <e p="ISavedGameClient.cs" t="Include" />
+              <e p="ISavedGameMetadata.cs" t="Include" />
+              <e p="SavedGameMetadataUpdate.cs" t="Include" />
+            </e>
+            <e p="ScorePageToken.cs" t="Include" />
+            <e p="SignInHelper.cs" t="Include" />
+            <e p="SignInInteractivity.cs" t="Include" />
+            <e p="SignInStatus.cs" t="Include" />
+            <e p="Video" t="Include">
+              <e p="CaptureOverlayStateListener.cs" t="Include" />
+              <e p="IVideoClient.cs" t="Include" />
+              <e p="VideoCapabilities.cs" t="Include" />
+              <e p="VideoCaptureState.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Editor" t="Include">
+            <e p="GooglePlayGamesPlugin_v0.10.08.txt" t="Include" />
+            <e p="GooglePlayGamesPluginDependencies.xml" t="Include" />
+            <e p="GPGSAndroidSetupUI.cs" t="Include" />
+            <e p="GPGSDocsUI.cs" t="Include" />
+            <e p="GPGSPostBuild.cs" t="Include" />
+            <e p="GPGSProjectSettings.cs" t="Include" />
+            <e p="GPGSStrings.cs" t="Include" />
+            <e p="GPGSUpgrader.cs" t="Include" />
+            <e p="GPGSUtil.cs" t="Include" />
+            <e p="m2repository" t="Include">
+              <e p="com" t="Include">
+                <e p="google" t="Include">
+                  <e p="games" t="Include">
+                    <e p="gpgs-plugin-support" t="Include">
+                      <e p="maven-metadata.xml" t="Include" />
+                    </e>
+                  </e>
+                </e>
+              </e>
+            </e>
+            <e p="NearbyConnectionUI.cs" t="Include" />
+            <e p="template-AndroidManifest.txt" t="Include" />
+            <e p="template-Constants.txt" t="Include" />
+            <e p="template-GameInfo.txt" t="Include" />
+          </e>
+          <e p="GameInfo.cs" t="Include" />
+          <e p="ISocialPlatform" t="Include">
+            <e p="PlayGamesAchievement.cs" t="Include" />
+            <e p="PlayGamesLeaderboard.cs" t="Include" />
+            <e p="PlayGamesLocalUser.cs" t="Include" />
+            <e p="PlayGamesPlatform.cs" t="Include" />
+            <e p="PlayGamesScore.cs" t="Include" />
+            <e p="PlayGamesUserProfile.cs" t="Include" />
+          </e>
+          <e p="OurUtils" t="Include">
+            <e p="Logger.cs" t="Include" />
+            <e p="Misc.cs" t="Include" />
+            <e p="NearbyHelperObject.cs" t="Include" />
+            <e p="PlatformUtils.cs" t="Include" />
+            <e p="PlayGamesHelperObject.cs" t="Include" />
+          </e>
+          <e p="Platforms" t="Include">
+            <e p="Android" t="Include">
+              <e p="AndroidClient.cs" t="Include" />
+              <e p="AndroidEventsClient.cs" t="Include" />
+              <e p="AndroidHelperFragment.cs" t="Include" />
+              <e p="AndroidJavaConverter.cs" t="Include" />
+              <e p="AndroidNearbyConnectionClient.cs" t="Include" />
+              <e p="AndroidRealTimeMultiplayerClient.cs" t="Include" />
+              <e p="AndroidSavedGameClient.cs" t="Include" />
+              <e p="AndroidSnapshotMetadata.cs" t="Include" />
+              <e p="AndroidTaskUtils.cs" t="Include" />
+              <e p="AndroidTokenClient.cs" t="Include" />
+              <e p="AndroidTurnBasedMultiplayerClient.cs" t="Include" />
+              <e p="AndroidVideoClient.cs" t="Include" />
+            </e>
+            <e p="NearbyConnectionClientFactory.cs" t="Include" />
+            <e p="PlayGamesClientFactory.cs" t="Include" />
+            <e p="TokenClient.cs" t="Include" />
+          </e>
+          <e p="Plugins" t="Include">
+            <e p="Android" t="Include">
+              <e p="GooglePlayGamesManifest.plugin" t="Include">
+                <e p="AndroidManifest.xml" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="PluginVersion.cs" t="Include" />
+        </e>
+        <e p="GPGSIds.cs" t="Include" />
         <e p="Scripts" t="Include">
           <e p="ButtonPlayerFire.cs" t="Include" />
           <e p="ControllerCharacter.cs" t="Include" />

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
 using UnityEditor;
 using UnityEngine;
 
@@ -52,6 +54,25 @@ public class ManagerGame : ManagerGeneric {
         // Initialise the Game Clock
         _timeElapsed = 0.0;
 
+        #region InitialiseGooglePlayGames
+
+        // Create client configuration
+        var config = new
+                PlayGamesClientConfiguration.Builder()
+            .Build();
+
+        // Enable debugging output (recommended)
+        PlayGamesPlatform.DebugLogEnabled = true;
+
+        // Initialize and activate the platform
+        PlayGamesPlatform.InitializeInstance(config);
+        PlayGamesPlatform.Activate();
+
+        // Log the User into their Local Google Account
+        Social.localUser.Authenticate(success => { Debug.Log(success ? "Login Success" : "Login Fail"); });
+
+        #endregion
+
         // Place all starting GameObjects
         LoadLevel();
     }
@@ -85,6 +106,8 @@ public class ManagerGame : ManagerGeneric {
                 new Vector3(20, 0, 0),
                 Quaternion.Euler(Vector3.zero)));
 
+        Social.ShowAchievementsUI();
+
         // Start a coroutine to track how much time has elapsed
         StartCoroutine(GameClock());
     }
@@ -95,7 +118,13 @@ public class ManagerGame : ManagerGeneric {
     }
 
     public void PlayerWins() {
-        // End game differently eventually, but for now just call GameOver()
+        // Store the Elapsed time as the User's Score in the Leaderboard
+        if (Social.localUser.authenticated) {
+            Social.ReportScore((long) _timeElapsed, GPGSIds.leaderboard_level_complete_time,
+                success => { Debug.Log(success ? "Update Score Success" : "Update Score Fail"); });
+            Social.ShowLeaderboardUI();
+        }
+
         GameOver();
     }
 
@@ -103,10 +132,10 @@ public class ManagerGame : ManagerGeneric {
     public void GameOver() {
         //Stop playing the scene
         Application.Quit();
-#if UNITY_EDITOR
-
+        
+    #if UNITY_EDITOR
         EditorApplication.isPlaying = false;
-#endif
+    #endif
     }
 
     // Keep track of how much time has elapsed in the Game
@@ -150,6 +179,14 @@ public class ManagerGame : ManagerGeneric {
                     bossFight[0][1] = false;    // Player is not currently fighting Boss_01
                     bossFight[1][0] = true;     // Allow Boss_02 setup to run
                     _gameManagerLock[1] = true; // Allow progression to Stage 02
+
+                    if (Social.localUser.authenticated)
+                        Social.ReportProgress(GPGSIds.achievement_first_boss_defeated, 1,
+                            success => {
+                                Debug.Log(success
+                                    ? "Player Defeated First Boss Success"
+                                    : "Player Defeated First Boss Fail");
+                            });
                 }
 
                 // END BOSS FIGHT 01
@@ -203,10 +240,17 @@ public class ManagerGame : ManagerGeneric {
                 } else if (bossFight[1][1]) {
                     // Player was fighting Boss_02, but just killed it
 
-
                     // Boss_02 has been killed
                     bossFight[1][1] = false; // Player is not currently fighting Boss_01
                     bossFight[1][0] = true;  // Allow Boss_02 setup to run
+
+                    if (Social.localUser.authenticated)
+                        Social.ReportProgress(GPGSIds.achievement_second_boss_defeated, 1,
+                            success => {
+                                Debug.Log(success
+                                    ? "Player Defeated Second Boss Success"
+                                    : "Player Defeated Second Boss Fail");
+                            });
 
                     // Player has won the game
                     PlayerWins();
