@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using GameAnalyticsSDK;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
 using UnityEditor;
@@ -53,6 +54,12 @@ public class ManagerGame : ManagerGeneric {
     private void Start() {
         // Initialise the Game Clock
         _timeElapsed = 0.0;
+        
+        #region InitialiseGameAnalytics
+        
+        GameAnalytics.Initialize();
+        
+        #endregion //InitialiseGameAnalytics
 
         #region InitialiseGooglePlayGames
 
@@ -71,7 +78,7 @@ public class ManagerGame : ManagerGeneric {
         // Log the User into their Local Google Account
         Social.localUser.Authenticate(success => { Debug.Log(success ? "Login Success" : "Login Fail"); });
 
-        #endregion
+        #endregion //InitialiseGooglePlayGames
 
         // Place all starting GameObjects
         LoadLevel();
@@ -79,6 +86,8 @@ public class ManagerGame : ManagerGeneric {
 
     // Initialise the Game World ready for a new level
     private void LoadLevel() {
+        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "NewGame");
+        
         _debrisPoolManager = gameObject.GetComponent<ManagerPoolDebris>();
         _enemyPoolManager = gameObject.GetComponent<ManagerPoolEnemy>();
         _pickupPoolManager = gameObject.GetComponent<ManagerPoolPickup>();
@@ -130,6 +139,8 @@ public class ManagerGame : ManagerGeneric {
 
     // End the Game
     public void GameOver() {
+        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "NewGame", (int) _timeElapsed);
+        
         //Stop playing the scene
         Application.Quit();
         
