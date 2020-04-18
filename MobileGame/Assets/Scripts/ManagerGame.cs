@@ -114,8 +114,9 @@ public class ManagerGame : ManagerGeneric {
             _pickupSpawns.Add(Instantiate(obj,
                 new Vector3(20, 0, 0),
                 Quaternion.Euler(Vector3.zero)));
-
-        Social.ShowAchievementsUI();
+        if (Social.localUser.authenticated) {
+            Social.ShowAchievementsUI();
+        }
 
         // Start a coroutine to track how much time has elapsed
         StartCoroutine(GameClock());
@@ -130,7 +131,7 @@ public class ManagerGame : ManagerGeneric {
         // Store the Elapsed time as the User's Score in the Leaderboard
         if (Social.localUser.authenticated) {
             Social.ReportScore((long) _timeElapsed, GPGSIds.leaderboard_level_complete_time,
-                success => { Debug.Log(success ? "Update Score Success" : "Update Score Fail"); });
+                success => { Debug.Log(success ? "Update Time Leaderboard Score Success" : "Update Time Leaderboard Score Fail"); });
             Social.ShowLeaderboardUI();
         }
 
@@ -139,7 +140,7 @@ public class ManagerGame : ManagerGeneric {
 
     // End the Game
     public void GameOver() {
-        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "NewGame", (int) _timeElapsed);
+        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "NewGame");
         
         //Stop playing the scene
         Application.Quit();
@@ -192,7 +193,7 @@ public class ManagerGame : ManagerGeneric {
                     _gameManagerLock[1] = true; // Allow progression to Stage 02
 
                     if (Social.localUser.authenticated)
-                        Social.ReportProgress(GPGSIds.achievement_first_boss_defeated, 1,
+                        Social.ReportProgress(GPGSIds.achievement_first_boss_defeated, 100.0,
                             success => {
                                 Debug.Log(success
                                     ? "Player Defeated First Boss Success"
@@ -256,7 +257,7 @@ public class ManagerGame : ManagerGeneric {
                     bossFight[1][0] = true;  // Allow Boss_02 setup to run
 
                     if (Social.localUser.authenticated)
-                        Social.ReportProgress(GPGSIds.achievement_second_boss_defeated, 1,
+                        Social.ReportProgress(GPGSIds.achievement_second_boss_defeated, 100.0,
                             success => {
                                 Debug.Log(success
                                     ? "Player Defeated Second Boss Success"
