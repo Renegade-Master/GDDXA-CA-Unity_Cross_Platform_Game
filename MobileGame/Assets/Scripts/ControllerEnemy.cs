@@ -1,5 +1,4 @@
 using UnityEngine;
-using Event = GooglePlayGames.BasicApi.Events.Event;
 
 public abstract class ControllerEnemy : ControllerCharacter {
     protected new void Start() {
@@ -13,6 +12,9 @@ public abstract class ControllerEnemy : ControllerCharacter {
 
         // Has the Enemy been killed?
         if (HitPoints <= 0) {
+            // Increment the Enemies Defeated Counter
+            GameManager.IncrementEnemiesDefeated();
+
             if (Social.localUser.authenticated) {
                 Social.ReportProgress(GPGSIds.achievement_defeated_an_enemy, 100.0,
                     success => { Debug.Log(success ? "Defeated Enemy Success" : "Defeated Enemy Fail"); });

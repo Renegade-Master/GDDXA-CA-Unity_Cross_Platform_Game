@@ -21,6 +21,7 @@ public class ManagerGame : ManagerGeneric {
     private readonly List<GameObject> _pickupSpawns    = new List<GameObject>();
     private          GameObject       _boss;
     private          ManagerGeneric   _debrisPoolManager;
+    private          int              _enemiesDefeated;
     private          ManagerGeneric   _enemyPoolManager;
     private          ManagerGeneric   _pickupPoolManager;
 
@@ -50,15 +51,17 @@ public class ManagerGame : ManagerGeneric {
     public double           timeForStage03;
     public double           timeForStage04;
 
+
     // Start is called before the first frame update
     private void Start() {
         // Initialise the Game Clock
         _timeElapsed = 0.0;
-        
+        _enemiesDefeated = 0;
+
         #region InitialiseGameAnalytics
-        
+
         GameAnalytics.Initialize();
-        
+
         #endregion //InitialiseGameAnalytics
 
         #region InitialiseGooglePlayGames
@@ -87,7 +90,8 @@ public class ManagerGame : ManagerGeneric {
     // Initialise the Game World ready for a new level
     private void LoadLevel() {
         GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "NewGame");
-        
+        if (Social.localUser.authenticated) Social.ShowAchievementsUI();
+
         _debrisPoolManager = gameObject.GetComponent<ManagerPoolDebris>();
         _enemyPoolManager = gameObject.GetComponent<ManagerPoolEnemy>();
         _pickupPoolManager = gameObject.GetComponent<ManagerPoolPickup>();
@@ -114,9 +118,6 @@ public class ManagerGame : ManagerGeneric {
             _pickupSpawns.Add(Instantiate(obj,
                 new Vector3(20, 0, 0),
                 Quaternion.Euler(Vector3.zero)));
-        if (Social.localUser.authenticated) {
-            Social.ShowAchievementsUI();
-        }
 
         // Start a coroutine to track how much time has elapsed
         StartCoroutine(GameClock());
@@ -127,12 +128,24 @@ public class ManagerGame : ManagerGeneric {
         return playerMaxHealth;
     }
 
+    // Increment the EnemiesDefeated counter
+    public void IncrementEnemiesDefeated(int counter = 1) {
+        _enemiesDefeated += counter;
+    }
+
     public void PlayerWins() {
         // Store the Elapsed time as the User's Score in the Leaderboard
         if (Social.localUser.authenticated) {
+            Social.ReportScore(_enemiesDefeated, GPGSIds.leaderboard_enemies_defeated,
+                success => {
+                    Debug.Log(success
+                        ? "Update Enemies Defeated Leaderboard Score Success"
+                        : "Update Enemies Defeated Leaderboard Score Fail");
+                });
             Social.ReportScore((long) _timeElapsed, GPGSIds.leaderboard_level_complete_time,
-                success => { Debug.Log(success ? "Update Time Leaderboard Score Success" : "Update Time Leaderboard Score Fail"); });
-            Social.ShowLeaderboardUI();
+                success => {
+                    Debug.Log(success ? "Update Time Leaderboard Score Success" : "Update Time Leaderboard Score Fail");
+                });
         }
 
         GameOver();
@@ -141,13 +154,17 @@ public class ManagerGame : ManagerGeneric {
     // End the Game
     public void GameOver() {
         GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "NewGame");
-        
+
+        // Show the Achievements and Leaderrboards UI
+        Social.ShowAchievementsUI();
+        Social.ShowLeaderboardUI();
+
         //Stop playing the scene
         Application.Quit();
-        
-    #if UNITY_EDITOR
+
+#if UNITY_EDITOR
         EditorApplication.isPlaying = false;
-    #endif
+#endif
     }
 
     // Keep track of how much time has elapsed in the Game
