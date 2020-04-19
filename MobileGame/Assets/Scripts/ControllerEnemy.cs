@@ -1,6 +1,13 @@
 using UnityEngine;
 
 public abstract class ControllerEnemy : ControllerCharacter {
+    
+    /**
+     * Function Start
+     *  Runs when the GameObject that this script is attached to is
+     *  initialised.
+     *  Overrides the Start function of the ControllerCharacter Class
+     */
     protected new void Start() {
         base.Start();
         Boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().enemyBoundary;

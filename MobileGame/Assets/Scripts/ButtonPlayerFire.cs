@@ -6,6 +6,12 @@ public class ButtonPlayerFire : HudGeneric {
     private Button           _fireButton;
     private ControllerPlayer _playerController;
 
+    
+    /**
+     * Function Start
+     *  Runs when the GameObject that this script is attached to is
+     *  initialised.
+     */
     private void Start() {
         _playerController = GameObject.FindWithTag("Player").GetComponent<ControllerPlayer>();
         if (_playerController == null) throw new NullReferenceException();

@@ -4,6 +4,13 @@ public class ControllerEnemyLarge : ControllerEnemy {
     private int     _direction;
     private Vector3 _moveSpeed;
 
+    
+    /**
+     * Function Awake
+     *  Runs when the GameObject that this script is attached to is
+     *  initialised.
+     *  Overrides the Awake function of the ControllerEnemy Class
+     */
     protected new void Awake() {
         base.Awake();
         _direction = Random.Range(0, 2) * 2 - 1;
@@ -14,6 +21,13 @@ public class ControllerEnemyLarge : ControllerEnemy {
         HitPoints = GameManager.enemyHitPoints.largeHp;
     }
 
+    
+    /**
+     * Function Start
+     *  Runs when the GameObject that this script is attached to is
+     *  initialised.
+     *  Overrides the Start function of the ControllerEnemy Class
+     */
     protected new void Start() {
         base.Start();
     }

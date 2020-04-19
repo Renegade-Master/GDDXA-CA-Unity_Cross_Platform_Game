@@ -6,10 +6,21 @@ public class ControllerGeneric : MonoBehaviour {
     protected ManagerGame GameManager;
     protected Camera      MainCam;
 
+    
+    /**
+     * Function Start
+     *  Runs when the GameObject that this script is attached to is
+     *  initialised.  Finds the Game Manager for use later
+     */
     protected void Start() {
         GameManager = GameObject.FindWithTag("GameController").GetComponent<ManagerGame>();
     }
 
+    /**
+     * Function Awake
+     *  Runs when the GameObject that this script is attached to is
+     *  initialised.
+     */
     protected void Awake() {
         Start();
     }

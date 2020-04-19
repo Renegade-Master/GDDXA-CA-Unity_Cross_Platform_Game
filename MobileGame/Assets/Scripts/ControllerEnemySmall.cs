@@ -1,6 +1,13 @@
 ﻿using UnityEngine;
 
 public class ControllerEnemySmall : ControllerEnemy {
+    
+    /**
+     * Function Awake
+     *  Runs when the GameObject that this script is attached to is
+     *  initialised.
+     *  Overrides the Awake function of the ControllerEnemy Class
+     */
     protected new void Awake() {
         base.Awake();
     }
@@ -9,6 +16,13 @@ public class ControllerEnemySmall : ControllerEnemy {
         HitPoints = GameManager.enemyHitPoints.smallHp;
     }
 
+    
+    /**
+     * Function Start
+     *  Runs when the GameObject that this script is attached to is
+     *  initialised.
+     *  Overrides the Start function of the ControllerEnemy Class
+     */
     protected new void Start() {
         base.Start();
     }

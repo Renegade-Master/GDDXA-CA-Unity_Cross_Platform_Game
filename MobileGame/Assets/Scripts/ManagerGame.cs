@@ -15,9 +15,15 @@ public class EnemyHitPoints {
 
 
 /**
- * Class ManagerGame inherits from ManagerGeneric
- *  A Class for managing the game.  Contains functions and variables for
- *  tracking the progress of the game
+ * <summary>
+ * Class <c>ManagerGame</c> 
+ * <para>
+ * The Class for managing the game.  Contains functions and variables
+ * for tracking the progress of the game.
+ * Inherits from the <c>ManagerGeneric</c> <c>Class</c>
+ * </para>
+ * <seealso cref="ManagerGeneric"/>
+ * </summary>
  */
 public class ManagerGame : ManagerGeneric {
     private readonly List<GameObject> _debrisSpawns = new List<GameObject>();
@@ -58,11 +64,16 @@ public class ManagerGame : ManagerGeneric {
     public double           timeForStage03;
     public double           timeForStage04;
 
-
+    
     /**
-     * Function Start
-     *  Runs when the GameObject that this script is attached to is
-     *  initialised.
+     * <summary>
+     * Function <c>Start</c> 
+     * <para>
+     * Runs when the GameObject that this script is attached to is
+     * initialised.  Creates the data required to run the game.  Also
+     * initialises the connections to the PlayStore and GameAnalytics.
+     * </para>
+     * </summary>
      */
     private void Start() {
         // Initialise the Game Clock
@@ -100,12 +111,16 @@ public class ManagerGame : ManagerGeneric {
     
     
     /**
-     * LoadLevel
-     *  Load up the data required for the Level
+     * <summary>
+     * Function <c>LoadLevel</c>
+     * <para>
+     * Load up the data required for the Level
+     * </para>
+     * </summary>
      */
     private void LoadLevel() {
-        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "NewGame");
-        if (Social.localUser.authenticated) Social.ShowAchievementsUI();
+        GameAnalytics.StartSession();
+        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "Level_01");
 
         _debrisPoolManager = gameObject.GetComponent<ManagerPoolDebris>();
         _enemyPoolManager = gameObject.GetComponent<ManagerPoolEnemy>();
@@ -140,10 +155,13 @@ public class ManagerGame : ManagerGeneric {
 
     
     /**
-     * GetPlayerMaxHealth
-     *  Return the Maximum permitted amount of Player health
-     *
-     * @return int - The maximum amount of Player health
+     * <summary>
+     * Function <c>GetPlayerMaxHealth</c>
+     * <para>
+     * Return the Maximum permitted amount of Player health.
+     * </para>
+     * <returns>The maximum amount of Player health.</returns>
+     * </summary>
      */
     public int GetPlayerMaxHealth() {
         return playerMaxHealth;
@@ -151,8 +169,14 @@ public class ManagerGame : ManagerGeneric {
 
     
     /**
-     * IncrementEnemiesDefeated
-     *  Increment the local counter for the amount of enemies defeated
+     * <summary>
+     * Function <c>IncrementEnemiesDefeated</c>
+     * <para>
+     * Increment the local counter for the amount of enemies defeated
+     * </para>
+     * <param name="counter">The number to increment the counter by.
+     * The default value is <c>1</c>.</param>
+     * </summary>
      */
     public void IncrementEnemiesDefeated(int counter = 1) {
         _enemiesDefeated += counter;
@@ -193,9 +217,15 @@ public class ManagerGame : ManagerGeneric {
         }
     }
 
+    
     /**
-     * PlayerWins
-     *  The Player has won the game, handle this event
+     * <summary>
+     * Function <c>PlayerWins</c>
+     * <para>
+     * For handling functionality in the event that the User has won the
+     * game.
+     * </para>
+     * </summary>
      */
     private void PlayerWins() {
         // Store the Elapsed time as the User's Score in the Leaderboard
@@ -215,24 +245,38 @@ public class ManagerGame : ManagerGeneric {
                         : "Update Time Leaderboard Score Fail");
                 });
         }
+        
+        StartCoroutine(WaitTime());
 
         GameOver();
     }
 
     
     /**
-     * GameOver
-     *  End the current game session
+     * <summary>
+     * Function <c>GameOver</c>
+     * <para>
+     * End the current game session
+     * </para>
+     * </summary>
      */
     public void GameOver() {
-        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "NewGame");
+        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "Level_01");
 
         // Show the Achievements and Leaderboards UI
-        Social.ShowAchievementsUI();
-        Social.ShowLeaderboardUI();
+        //Social.ShowAchievementsUI();
+        PlayGamesPlatform.Instance.ShowAchievementsUI();
         
-        // Wait some time to give the User a chance to look at their stats
-        StartCoroutine(WaitTime(5.0f));
+        // Wait some time to give the User a chance to look at the Achievements
+        StartCoroutine(WaitTime());
+        
+        //Social.ShowLeaderboardUI();
+        PlayGamesPlatform.Instance.ShowLeaderboardUI();
+        
+        // Wait some time to give the User a chance to look at the Leaderboard
+        StartCoroutine(WaitTime());
+        
+        GameAnalytics.EndSession();
 
         //Stop playing the scene
         Application.Quit();
@@ -244,11 +288,14 @@ public class ManagerGame : ManagerGeneric {
 
     
     /**
-     * Coroutine GameClock
-     *  Keep track of how much time has elapsed in the Game
-     *  Also handles the different game stages
-     *
-     * @return IEnumerator - An iterator for re-entering this function
+     * <summary>
+     * Coroutine <c>GameClock</c>
+     * <para>
+     * Keep track of how much time has elapsed in the Game.  Also
+     * handles transition between the different game stages.
+     * </para>
+     * <returns>An <c>IEnumerator</c> to re-enter the function.</returns>
+     * </summary>
      */
     private IEnumerator GameClock() {
         while (true) {
@@ -362,6 +409,8 @@ public class ManagerGame : ManagerGeneric {
                                     : "Player Defeated Second Boss Fail");
                             });
 
+                    StartCoroutine(WaitTime());
+
                     // Player has won the game
                     PlayerWins();
                 }
@@ -377,14 +426,22 @@ public class ManagerGame : ManagerGeneric {
     
     
     /**
-     * Coroutine WaitTime
-     *  Wait a specified amount of time
-     *
-     * @param float        - The amount of time to wait
-     * @return IEnumerator - An iterator for re-entering this function
+     * <summary>
+     * Coroutine <c>WaitTime</c>
+     * <para>
+     * Wait a specified amount of time.
+     * </para>
+     * <param name="timeToWait">The time in <c>seconds</c> to wait.</param>
+     * <returns>An <c>IEnumerator</c> to re-enter the function.</returns>
+     * </summary>
      */
-    private IEnumerator WaitTime(float timeToWait) {
-        yield return new WaitForSeconds(timeToWait);
+    public IEnumerator WaitTime(float timeToWait = 5.0f) {
+        bool waited = false;
+
+        while (!waited) {
+            yield return new WaitForSeconds(timeToWait);
+            waited = true;
+        }
     }
 
     // Shrink the Object Poolers if they are holding more items than necessary

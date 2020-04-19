@@ -10,6 +10,13 @@ public abstract class ControllerCharacter : ControllerGeneric {
     public    float     speed;
     protected Transform Target;
 
+    
+    /**
+     * Function Start
+     *  Runs when the GameObject that this script is attached to is
+     *  initialised.
+     *  Overrides the Start function of the ControllerGeneric Class
+     */
     protected new void Start() {
         base.Start();
 

@@ -1,4 +1,5 @@
-﻿using GooglePlayGames;
+﻿using GameAnalyticsSDK;
+using GooglePlayGames;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
@@ -10,7 +11,13 @@ public class ControllerPlayer : ControllerCharacter {
     public float      springForce;
     public GameObject touchTarget;
 
-    // For when the GameObject is Woken after being set to sleep, or after first activation.
+    
+    /**
+     * Function Start
+     *  Runs when the GameObject that this script is attached to is
+     *  initialised.
+     *  Overrides the Start function of the ControllerCharacter Class
+     */
     protected new void Start() {
         base.Start();
 
@@ -30,6 +37,7 @@ public class ControllerPlayer : ControllerCharacter {
         // Has the Player lost the game?
         if (HitPoints <= 0) {
             if (Social.localUser.authenticated) {
+                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Fail,"Level_01");
                 PlayGamesPlatform.Instance.Events.IncrementEvent(GPGSIds.event_total_deaths, 1);
 
                 Social.ReportProgress(GPGSIds.achievement_you_died, 100.0f,
@@ -39,6 +47,8 @@ public class ControllerPlayer : ControllerCharacter {
                             : "Player Died Fail");
                     });
             }
+
+            StartCoroutine(GameManager.WaitTime());
 
             GameManager.GameOver();
         }

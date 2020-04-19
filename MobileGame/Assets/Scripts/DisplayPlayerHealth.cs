@@ -22,7 +22,7 @@ public class DisplayPlayerHealth : HudGeneric {
     /**
      * Function Awake
      *  Runs when the GameObject that this script is attached to is
-     *  initialised.
+     *  initialised.  Finds and sets all of the required data
      */
     private void Awake() {
         _gameManager = GameObject.FindWithTag("GameController").GetComponent<ManagerGame>();

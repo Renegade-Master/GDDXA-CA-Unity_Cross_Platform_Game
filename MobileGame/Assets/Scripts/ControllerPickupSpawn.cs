@@ -13,6 +13,13 @@ public class ControllerPickupSpawn : ControllerGeneric {
     private Vector3 _moveSpeed;
     private float   _speedSpawnFreq;
 
+    
+    /**
+     * Function Awake
+     *  Runs when the GameObject that this script is attached to is
+     *  initialised.
+     *  Overrides the Awake function of the ControllerGeneric Class
+     */
     protected new void Awake() {
         Boundary = GameObject.FindGameObjectWithTag("PlayArea").GetComponent<ManagerBoundary>().pickupBoundary;
         _direction = Random.Range(0, 2) * 2 - 1;
