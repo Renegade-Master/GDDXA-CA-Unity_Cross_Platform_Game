@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using GameAnalyticsSDK;
-using GooglePlayGames;
+﻿using GameAnalyticsSDK;
 using GooglePlayGames.BasicApi;
+using GooglePlayGames;
+using System.Collections.Generic;
+using System.Collections;
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -131,11 +131,48 @@ public class ManagerGame : ManagerGeneric {
     // Increment the EnemiesDefeated counter
     public void IncrementEnemiesDefeated(int counter = 1) {
         _enemiesDefeated += counter;
+
+        if (Social.localUser.authenticated) {
+            PlayGamesPlatform.Instance.Events.IncrementEvent(GPGSIds.event_enemies_defeated, 1);
+
+            Social.ReportProgress(GPGSIds.achievement_defeated_an_enemy, 100.0,
+                success => {
+                    Debug.Log(success
+                        ? "Defeated Enemy Success"
+                        : "Defeated Enemy Fail");
+                });
+
+            PlayGamesPlatform.Instance.IncrementAchievement(
+                GPGSIds.achievement_5_enemies_defeated, 1,
+                success => {
+                    Debug.Log(success
+                        ? "Update 5 Enemies Defeated Achievement Success"
+                        : "Update 5 Enemies Defeated Achievement Fail");
+                });
+
+            PlayGamesPlatform.Instance.IncrementAchievement(
+                GPGSIds.achievement_10_enemies_defeated, 1,
+                success => {
+                    Debug.Log(success
+                        ? "Update 10 Enemies Defeated Achievement Success"
+                        : "Update 10 Enemies Defeated Achievement Fail");
+                });
+
+            PlayGamesPlatform.Instance.IncrementAchievement(
+                GPGSIds.achievement_25_enemies_defeated, 1,
+                success => {
+                    Debug.Log(success
+                        ? "Update 25 Enemies Defeated Achievement Success"
+                        : "Update 25 Enemies Defeated Achievement Fail");
+                });
+        }
     }
 
-    public void PlayerWins() {
+    private void PlayerWins() {
         // Store the Elapsed time as the User's Score in the Leaderboard
         if (Social.localUser.authenticated) {
+            PlayGamesPlatform.Instance.Events.IncrementEvent(GPGSIds.event_total_wins, 1);
+
             Social.ReportScore(_enemiesDefeated, GPGSIds.leaderboard_enemies_defeated,
                 success => {
                     Debug.Log(success
@@ -144,7 +181,9 @@ public class ManagerGame : ManagerGeneric {
                 });
             Social.ReportScore((long) _timeElapsed, GPGSIds.leaderboard_level_complete_time,
                 success => {
-                    Debug.Log(success ? "Update Time Leaderboard Score Success" : "Update Time Leaderboard Score Fail");
+                    Debug.Log(success
+                        ? "Update Time Leaderboard Score Success"
+                        : "Update Time Leaderboard Score Fail");
                 });
         }
 

@@ -15,23 +15,6 @@ public abstract class ControllerEnemy : ControllerCharacter {
             // Increment the Enemies Defeated Counter
             GameManager.IncrementEnemiesDefeated();
 
-            if (Social.localUser.authenticated) {
-                Social.ReportProgress(GPGSIds.achievement_defeated_an_enemy, 100.0,
-                    success => { Debug.Log(success ? "Defeated Enemy Success" : "Defeated Enemy Fail"); });
-                Social.ReportProgress(GPGSIds.achievement_5_enemies_defeated, 100.0,
-                    success => {
-                        Debug.Log(success ? "Update 5 Enemies Defeated Success" : "Update 5 Enemies Defeated Fail");
-                    });
-                Social.ReportProgress(GPGSIds.achievement_10_enemies_defeated, 100.0,
-                    success => {
-                        Debug.Log(success ? "Update 10 Enemies Defeated Success" : "Update 10 Enemies Defeated Fail");
-                    });
-                Social.ReportProgress(GPGSIds.achievement_25_enemies_defeated, 100.0,
-                    success => {
-                        Debug.Log(success ? "Update 25 Enemies Defeated Success" : "Update 25 Enemies Defeated Fail");
-                    });
-            }
-
             gameObject.SetActive(false);
         }
 

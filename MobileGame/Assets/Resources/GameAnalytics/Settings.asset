@@ -30,7 +30,7 @@ MonoBehaviour:
   secretKey:
   - 0817fe7ba501681a67eb349e307402d6ecbf8ea5
   Build:
-  - 0.0.5
+  - 0.0.6
   SelectedPlatformStudio:
   - RenegadeMaster Inc.
   SelectedPlatformGame:

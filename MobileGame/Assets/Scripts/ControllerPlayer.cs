@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using GooglePlayGames;
+using UnityEngine;
 
 public class ControllerPlayer : ControllerCharacter {
     private DisplayPlayerHealth _healthDisplay;
@@ -27,9 +28,16 @@ public class ControllerPlayer : ControllerCharacter {
 
         // Has the Player lost the game?
         if (HitPoints <= 0) {
-            if (Social.localUser.authenticated)
+            if (Social.localUser.authenticated) {
+                PlayGamesPlatform.Instance.Events.IncrementEvent(GPGSIds.event_total_deaths, 1);
+
                 Social.ReportProgress(GPGSIds.achievement_you_died, 100.0,
-                    success => { Debug.Log(success ? "Player Died Success" : "Player Died Fail"); });
+                    success => {
+                        Debug.Log(success
+                            ? "Player Died Success"
+                            : "Player Died Fail");
+                    });
+            }
 
             GameManager.GameOver();
         }
@@ -107,6 +115,35 @@ public class ControllerPlayer : ControllerCharacter {
 
     // Handles Player attacks.
     public override void Fire() {
+        // Increment the User's Shot Count Achievements 
+        if (Social.localUser.authenticated) {
+            PlayGamesPlatform.Instance.Events.IncrementEvent(GPGSIds.event_shots_fired, 1);
+
+            PlayGamesPlatform.Instance.IncrementAchievement(
+                GPGSIds.achievement_10_shots_fired, 1,
+                success => {
+                    Debug.Log(success
+                        ? "Update 10 Shots Fired Success"
+                        : "Update 10 Shots Fired Fail");
+                });
+
+            PlayGamesPlatform.Instance.IncrementAchievement(
+                GPGSIds.achievement_25_shots_fired, 1,
+                success => {
+                    Debug.Log(success
+                        ? "Update 20 Shots Fired Success"
+                        : "Update 20 Shots Fired Fail");
+                });
+
+            PlayGamesPlatform.Instance.IncrementAchievement(
+                GPGSIds.achievement_50_shots_fired, 1,
+                success => {
+                    Debug.Log(success
+                        ? "Update 50 Shots Fired Success"
+                        : "Update 50 Shots Fired Fail");
+                });
+        }
+
         foreach (Transform child in gameObject.transform.Find("ShotSpawns"))
             if (child.gameObject.activeSelf) {
                 var bullet = ManagerPoolShot.instance.GetPooledObject("Shot_Player_Main");
