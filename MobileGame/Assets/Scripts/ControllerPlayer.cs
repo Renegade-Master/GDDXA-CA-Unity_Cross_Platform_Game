@@ -1,5 +1,6 @@
 ﻿using GooglePlayGames;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class ControllerPlayer : ControllerCharacter {
     private DisplayPlayerHealth _healthDisplay;
@@ -31,7 +32,7 @@ public class ControllerPlayer : ControllerCharacter {
             if (Social.localUser.authenticated) {
                 PlayGamesPlatform.Instance.Events.IncrementEvent(GPGSIds.event_total_deaths, 1);
 
-                Social.ReportProgress(GPGSIds.achievement_you_died, 100.0,
+                Social.ReportProgress(GPGSIds.achievement_you_died, 100.0f,
                     success => {
                         Debug.Log(success
                             ? "Player Died Success"

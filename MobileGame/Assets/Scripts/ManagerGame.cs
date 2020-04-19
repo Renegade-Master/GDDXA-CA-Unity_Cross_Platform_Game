@@ -6,12 +6,19 @@ using System.Collections;
 using System;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 [Serializable]
 public class EnemyHitPoints {
-    public int smallHp, mediumHp, largeHp, bossHp;
+    public int smallHp, mediumHp, largeHp;
 }
 
+
+/**
+ * Class ManagerGame inherits from ManagerGeneric
+ *  A Class for managing the game.  Contains functions and variables for
+ *  tracking the progress of the game
+ */
 public class ManagerGame : ManagerGeneric {
     private readonly List<GameObject> _debrisSpawns = new List<GameObject>();
     private readonly List<GameObject> _enemySpawns  = new List<GameObject>();
@@ -52,7 +59,11 @@ public class ManagerGame : ManagerGeneric {
     public double           timeForStage04;
 
 
-    // Start is called before the first frame update
+    /**
+     * Function Start
+     *  Runs when the GameObject that this script is attached to is
+     *  initialised.
+     */
     private void Start() {
         // Initialise the Game Clock
         _timeElapsed = 0.0;
@@ -86,8 +97,12 @@ public class ManagerGame : ManagerGeneric {
         // Place all starting GameObjects
         LoadLevel();
     }
-
-    // Initialise the Game World ready for a new level
+    
+    
+    /**
+     * LoadLevel
+     *  Load up the data required for the Level
+     */
     private void LoadLevel() {
         GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "NewGame");
         if (Social.localUser.authenticated) Social.ShowAchievementsUI();
@@ -123,19 +138,29 @@ public class ManagerGame : ManagerGeneric {
         StartCoroutine(GameClock());
     }
 
-    // Returns the Maximum permitted Player Health
+    
+    /**
+     * GetPlayerMaxHealth
+     *  Return the Maximum permitted amount of Player health
+     *
+     * @return int - The maximum amount of Player health
+     */
     public int GetPlayerMaxHealth() {
         return playerMaxHealth;
     }
 
-    // Increment the EnemiesDefeated counter
+    
+    /**
+     * IncrementEnemiesDefeated
+     *  Increment the local counter for the amount of enemies defeated
+     */
     public void IncrementEnemiesDefeated(int counter = 1) {
         _enemiesDefeated += counter;
 
         if (Social.localUser.authenticated) {
             PlayGamesPlatform.Instance.Events.IncrementEvent(GPGSIds.event_enemies_defeated, 1);
 
-            Social.ReportProgress(GPGSIds.achievement_defeated_an_enemy, 100.0,
+            Social.ReportProgress(GPGSIds.achievement_defeated_an_enemy, 100.0f,
                 success => {
                     Debug.Log(success
                         ? "Defeated Enemy Success"
@@ -168,6 +193,10 @@ public class ManagerGame : ManagerGeneric {
         }
     }
 
+    /**
+     * PlayerWins
+     *  The Player has won the game, handle this event
+     */
     private void PlayerWins() {
         // Store the Elapsed time as the User's Score in the Leaderboard
         if (Social.localUser.authenticated) {
@@ -190,13 +219,20 @@ public class ManagerGame : ManagerGeneric {
         GameOver();
     }
 
-    // End the Game
+    
+    /**
+     * GameOver
+     *  End the current game session
+     */
     public void GameOver() {
         GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "NewGame");
 
-        // Show the Achievements and Leaderrboards UI
+        // Show the Achievements and Leaderboards UI
         Social.ShowAchievementsUI();
         Social.ShowLeaderboardUI();
+        
+        // Wait some time to give the User a chance to look at their stats
+        StartCoroutine(WaitTime(5.0f));
 
         //Stop playing the scene
         Application.Quit();
@@ -206,8 +242,14 @@ public class ManagerGame : ManagerGeneric {
 #endif
     }
 
-    // Keep track of how much time has elapsed in the Game
-    // Also handles the different game stages
+    
+    /**
+     * Coroutine GameClock
+     *  Keep track of how much time has elapsed in the Game
+     *  Also handles the different game stages
+     *
+     * @return IEnumerator - An iterator for re-entering this function
+     */
     private IEnumerator GameClock() {
         while (true) {
             // Handle different Game Stages
@@ -249,7 +291,7 @@ public class ManagerGame : ManagerGeneric {
                     _gameManagerLock[1] = true; // Allow progression to Stage 02
 
                     if (Social.localUser.authenticated)
-                        Social.ReportProgress(GPGSIds.achievement_first_boss_defeated, 100.0,
+                        Social.ReportProgress(GPGSIds.achievement_first_boss_defeated, 100.0f,
                             success => {
                                 Debug.Log(success
                                     ? "Player Defeated First Boss Success"
@@ -313,7 +355,7 @@ public class ManagerGame : ManagerGeneric {
                     bossFight[1][0] = true;  // Allow Boss_02 setup to run
 
                     if (Social.localUser.authenticated)
-                        Social.ReportProgress(GPGSIds.achievement_second_boss_defeated, 100.0,
+                        Social.ReportProgress(GPGSIds.achievement_second_boss_defeated, 100.0f,
                             success => {
                                 Debug.Log(success
                                     ? "Player Defeated Second Boss Success"
@@ -331,6 +373,18 @@ public class ManagerGame : ManagerGeneric {
             if (!bossFight[0][1] && !bossFight[1][1]) _timeElapsed += 1.0f;
             yield return new WaitForSeconds(1.0f);
         }
+    }
+    
+    
+    /**
+     * Coroutine WaitTime
+     *  Wait a specified amount of time
+     *
+     * @param float        - The amount of time to wait
+     * @return IEnumerator - An iterator for re-entering this function
+     */
+    private IEnumerator WaitTime(float timeToWait) {
+        yield return new WaitForSeconds(timeToWait);
     }
 
     // Shrink the Object Poolers if they are holding more items than necessary
